@@ -1,21 +1,21 @@
 {
-  "name": "PPL Workout Tracker",
-  "short_name": "PPL Tracker",
-  "description": "Track your Push/Pull/Legs workout routine with Nepali calendar support",
+  "name": "Kritik's Gurkha Gains - Cyberpunk PPL Tracker",
+  "short_name": "Gurkha Gains",
+  "description": "Cyberpunk-themed Push/Pull/Legs workout tracker with Nepali calendar support",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#6366f1",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00f0ff",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%236366f1' width='192' height='192' rx='32'/%3E%3Ctext x='96' y='120' font-size='100' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%230a0a0f' width='192' height='192' rx='32'/%3E%3Crect x='8' y='8' width='176' height='176' rx='28' fill='none' stroke='%2300f0ff' stroke-width='4'/%3E%3Ctext x='96' y='125' font-size='90' text-anchor='middle' fill='%2300f0ff'%3E⚡%3C/text%3E%3C/svg%3E",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%236366f1' width='512' height='512' rx='64'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%230a0a0f' width='512' height='512' rx='64'/%3E%3Crect x='16' y='16' width='480' height='480' rx='56' fill='none' stroke='%2300f0ff' stroke-width='8'/%3E%3Ctext x='256' y='340' font-size='260' text-anchor='middle' fill='%2300f0ff'%3E⚡%3C/text%3E%3C/svg%3E",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
