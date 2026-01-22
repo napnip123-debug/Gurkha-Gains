@@ -3,215 +3,1172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>PPL Workout Tracker</title>
-    <meta name="description" content="Track your Push/Pull/Legs workout routine with Nepali calendar support">
-    <meta name="theme-color" content="#6366f1">
+    <title>Kritik's Gurkha Gains</title>
+    <meta name="description" content="Cyberpunk PPL Workout Tracker with Nepali Calendar">
+    <meta name="theme-color" content="#0a0a0f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="PPL Tracker">
+    <meta name="apple-mobile-web-app-title" content="Gurkha Gains">
     <link rel="manifest" href="manifest.json">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        body { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; }
-        .app-container { max-width: 430px; margin: 0 auto; min-height: 100vh; }
-        .exercise-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .exercise-card.completed { background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3); }
-        .custom-checkbox { appearance: none; width: 24px; height: 24px; border: 2px solid #6366f1; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-        .custom-checkbox:checked { background: linear-gradient(135deg, #6366f1, #8b5cf6); border-color: #8b5cf6; }
-        .custom-checkbox:checked::after { content: '✓'; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; }
-        .day-tab { transition: all 0.3s; }
-        .day-tab.active { background: linear-gradient(135deg, #6366f1, #8b5cf6); transform: scale(1.05); }
-        .progress-ring { transform: rotate(-90deg); }
-        .nav-item.active { color: #8b5cf6; }
-        .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: #8b5cf6; border-radius: 50%; }
-        .calendar-day { transition: all 0.2s; }
-        .calendar-day.today { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-        .calendar-day.has-workout { border: 2px solid #22c55e; }
-        .calendar-day.completed-day { background: rgba(34, 197, 94, 0.3); }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: slideIn 0.3s ease-out forwards; }
-        .install-banner { background: linear-gradient(135deg, #059669, #10b981); animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        :root {
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff00ff;
+            --neon-yellow: #ffd700;
+            --neon-green: #39ff14;
+            --neon-red: #ff073a;
+            --neon-orange: #ff6b35;
+            --dark-bg: #0a0a0f;
+            --dark-card: #12121a;
+            --dark-border: #1a1a2e;
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body { 
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Cyberpunk Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Scanline Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.1) 0px,
+                rgba(0,0,0,0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+        
+        .app-container { 
+            max-width: 430px; 
+            margin: 0 auto; 
+            min-height: 100vh; 
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Glowing Text */
+        .glow-cyan { 
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan); 
+            color: var(--neon-cyan);
+        }
+        .glow-magenta { 
+            text-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta); 
+            color: var(--neon-magenta);
+        }
+        .glow-green { 
+            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); 
+            color: var(--neon-green);
+        }
+        .glow-yellow { 
+            text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow); 
+            color: var(--neon-yellow);
+        }
+        
+        /* Header */
+        .cyber-header {
+            background: linear-gradient(180deg, rgba(0,240,255,0.1) 0%, transparent 100%);
+            border-bottom: 2px solid var(--neon-cyan);
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(20px);
+        }
+        
+        .cyber-header::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), var(--neon-cyan), transparent);
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes headerGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', monospace;
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            animation: logoFlicker 4s ease-in-out infinite;
+        }
+        
+        @keyframes logoFlicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            96% { opacity: 0.9; }
+            97% { opacity: 1; }
+        }
+        
+        .nepali-date {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-yellow);
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        .cyber-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(10,10,15,0.9);
+            border-bottom: 1px solid var(--dark-border);
+            position: sticky;
+            top: 76px;
+            z-index: 40;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--dark-border);
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        
+        .nav-btn.active {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0,240,255,0.3), inset 0 0 20px rgba(0,240,255,0.1);
+        }
+        
+        .nav-btn.active::before {
+            opacity: 0.1;
+        }
+        
+        /* Day Selector */
+        .day-selector {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 16px;
+            scrollbar-width: none;
+        }
+        
+        .day-selector::-webkit-scrollbar { display: none; }
+        
+        .day-chip {
+            flex-shrink: 0;
+            padding: 12px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+        
+        .day-chip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .day-chip.active {
+            border-color: var(--neon-cyan);
+            background: linear-gradient(180deg, rgba(0,240,255,0.15) 0%, transparent 100%);
+            box-shadow: 0 0 30px rgba(0,240,255,0.2);
+        }
+        
+        .day-chip.active::before { opacity: 1; }
+        
+        .day-chip.today {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(57,255,20,0.3);
+        }
+        
+        .day-chip.today::after {
+            content: 'TODAY';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.5rem;
+            color: var(--dark-bg);
+            background: var(--neon-green);
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+        
+        .day-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+        
+        .day-name {
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+        
+        .day-type {
+            font-size: 0.6rem;
+            color: var(--neon-magenta);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        /* Workout Header Card */
+        .workout-header {
+            margin: 0 16px 16px;
+            padding: 20px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+        
+        .workout-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta), var(--neon-yellow));
+        }
+        
+        .workout-header::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .workout-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        
+        .workout-focus {
+            font-size: 0.85rem;
+            color: var(--neon-magenta);
+            margin-bottom: 16px;
+        }
+        
+        /* Cyberpunk Progress Ring */
+        .progress-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+        
+        .progress-ring-bg {
+            stroke: var(--dark-border);
+        }
+        
+        .progress-ring-fill {
+            stroke: url(#cyberGradient);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .progress-percent {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+        
+        .progress-label {
+            font-size: 0.6rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Exercise Cards */
+        .exercise-list {
+            padding: 0 16px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .exercise-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            animation: cardSlideIn 0.4s ease-out backwards;
+        }
+        
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-magenta));
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        
+        .exercise-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0,240,255,0.1);
+        }
+        
+        .exercise-card:hover::before {
+            opacity: 1;
+        }
+        
+        .exercise-card.completed {
+            background: linear-gradient(135deg, rgba(57,255,20,0.1) 0%, transparent 50%);
+            border-color: var(--neon-green);
+        }
+        
+        .exercise-card.completed::before {
+            background: var(--neon-green);
+            opacity: 1;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        /* Custom Checkbox */
+        .cyber-checkbox {
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--neon-cyan);
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+        
+        .cyber-checkbox:hover {
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+        
+        .cyber-checkbox:checked {
+            background: linear-gradient(135deg, var(--neon-green), #00ff88);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+        
+        .cyber-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .exercise-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .exercise-card.completed .exercise-name {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        
+        .exercise-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .exercise-sets {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            background: rgba(0,240,255,0.1);
+            padding: 4px 10px;
+            border: 1px solid rgba(0,240,255,0.3);
+        }
+        
+        .exercise-note {
+            font-size: 0.7rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Muscle Group Tag */
+        .muscle-tag {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.55rem;
+            color: var(--neon-magenta);
+            background: rgba(255,0,255,0.1);
+            padding: 3px 8px;
+            border: 1px solid rgba(255,0,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Calendar View */
+        .calendar-container {
+            margin: 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 20px;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-nav-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+        
+        .calendar-nav-btn:hover {
+            background: rgba(0,240,255,0.1);
+            box-shadow: 0 0 15px rgba(0,240,255,0.3);
+        }
+        
+        .calendar-title {
+            text-align: center;
+        }
+        
+        .calendar-month {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+        
+        .calendar-nepali {
+            font-size: 0.75rem;
+            color: var(--neon-magenta);
+            margin-top: 4px;
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .calendar-weekday {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.6rem;
+            color: #666;
+            text-align: center;
+            padding: 8px 0;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .calendar-day:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(0,240,255,0.1);
+        }
+        
+        .calendar-day.today {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            color: var(--dark-bg);
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0,240,255,0.5);
+        }
+        
+        .calendar-day.has-workout {
+            border-color: rgba(0,240,255,0.3);
+        }
+        
+        .calendar-day.completed-day {
+            background: rgba(57,255,20,0.2);
+            border-color: var(--neon-green);
+        }
+        
+        /* Stats View */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+        
+        .stat-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+        
+        .stat-card.cyan::before { background: var(--neon-cyan); }
+        .stat-card.magenta::before { background: var(--neon-magenta); }
+        .stat-card.green::before { background: var(--neon-green); }
+        .stat-card.yellow::before { background: var(--neon-yellow); }
+        
+        .stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card.cyan .stat-value { color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan); }
+        .stat-card.magenta .stat-value { color: var(--neon-magenta); text-shadow: 0 0 20px var(--neon-magenta); }
+        .stat-card.green .stat-value { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); }
+        .stat-card.yellow .stat-value { color: var(--neon-yellow); text-shadow: 0 0 20px var(--neon-yellow); }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Weekly Overview */
+        .weekly-overview {
+            margin: 0 16px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 20px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .weekly-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+        
+        .weekly-days {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .weekly-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .weekly-day-box {
+            width: 36px;
+            height: 36px;
+            background: var(--dark-border);
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+        }
+        
+        .weekly-day-box.completed {
+            background: linear-gradient(135deg, var(--neon-green), #00ff88);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+            color: var(--dark-bg);
+        }
+        
+        .weekly-day-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.6rem;
+            color: #666;
+        }
+        
+        /* Reset Button */
+        .reset-btn {
+            margin: 0 16px 100px;
+            width: calc(100% - 32px);
+            padding: 16px;
+            background: transparent;
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255,7,58,0.1);
+            box-shadow: 0 0 20px rgba(255,7,58,0.3);
+        }
+        
+        /* Install Banner */
+        .install-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--neon-green), #00ff88);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideDown 0.3s ease-out;
+        }
+        
         .install-banner.hidden { display: none; }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .install-text {
+            color: var(--dark-bg);
+        }
+        
+        .install-title {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .install-subtitle {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        
+        .install-btn {
+            background: var(--dark-bg);
+            color: var(--neon-green);
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        
+        .install-dismiss {
+            background: none;
+            border: none;
+            color: var(--dark-bg);
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.8;
+        }
+        
+        /* XP Bar */
+        .xp-bar-container {
+            margin: 0 16px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 12px 16px;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+        
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .xp-level {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-yellow);
+        }
+        
+        .xp-amount {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .xp-bar {
+            height: 6px;
+            background: var(--dark-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
+            box-shadow: 0 0 10px var(--neon-yellow);
+            transition: width 0.5s ease;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .legend-box {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .legend-box.today {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+        }
+        
+        .legend-box.workout {
+            border: 1px solid var(--neon-cyan);
+        }
+        
+        .legend-box.completed {
+            background: rgba(57,255,20,0.3);
+            border: 1px solid var(--neon-green);
+        }
+        
+        /* Hidden */
+        .hidden { display: none !important; }
+        
+        /* Utility */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .justify-between { justify-content: space-between; }
+        .gap-3 { gap: 12px; }
+        .gap-4 { gap: 16px; }
+        .flex-1 { flex: 1; }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 8px; }
     </style>
 </head>
-<body class="text-white">
-    <div id="installBanner" class="install-banner hidden fixed top-0 left-0 right-0 z-[100] px-4 py-3 flex items-center justify-between">
+<body>
+    <!-- Install Banner -->
+    <div id="installBanner" class="install-banner hidden">
         <div class="flex items-center gap-3">
-            <span class="text-2xl">📲</span>
-            <div>
-                <p class="font-semibold text-sm">Install PPL Tracker</p>
-                <p class="text-xs opacity-80">Add to home screen for best experience</p>
+            <span style="font-size: 1.5rem;">⚡</span>
+            <div class="install-text">
+                <div class="install-title">INSTALL GURKHA GAINS</div>
+                <div class="install-subtitle">Add to home screen for full experience</div>
             </div>
         </div>
-        <div class="flex gap-2">
-            <button onclick="dismissInstall()" class="px-3 py-1.5 text-sm opacity-80 hover:opacity-100">Later</button>
-            <button onclick="installApp()" class="px-4 py-1.5 bg-white text-green-600 rounded-lg text-sm font-semibold">Install</button>
+        <div class="flex items-center gap-2">
+            <button onclick="dismissInstall()" class="install-dismiss">✕</button>
+            <button onclick="installApp()" class="install-btn">INSTALL</button>
         </div>
     </div>
-    <div class="app-container pb-20">
-        <header class="sticky top-0 z-50 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-4 shadow-lg">
-            <div class="flex items-center justify-between">
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="cyber-header">
+            <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-xl font-bold">💪 PPL Tracker</h1>
-                    <p class="text-xs text-indigo-200" id="nepaliDate">Loading...</p>
+                    <h1 class="logo-text">⚡ Kritik's Gurkha Gains</h1>
+                    <p class="nepali-date" id="nepaliDate">LOADING SYSTEM...</p>
                 </div>
-                <div class="text-right">
-                    <p class="text-sm font-medium" id="englishDate"></p>
-                    <p class="text-xs text-indigo-200" id="dayName"></p>
+                <div style="text-align: right;">
+                    <p style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--neon-cyan);" id="englishDate"></p>
+                    <p style="font-size: 0.7rem; color: #666;" id="dayName"></p>
                 </div>
             </div>
         </header>
-        <nav class="flex justify-around bg-slate-900/80 backdrop-blur px-2 py-3 sticky top-16 z-40">
-            <button onclick="showView('workout')" class="nav-item active relative text-sm font-medium px-4 py-2" id="nav-workout">🏋️ Workout</button>
-            <button onclick="showView('calendar')" class="nav-item relative text-sm font-medium px-4 py-2 text-gray-400" id="nav-calendar">📅 Calendar</button>
-            <button onclick="showView('stats')" class="nav-item relative text-sm font-medium px-4 py-2 text-gray-400" id="nav-stats">📊 Stats</button>
+
+        <!-- Navigation -->
+        <nav class="cyber-nav">
+            <button onclick="showView('workout')" class="nav-btn active" id="nav-workout">
+                <span style="margin-right: 6px;">💪</span>WORKOUT
+            </button>
+            <button onclick="showView('calendar')" class="nav-btn" id="nav-calendar">
+                <span style="margin-right: 6px;">📅</span>CALENDAR
+            </button>
+            <button onclick="showView('stats')" class="nav-btn" id="nav-stats">
+                <span style="margin-right: 6px;">📊</span>STATS
+            </button>
         </nav>
-        <div id="workout-view" class="px-4 py-4">
-            <div class="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
-                <button onclick="selectDay(1)" class="day-tab active flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="1"><div>Day 1</div><div class="text-[10px] opacity-70">Push A</div></button>
-                <button onclick="selectDay(2)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="2"><div>Day 2</div><div class="text-[10px] opacity-70">Pull A</div></button>
-                <button onclick="selectDay(3)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="3"><div>Day 3</div><div class="text-[10px] opacity-70">Legs A</div></button>
-                <button onclick="selectDay(4)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="4"><div>Day 4</div><div class="text-[10px] opacity-70">Push B</div></button>
-                <button onclick="selectDay(5)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="5"><div>Day 5</div><div class="text-[10px] opacity-70">Pull B</div></button>
-                <button onclick="selectDay(6)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="6"><div>Day 6</div><div class="text-[10px] opacity-70">Legs B</div></button>
-                <button onclick="selectDay(7)" class="day-tab flex-shrink-0 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800" data-day="7"><div>Day 7</div><div class="text-[10px] opacity-70">Rest</div></button>
+
+        <!-- Workout View -->
+        <div id="workout-view">
+            <!-- Day Selector -->
+            <div class="day-selector" id="dayTabs"></div>
+
+            <!-- XP Bar -->
+            <div class="xp-bar-container">
+                <div class="xp-header">
+                    <span class="xp-level">⚡ LEVEL <span id="userLevel">1</span> WARRIOR</span>
+                    <span class="xp-amount"><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</span>
+                </div>
+                <div class="xp-bar">
+                    <div class="xp-fill" id="xpFill" style="width: 0%;"></div>
+                </div>
             </div>
-            <div class="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-2xl p-4 mb-4 border border-indigo-500/30">
-                <div class="flex items-center justify-between">
+
+            <!-- Workout Header -->
+            <div class="workout-header">
+                <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="font-bold text-lg" id="currentDayTitle">Day 1: Push A</h3>
-                        <p class="text-sm text-gray-400" id="currentDayFocus">Incline & Tricep Focus</p>
+                        <h2 class="workout-title" id="currentDayTitle">DAY 1: PUSH A</h2>
+                        <p class="workout-focus" id="currentDayFocus">// INCLINE & TRICEP FOCUS</p>
                     </div>
-                    <div class="relative">
-                        <svg class="progress-ring w-16 h-16">
-                            <circle cx="32" cy="32" r="28" stroke="#374151" stroke-width="4" fill="none"/>
-                            <circle id="progressCircle" cx="32" cy="32" r="28" stroke="url(#gradient)" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176"/>
-                            <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+                    <div class="progress-container">
+                        <svg class="progress-ring" width="100" height="100">
+                            <defs>
+                                <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00f0ff"/>
+                                    <stop offset="50%" stop-color="#ff00ff"/>
+                                    <stop offset="100%" stop-color="#00f0ff"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="progress-ring-bg" cx="50" cy="50" r="42" stroke-width="6" fill="none"/>
+                            <circle class="progress-ring-fill" id="progressCircle" cx="50" cy="50" r="42" stroke-width="6" fill="none" stroke-dasharray="264" stroke-dashoffset="264"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-sm font-bold" id="progressText">0%</span>
+                        <div class="progress-text">
+                            <span class="progress-percent" id="progressText">0%</span>
+                            <span class="progress-label">COMPLETE</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="exerciseList" class="space-y-3"></div>
+
+            <!-- Exercise List -->
+            <div class="exercise-list" id="exerciseList"></div>
         </div>
-        <div id="calendar-view" class="px-4 py-4 hidden">
-            <div class="bg-slate-800/50 rounded-2xl p-4 border border-slate-700">
-                <div class="flex items-center justify-between mb-4">
-                    <button onclick="changeMonth(-1)" class="p-2 hover:bg-slate-700 rounded-lg">←</button>
-                    <div class="text-center">
-                        <h3 class="font-bold text-lg" id="calendarMonth"></h3>
-                        <p class="text-xs text-purple-400" id="calendarNepaliMonth"></p>
+
+        <!-- Calendar View -->
+        <div id="calendar-view" class="hidden">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)" class="calendar-nav-btn">◀</button>
+                    <div class="calendar-title">
+                        <div class="calendar-month" id="calendarMonth"></div>
+                        <div class="calendar-nepali" id="calendarNepaliMonth"></div>
                     </div>
-                    <button onclick="changeMonth(1)" class="p-2 hover:bg-slate-700 rounded-lg">→</button>
+                    <button onclick="changeMonth(1)" class="calendar-nav-btn">▶</button>
                 </div>
-                <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-2">
-                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                <div class="calendar-weekdays">
+                    <div class="calendar-weekday">SUN</div>
+                    <div class="calendar-weekday">MON</div>
+                    <div class="calendar-weekday">TUE</div>
+                    <div class="calendar-weekday">WED</div>
+                    <div class="calendar-weekday">THU</div>
+                    <div class="calendar-weekday">FRI</div>
+                    <div class="calendar-weekday">SAT</div>
                 </div>
-                <div id="calendarGrid" class="grid grid-cols-7 gap-1"></div>
+                <div class="calendar-grid" id="calendarGrid"></div>
             </div>
-            <div class="mt-4 flex gap-4 text-xs">
-                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-gradient-to-r from-indigo-500 to-purple-500"></div> Today</div>
-                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded border-2 border-green-500"></div> Workout Day</div>
-                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-green-500/30"></div> Completed</div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-box today"></div> Today</div>
+                <div class="legend-item"><div class="legend-box workout"></div> Workout Day</div>
+                <div class="legend-item"><div class="legend-box completed"></div> Completed</div>
             </div>
         </div>
-        <div id="stats-view" class="px-4 py-4 hidden">
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl p-4 border border-green-500/30">
-                    <p class="text-3xl font-bold" id="totalWorkouts">0</p>
-                    <p class="text-sm text-gray-400">Workouts Done</p>
+
+        <!-- Stats View -->
+        <div id="stats-view" class="hidden">
+            <div class="stats-grid">
+                <div class="stat-card green">
+                    <div class="stat-value" id="totalWorkouts">0</div>
+                    <div class="stat-label">Workouts</div>
                 </div>
-                <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl p-4 border border-blue-500/30">
-                    <p class="text-3xl font-bold" id="currentStreak">0</p>
-                    <p class="text-sm text-gray-400">Day Streak 🔥</p>
+                <div class="stat-card cyan">
+                    <div class="stat-value" id="currentStreak">0</div>
+                    <div class="stat-label">Day Streak 🔥</div>
                 </div>
-                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-4 border border-purple-500/30">
-                    <p class="text-3xl font-bold" id="totalExercises">0</p>
-                    <p class="text-sm text-gray-400">Exercises Done</p>
+                <div class="stat-card magenta">
+                    <div class="stat-value" id="totalExercises">0</div>
+                    <div class="stat-label">Exercises</div>
                 </div>
-                <div class="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl p-4 border border-orange-500/30">
-                    <p class="text-3xl font-bold" id="weeklyProgress">0%</p>
-                    <p class="text-sm text-gray-400">This Week</p>
-                </div>
-            </div>
-            <div class="bg-slate-800/50 rounded-2xl p-4 border border-slate-700 mb-4">
-                <h3 class="font-bold mb-3">Weekly Overview</h3>
-                <div class="flex justify-between">
-                    <div class="text-center" id="weekDay0"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">S</span></div>
-                    <div class="text-center" id="weekDay1"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">M</span></div>
-                    <div class="text-center" id="weekDay2"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">T</span></div>
-                    <div class="text-center" id="weekDay3"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">W</span></div>
-                    <div class="text-center" id="weekDay4"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">T</span></div>
-                    <div class="text-center" id="weekDay5"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">F</span></div>
-                    <div class="text-center" id="weekDay6"><div class="w-8 h-8 rounded-lg bg-slate-700 mb-1"></div><span class="text-xs">S</span></div>
+                <div class="stat-card yellow">
+                    <div class="stat-value" id="weeklyProgress">0%</div>
+                    <div class="stat-label">This Week</div>
                 </div>
             </div>
-            <button onclick="resetAllData()" class="w-full py-3 bg-red-500/20 border border-red-500/30 rounded-xl text-red-400 font-medium hover:bg-red-500/30 transition">🗑️ Reset All Data</button>
+
+            <div class="weekly-overview">
+                <div class="weekly-title">// WEEKLY MISSION STATUS</div>
+                <div class="weekly-days">
+                    <div class="weekly-day" id="weekDay0"><div class="weekly-day-box">S</div><div class="weekly-day-label">SUN</div></div>
+                    <div class="weekly-day" id="weekDay1"><div class="weekly-day-box">M</div><div class="weekly-day-label">MON</div></div>
+                    <div class="weekly-day" id="weekDay2"><div class="weekly-day-box">T</div><div class="weekly-day-label">TUE</div></div>
+                    <div class="weekly-day" id="weekDay3"><div class="weekly-day-box">W</div><div class="weekly-day-label">WED</div></div>
+                    <div class="weekly-day" id="weekDay4"><div class="weekly-day-box">T</div><div class="weekly-day-label">THU</div></div>
+                    <div class="weekly-day" id="weekDay5"><div class="weekly-day-box">F</div><div class="weekly-day-label">FRI</div></div>
+                    <div class="weekly-day" id="weekDay6"><div class="weekly-day-box">S</div><div class="weekly-day-label">SAT</div></div>
+                </div>
+            </div>
+
+            <button onclick="resetAllData()" class="reset-btn">⚠ RESET ALL DATA</button>
         </div>
     </div>
+
     <script>
+        // Workout Data with Muscle Tags
         const workoutData = {
-            1: { title: "Day 1: Push A", focus: "Incline & Tricep Focus", exercises: [
-                { name: "Inclined Smith Machine Chest Press", sets: "3", reps: "8-10", note: "Heavy compound" },
-                { name: "Dips", sets: "3", reps: "10-12", note: "Lower chest/triceps" },
-                { name: "Chest Fly Machine", sets: "3", reps: "12-15", note: "Peak contraction" },
-                { name: "Cable Lateral Raises", sets: "4", reps: "12-15", note: "Constant tension" },
-                { name: "Cable Tricep Push Downs", sets: "3", reps: "10-12", note: "Rope or straight bar" },
-                { name: "EZ Bar Skull Crushers", sets: "3", reps: "8-10", note: "Long head mass builder" }
-            ]},
-            2: { title: "Day 2: Pull A", focus: "Vertical Pulling & Curl Focus", exercises: [
-                { name: "Pull Ups", sets: "3", reps: "AMRAP", note: "Add weight if needed" },
-                { name: "Lat Pulldowns", sets: "3", reps: "10-12", note: "" },
-                { name: "Lat Prayers", sets: "3", reps: "12-15", note: "Straight arm pulldowns" },
-                { name: "Seated Chest Supported Rows", sets: "3", reps: "10-12", note: "Upper back thickness" },
-                { name: "Bayesian Bicep Curls", sets: "3", reps: "12-15", note: "Full stretch position" },
-                { name: "Preacher Bicep Curls", sets: "3", reps: "10-12", note: "Short head isolation" }
-            ]},
-            3: { title: "Day 3: Legs A", focus: "Squat Focus + Lower Abs", exercises: [
-                { name: "Squats", sets: "3", reps: "6-8", note: "Primary heavy compound" },
-                { name: "Hip Thrust Machine", sets: "3", reps: "10-12", note: "Glute focus" },
-                { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "" },
-                { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "" },
-                { name: "Leg Raises (Core)", sets: "3", reps: "15", note: "Lower abs" },
-                { name: "Inclined Treadmill Walk", sets: "1", reps: "20-30 mins", note: "Steady state cardio" }
-            ]},
-            4: { title: "Day 4: Push B", focus: "Machine Press & Delt Focus", exercises: [
-                { name: "Hammer Chest Press", sets: "3", reps: "8-10", note: "Heavy flat press" },
-                { name: "Inclined Machine Press", sets: "3", reps: "10-12", note: "Upper pec shelf" },
-                { name: "Multiflight Lateral Raise Machine", sets: "4", reps: "12-15", note: "Drop sets work well" },
-                { name: "Inclined Y Raises", sets: "3", reps: "12-15", note: "Lower traps/rear delts" },
-                { name: "Cable Tricep Extension", sets: "3", reps: "12-15", note: "Overhead - long head" }
-            ]},
-            5: { title: "Day 5: Pull B", focus: "Horizontal Rowing & Brachialis", exercises: [
-                { name: "Seated Cable Rows", sets: "3", reps: "10-12", note: "" },
-                { name: "Inclined DB Chest Supported Rows", sets: "3", reps: "10-12", note: "No lower back strain" },
-                { name: "Lat Pulldowns (Variation)", sets: "3", reps: "10-12", note: "Different grip" },
-                { name: "Preacher Hammer Curls", sets: "3", reps: "10-12", note: "Brachialis focus" },
-                { name: "Bayesian Bicep Curls", sets: "2", reps: "15", note: "Light pump finish" }
-            ]},
-            6: { title: "Day 6: Legs B", focus: "Hinge/Posterior Chain + Upper Abs", exercises: [
-                { name: "Deadlifts", sets: "3", reps: "5-8", note: "Heavy - strict form" },
-                { name: "Lying Hamstring Curls", sets: "3", reps: "10-12", note: "" },
-                { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "Maintain quad volume" },
-                { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "" },
-                { name: "Cable Crunches (Core)", sets: "3", reps: "15", note: "Upper abs" },
-                { name: "Elliptical Machine", sets: "1", reps: "20-30 mins", note: "Moderate cardio" }
-            ]},
-            7: { title: "Day 7: Rest & Recovery", focus: "Active Recovery", exercises: [
-                { name: "Inclined Treadmill Walk", sets: "1", reps: "45 mins", note: "Low intensity" },
-                { name: "Foam Rolling", sets: "1", reps: "15-20 mins", note: "Full body" },
-                { name: "Stretching", sets: "1", reps: "15-20 mins", note: "Focus on tight areas" }
-            ]}
+            1: { 
+                title: "DAY 1: PUSH A", 
+                subtitle: "Sunday", 
+                focus: "// INCLINE & TRICEP FOCUS", 
+                exercises: [
+                    { name: "Inclined Smith Machine Chest Press", sets: "3", reps: "8-10", note: "Heavy compound", muscle: "CHEST" },
+                    { name: "Dips", sets: "3", reps: "10-12", note: "Lower chest/triceps", muscle: "CHEST" },
+                    { name: "Chest Fly Machine", sets: "3", reps: "12-15", note: "Peak contraction", muscle: "CHEST" },
+                    { name: "Cable Lateral Raises", sets: "4", reps: "12-15", note: "Constant tension", muscle: "DELTS" },
+                    { name: "Cable Tricep Push Downs", sets: "3", reps: "10-12", note: "Rope or straight bar", muscle: "TRICEPS" },
+                    { name: "EZ Bar Skull Crushers", sets: "3", reps: "8-10", note: "Long head mass builder", muscle: "TRICEPS" }
+                ]
+            },
+            2: { 
+                title: "DAY 2: PULL A", 
+                subtitle: "Monday", 
+                focus: "// VERTICAL PULLING & CURL FOCUS", 
+                exercises: [
+                    { name: "Pull Ups", sets: "3", reps: "AMRAP", note: "Add weight if needed", muscle: "BACK" },
+                    { name: "Lat Pulldowns", sets: "3", reps: "10-12", note: "", muscle: "LATS" },
+                    { name: "Lat Prayers", sets: "3", reps: "12-15", note: "Straight arm pulldowns", muscle: "LATS" },
+                    { name: "Seated Chest Supported Rows", sets: "3", reps: "10-12", note: "Upper back thickness", muscle: "BACK" },
+                    { name: "Bayesian Bicep Curls", sets: "3", reps: "12-15", note: "Full stretch position", muscle: "BICEPS" },
+                    { name: "Preacher Bicep Curls", sets: "3", reps: "10-12", note: "Short head isolation", muscle: "BICEPS" }
+                ]
+            },
+            3: { 
+                title: "DAY 3: LEGS A", 
+                subtitle: "Tuesday", 
+                focus: "// SQUAT FOCUS + LOWER ABS", 
+                exercises: [
+                    { name: "Squats", sets: "3", reps: "6-8", note: "Primary heavy compound", muscle: "QUADS" },
+                    { name: "Hip Thrust Machine", sets: "3", reps: "10-12", note: "Glute focus", muscle: "GLUTES" },
+                    { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "", muscle: "QUADS" },
+                    { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "", muscle: "CALVES" },
+                    { name: "Leg Raises (Core)", sets: "3", reps: "15", note: "Lower abs", muscle: "ABS" },
+                    { name: "Inclined Treadmill Walk", sets: "1", reps: "20-30 mins", note: "Steady state cardio", muscle: "CARDIO" }
+                ]
+            },
+            4: { 
+                title: "DAY 4: PUSH B", 
+                subtitle: "Wednesday", 
+                focus: "// MACHINE PRESS & DELT FOCUS", 
+                exercises: [
+                    { name: "Hammer Chest Press", sets: "3", reps: "8-10", note: "Heavy flat press", muscle: "CHEST" },
+                    { name: "Inclined Machine Press", sets: "3", reps: "10-12", note: "Upper pec shelf", muscle: "CHEST" },
+                    { name: "Multiflight Lateral Raise Machine", sets: "4", reps: "12-15", note: "Drop sets work well", muscle: "DELTS" },
+                    { name: "Inclined Y Raises", sets: "3", reps: "12-15", note: "Lower traps/rear delts", muscle: "DELTS" },
+                    { name: "Cable Tricep Extension", sets: "3", reps: "12-15", note: "Overhead - long head", muscle: "TRICEPS" }
+                ]
+            },
+            5: { 
+                title: "DAY 5: PULL B", 
+                subtitle: "Thursday", 
+                focus: "// HORIZONTAL ROWING & BRACHIALIS", 
+                exercises: [
+                    { name: "Seated Cable Rows", sets: "3", reps: "10-12", note: "", muscle: "BACK" },
+                    { name: "Inclined DB Chest Supported Rows", sets: "3", reps: "10-12", note: "No lower back strain", muscle: "BACK" },
+                    { name: "Lat Pulldowns (Variation)", sets: "3", reps: "10-12", note: "Different grip", muscle: "LATS" },
+                    { name: "Preacher Hammer Curls", sets: "3", reps: "10-12", note: "Brachialis focus", muscle: "BICEPS" },
+                    { name: "Bayesian Bicep Curls", sets: "2", reps: "15", note: "Light pump finish", muscle: "BICEPS" }
+                ]
+            },
+            6: { 
+                title: "DAY 6: LEGS B", 
+                subtitle: "Friday", 
+                focus: "// HINGE/POSTERIOR CHAIN + UPPER ABS", 
+                exercises: [
+                    { name: "Deadlifts", sets: "3", reps: "5-8", note: "Heavy - strict form", muscle: "POSTERIOR" },
+                    { name: "Lying Hamstring Curls", sets: "3", reps: "10-12", note: "", muscle: "HAMSTRINGS" },
+                    { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "Maintain quad volume", muscle: "QUADS" },
+                    { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "", muscle: "CALVES" },
+                    { name: "Cable Crunches (Core)", sets: "3", reps: "15", note: "Upper abs", muscle: "ABS" },
+                    { name: "Elliptical Machine", sets: "1", reps: "20-30 mins", note: "Moderate cardio", muscle: "CARDIO" }
+                ]
+            },
+            7: { 
+                title: "DAY 7: REST & RECOVERY", 
+                subtitle: "Saturday", 
+                focus: "// ACTIVE RECOVERY PROTOCOL", 
+                exercises: [
+                    { name: "Inclined Treadmill Walk", sets: "1", reps: "45 mins", note: "Low intensity", muscle: "CARDIO" },
+                    { name: "Foam Rolling", sets: "1", reps: "15-20 mins", note: "Full body", muscle: "RECOVERY" },
+                    { name: "Stretching", sets: "1", reps: "15-20 mins", note: "Focus on tight areas", muscle: "MOBILITY" }
+                ]
+            }
         };
+
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const shortDayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        const workoutTypes = ["PUSH A", "PULL A", "LEGS A", "PUSH B", "PULL B", "LEGS B", "REST"];
+
+        // Nepali Calendar Data
         const nepaliMonths = ["बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "असोज", "कार्तिक", "मंसिर", "पुष", "माघ", "फाल्गुन", "चैत्र"];
         const nepaliMonthsEng = ["Baisakh", "Jestha", "Ashar", "Shrawan", "Bhadra", "Ashwin", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
         const nepaliDays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
         const nepaliNums = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
         const bsMonthDays = [[2000,30,32,31,32,31,30,30,30,29,30,29,31],[2001,31,31,32,31,31,31,30,29,30,29,30,30],[2002,31,31,32,32,31,30,30,29,30,29,30,30],[2003,31,32,31,32,31,30,30,30,29,29,30,31],[2004,30,32,31,32,31,30,30,30,29,30,29,31],[2005,31,31,32,31,31,31,30,29,30,29,30,30],[2006,31,31,32,32,31,30,30,29,30,29,30,30],[2007,31,32,31,32,31,30,30,30,29,29,30,31],[2008,31,31,31,32,31,31,29,30,30,29,29,31],[2009,31,31,32,31,31,31,30,29,30,29,30,30],[2010,31,31,32,32,31,30,30,29,30,29,30,30],[2011,31,32,31,32,31,30,30,30,29,29,30,31],[2012,31,31,31,32,31,31,29,30,30,29,30,30],[2013,31,31,32,31,31,31,30,29,30,29,30,30],[2014,31,31,32,32,31,30,30,29,30,29,30,30],[2015,31,32,31,32,31,30,30,30,29,29,30,31],[2016,31,31,31,32,31,31,29,30,30,29,30,30],[2017,31,31,32,31,31,31,30,29,30,29,30,30],[2018,31,32,31,32,31,30,30,29,30,29,30,30],[2019,31,32,31,32,31,30,30,30,29,30,29,31],[2020,31,31,31,32,31,31,30,29,30,29,30,30],[2021,31,31,32,31,31,31,30,29,30,29,30,30],[2022,31,32,31,32,31,30,30,30,29,29,30,30],[2023,31,32,31,32,31,30,30,30,29,30,29,31],[2024,31,31,31,32,31,31,30,29,30,29,30,30],[2025,31,31,32,31,31,31,30,29,30,29,30,30],[2026,31,32,31,32,31,30,30,30,29,29,30,31],[2027,30,32,31,32,31,30,30,30,29,30,29,31],[2028,31,31,32,31,31,31,30,29,30,29,30,30],[2029,31,31,32,31,32,30,30,29,30,29,30,30],[2030,31,32,31,32,31,30,30,30,29,29,30,31],[2031,30,32,31,32,31,30,30,30,29,30,29,31],[2032,31,31,32,31,31,31,30,29,30,29,30,30],[2033,31,31,32,32,31,30,30,29,30,29,30,30],[2034,31,32,31,32,31,30,30,30,29,29,30,31],[2035,30,32,31,32,31,31,29,30,30,29,29,31],[2036,31,31,32,31,31,31,30,29,30,29,30,30],[2037,31,31,32,32,31,30,30,29,30,29,30,30],[2038,31,32,31,32,31,30,30,30,29,29,30,31],[2039,31,31,31,32,31,31,29,30,30,29,30,30],[2040,31,31,32,31,31,31,30,29,30,29,30,30],[2041,31,31,32,32,31,30,30,29,30,29,30,30],[2042,31,32,31,32,31,30,30,30,29,29,30,31],[2043,31,31,31,32,31,31,29,30,30,29,30,30],[2044,31,31,32,31,31,31,30,29,30,29,30,30],[2045,31,32,31,32,31,30,30,29,30,29,30,30],[2046,31,32,31,32,31,30,30,30,29,29,30,31],[2047,31,31,31,32,31,31,30,29,30,29,30,30],[2048,31,31,32,31,31,31,30,29,30,29,30,30],[2049,31,32,31,32,31,30,30,30,29,29,30,30],[2050,31,32,31,32,31,30,30,30,29,30,29,31],[2051,31,31,31,32,31,31,30,29,30,29,30,30],[2052,31,31,32,31,31,31,30,29,30,29,30,30],[2053,31,32,31,32,31,30,30,30,29,29,30,30],[2054,31,32,31,32,31,30,30,30,29,30,29,31],[2055,31,31,32,31,31,31,30,29,30,29,30,30],[2056,31,31,32,31,32,30,30,29,30,29,30,30],[2057,31,32,31,32,31,30,30,30,29,29,30,31],[2058,30,32,31,32,31,30,30,30,29,30,29,31],[2059,31,31,32,31,31,31,30,29,30,29,30,30],[2060,31,31,32,32,31,30,30,29,30,29,30,30],[2061,31,32,31,32,31,30,30,30,29,29,30,31],[2062,30,32,31,32,31,31,29,30,29,30,29,31],[2063,31,31,32,31,31,31,30,29,30,29,30,30],[2064,31,31,32,32,31,30,30,29,30,29,30,30],[2065,31,32,31,32,31,30,30,30,29,29,30,31],[2066,31,31,31,32,31,31,29,30,30,29,29,31],[2067,31,31,32,31,31,31,30,29,30,29,30,30],[2068,31,31,32,32,31,30,30,29,30,29,30,30],[2069,31,32,31,32,31,30,30,30,29,29,30,31],[2070,31,31,31,32,31,31,29,30,30,29,30,30],[2071,31,31,32,31,31,31,30,29,30,29,30,30],[2072,31,32,31,32,31,30,30,29,30,29,30,30],[2073,31,32,31,32,31,30,30,30,29,29,30,31],[2074,31,31,31,32,31,31,30,29,30,29,30,30],[2075,31,31,32,31,31,31,30,29,30,29,30,30],[2076,31,32,31,32,31,30,30,30,29,29,30,30],[2077,31,32,31,32,31,30,30,30,29,30,29,31],[2078,31,31,31,32,31,31,30,29,30,29,30,30],[2079,31,31,32,31,31,31,30,29,30,29,30,30],[2080,31,32,31,32,31,30,30,30,29,29,30,30],[2081,31,32,31,32,31,30,30,30,29,30,29,31],[2082,31,31,32,31,31,31,30,29,30,29,30,30],[2083,31,31,32,31,32,30,30,29,30,29,30,30],[2084,31,32,31,32,31,30,30,30,29,29,30,31],[2085,30,32,31,32,31,30,30,30,29,30,29,31],[2086,31,31,32,31,31,31,30,29,30,29,30,30],[2087,31,31,32,32,31,30,30,29,30,29,30,30],[2088,31,32,31,32,31,30,30,30,29,29,30,31],[2089,30,32,31,32,31,31,29,30,30,29,29,31],[2090,31,31,32,31,31,31,30,29,30,29,30,30],[2091,31,31,32,32,31,30,30,29,30,29,30,30],[2092,31,32,31,32,31,30,30,30,29,29,30,31],[2093,31,31,31,32,31,31,29,30,30,29,30,30],[2094,31,31,32,31,31,31,30,29,30,29,30,30],[2095,31,32,31,32,31,30,30,29,30,29,30,30],[2096,31,32,31,32,31,30,30,30,29,29,30,31],[2097,31,31,31,32,31,31,30,29,30,29,30,30],[2098,31,31,32,31,31,31,30,29,30,29,30,30],[2099,31,32,31,32,31,30,30,30,29,29,30,30],[2100,31,32,31,32,31,30,30,30,29,30,29,31]];
-        function toNepaliNum(num) { return String(num).split('').map(d => nepaliNums[parseInt(d)]).join(''); }
+
+        function toNepaliNum(num) { return String(num).split('').map(d => nepaliNums[parseInt(d)] || d).join(''); }
+        
         function adToBs(year, month, day) {
             const startAdDate = new Date(1943, 3, 14);
             const inputDate = new Date(year, month - 1, day);
@@ -226,81 +1183,180 @@
             }
             return { year: bsYear, month: bsMonth, day: bsDay };
         }
-        let currentDay = 1;
+
+        // State
+        function getTodayWorkoutDay() {
+            const today = new Date();
+            return today.getDay() + 1;
+        }
+
+        let currentDay = getTodayWorkoutDay();
         let currentCalendarDate = new Date();
         let completedExercises = JSON.parse(localStorage.getItem('completedExercises') || '{}');
         let completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-        function init() { updateDateDisplay(); selectDay(1); renderCalendar(); updateStats(); }
+        let totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+
+        // Initialize
+        function init() {
+            updateDateDisplay();
+            renderDayTabs();
+            selectDay(getTodayWorkoutDay());
+            renderCalendar();
+            updateStats();
+            updateXPBar();
+        }
+
         function updateDateDisplay() {
             const now = new Date();
-            const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
-            const englishDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const dayName = now.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
+            const englishDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
             const bs = adToBs(now.getFullYear(), now.getMonth() + 1, now.getDate());
-            const nepaliDate = toNepaliNum(bs.year) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.day) + ' ' + nepaliDays[now.getDay()];
+            const nepaliDate = toNepaliNum(bs.year) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.day) + ' • ' + nepaliDays[now.getDay()];
             document.getElementById('englishDate').textContent = englishDate;
             document.getElementById('dayName').textContent = dayName;
             document.getElementById('nepaliDate').textContent = nepaliDate;
         }
+
+        function renderDayTabs() {
+            const container = document.getElementById('dayTabs');
+            const todayDay = getTodayWorkoutDay();
+            let html = '';
+            for (let day = 1; day <= 7; day++) {
+                const isToday = day === todayDay;
+                const isActive = day === currentDay;
+                let classes = 'day-chip';
+                if (isActive) classes += ' active';
+                if (isToday) classes += ' today';
+                html += '<div onclick="selectDay(' + day + ')" class="' + classes + '" data-day="' + day + '">';
+                html += '<div class="day-number">' + String(day).padStart(2, '0') + '</div>';
+                html += '<div class="day-name">' + shortDayNames[day - 1] + '</div>';
+                html += '<div class="day-type">' + workoutTypes[day - 1] + '</div>';
+                html += '</div>';
+            }
+            container.innerHTML = html;
+        }
+
         function showView(view) {
             document.getElementById('workout-view').classList.add('hidden');
             document.getElementById('calendar-view').classList.add('hidden');
             document.getElementById('stats-view').classList.add('hidden');
             document.getElementById(view + '-view').classList.remove('hidden');
-            document.querySelectorAll('.nav-item').forEach(item => { item.classList.remove('active'); item.classList.add('text-gray-400'); });
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('nav-' + view).classList.add('active');
-            document.getElementById('nav-' + view).classList.remove('text-gray-400');
             if (view === 'stats') updateStats();
             if (view === 'calendar') renderCalendar();
         }
+
         function selectDay(day) {
             currentDay = day;
-            document.querySelectorAll('.day-tab').forEach(tab => { tab.classList.remove('active'); if (parseInt(tab.dataset.day) === day) tab.classList.add('active'); });
+            renderDayTabs();
             const data = workoutData[day];
             document.getElementById('currentDayTitle').textContent = data.title;
             document.getElementById('currentDayFocus').textContent = data.focus;
             renderExercises();
             updateProgress();
         }
-        function getDateKey(date) { date = date || new Date(); return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(); }
+
+        function getDateKey(date) { 
+            date = date || new Date(); 
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(); 
+        }
+
         function renderExercises() {
             const list = document.getElementById('exerciseList');
             const data = workoutData[currentDay];
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             if (!completedExercises[dayKey]) completedExercises[dayKey] = {};
+            
             list.innerHTML = data.exercises.map((ex, index) => {
                 const isCompleted = completedExercises[dayKey][index] || false;
-                return '<div class="exercise-card ' + (isCompleted ? 'completed' : '') + ' rounded-xl p-4 animate-in" style="animation-delay: ' + (index * 50) + 'ms"><div class="flex items-start gap-3"><input type="checkbox" class="custom-checkbox mt-1 flex-shrink-0" ' + (isCompleted ? 'checked' : '') + ' onchange="toggleExercise(' + index + ', this.checked)"><div class="flex-1"><h4 class="font-semibold ' + (isCompleted ? 'line-through opacity-60' : '') + '">' + ex.name + '</h4><div class="flex items-center gap-3 mt-1"><span class="text-sm text-indigo-400">' + ex.sets + ' sets × ' + ex.reps + '</span>' + (ex.note ? '<span class="text-xs text-gray-500">• ' + ex.note + '</span>' : '') + '</div></div></div></div>';
+                return `
+                    <div class="exercise-card ${isCompleted ? 'completed' : ''}" style="animation-delay: ${index * 0.08}s">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" class="cyber-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleExercise(${index}, this.checked)">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2" style="flex-wrap: wrap;">
+                                    <span class="muscle-tag">${ex.muscle}</span>
+                                </div>
+                                <h4 class="exercise-name" style="margin-top: 6px;">${ex.name}</h4>
+                                <div class="exercise-meta">
+                                    <span class="exercise-sets">${ex.sets} × ${ex.reps}</span>
+                                    ${ex.note ? `<span class="exercise-note">${ex.note}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }).join('');
         }
+
         function toggleExercise(index, completed) {
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             if (!completedExercises[dayKey]) completedExercises[dayKey] = {};
+            
+            const wasCompleted = completedExercises[dayKey][index];
             completedExercises[dayKey][index] = completed;
             localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+            
+            // XP System
+            if (completed && !wasCompleted) {
+                totalXP += 15;
+                localStorage.setItem('totalXP', totalXP);
+                updateXPBar();
+            } else if (!completed && wasCompleted) {
+                totalXP = Math.max(0, totalXP - 15);
+                localStorage.setItem('totalXP', totalXP);
+                updateXPBar();
+            }
+            
             renderExercises();
             updateProgress();
             checkDayCompletion();
         }
+
+        function updateXPBar() {
+            const level = Math.floor(totalXP / 100) + 1;
+            const currentLevelXP = totalXP % 100;
+            const nextLevelXP = 100;
+            const percentage = (currentLevelXP / nextLevelXP) * 100;
+            
+            document.getElementById('userLevel').textContent = level;
+            document.getElementById('currentXP').textContent = currentLevelXP;
+            document.getElementById('nextLevelXP').textContent = nextLevelXP;
+            document.getElementById('xpFill').style.width = percentage + '%';
+        }
+
         function updateProgress() {
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             const exercises = workoutData[currentDay].exercises;
             const completed = Object.values(completedExercises[dayKey] || {}).filter(Boolean).length;
             const percentage = Math.round((completed / exercises.length) * 100);
-            const circumference = 2 * Math.PI * 28;
+            const circumference = 2 * Math.PI * 42;
             const offset = circumference - (percentage / 100) * circumference;
             document.getElementById('progressCircle').style.strokeDashoffset = offset;
             document.getElementById('progressText').textContent = percentage + '%';
         }
+
         function checkDayCompletion() {
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             const exercises = workoutData[currentDay].exercises;
             const completed = Object.values(completedExercises[dayKey] || {}).filter(Boolean).length;
-            if (completed === exercises.length) { completedDays[dateKey] = currentDay; localStorage.setItem('completedDays', JSON.stringify(completedDays)); }
+            if (completed === exercises.length) {
+                if (!completedDays[dateKey]) {
+                    completedDays[dateKey] = currentDay;
+                    localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                    // Bonus XP for completing a full day
+                    totalXP += 50;
+                    localStorage.setItem('totalXP', totalXP);
+                    updateXPBar();
+                }
+            }
         }
+
         function renderCalendar() {
             const grid = document.getElementById('calendarGrid');
             const year = currentCalendarDate.getFullYear();
@@ -309,30 +1365,39 @@
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const today = new Date();
             const bs = adToBs(year, month + 1, 15);
-            document.getElementById('calendarMonth').textContent = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            document.getElementById('calendarMonth').textContent = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
             document.getElementById('calendarNepaliMonth').textContent = nepaliMonthsEng[bs.month - 1] + ' ' + bs.year + ' BS';
+            
             let html = '';
-            for (let i = 0; i < firstDay; i++) html += '<div class="h-10"></div>';
+            for (let i = 0; i < firstDay; i++) html += '<div class="calendar-day" style="opacity: 0;"></div>';
             for (let day = 1; day <= daysInMonth; day++) {
                 const date = new Date(year, month, day);
                 const dateKey = year + '-' + (month + 1) + '-' + day;
                 const isToday = date.toDateString() === today.toDateString();
                 const isCompleted = completedDays[dateKey];
-                const cycleDay = (Math.floor((date - new Date(2024, 0, 1)) / (1000 * 60 * 60 * 24)) % 7) + 1;
-                let classes = 'calendar-day h-10 flex items-center justify-center rounded-lg text-sm font-medium cursor-pointer hover:bg-slate-700';
-                if (isToday) classes += ' today text-white';
+                const dayOfWeek = date.getDay() + 1;
+                const isRestDay = dayOfWeek === 7;
+                
+                let classes = 'calendar-day';
+                if (isToday) classes += ' today';
                 else if (isCompleted) classes += ' completed-day';
-                else classes += ' bg-slate-800';
-                if (!isToday && cycleDay !== 7) classes += ' has-workout';
-                html += '<div class="' + classes + '" onclick="showDayInfo(\'' + dateKey + '\', ' + cycleDay + ')">' + day + '</div>';
+                if (!isToday && !isRestDay) classes += ' has-workout';
+                
+                html += '<div class="' + classes + '">' + day + '</div>';
             }
             grid.innerHTML = html;
         }
-        function changeMonth(delta) { currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta); renderCalendar(); }
-        function showDayInfo(dateKey, cycleDay) { console.log('Date: ' + dateKey + ', Cycle Day: ' + cycleDay); }
+
+        function changeMonth(delta) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
         function updateStats() {
             const totalWorkouts = Object.keys(completedDays).length;
-            const totalExercises = Object.values(completedExercises).reduce((sum, day) => sum + Object.values(day).filter(Boolean).length, 0);
+            const totalExercisesCount = Object.values(completedExercises).reduce((sum, day) => sum + Object.values(day).filter(Boolean).length, 0);
+            
             let streak = 0;
             const today = new Date();
             for (let i = 0; i < 365; i++) {
@@ -342,42 +1407,56 @@
                 if (completedDays[dateKey]) streak++;
                 else if (i > 0) break;
             }
+            
             const weekStart = new Date(today);
             weekStart.setDate(weekStart.getDate() - weekStart.getDay());
             let weeklyCompleted = 0;
+            
             for (let i = 0; i < 7; i++) {
                 const checkDate = new Date(weekStart);
                 checkDate.setDate(checkDate.getDate() + i);
                 const dateKey = getDateKey(checkDate);
                 if (completedDays[dateKey]) weeklyCompleted++;
+                
                 const dayEl = document.getElementById('weekDay' + i);
                 if (dayEl) {
-                    const box = dayEl.querySelector('div');
-                    if (completedDays[dateKey]) box.className = 'w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 mb-1';
-                    else if (checkDate <= today) box.className = 'w-8 h-8 rounded-lg bg-slate-700 mb-1';
-                    else box.className = 'w-8 h-8 rounded-lg bg-slate-800 mb-1';
+                    const box = dayEl.querySelector('.weekly-day-box');
+                    if (completedDays[dateKey]) {
+                        box.classList.add('completed');
+                        box.textContent = '✓';
+                    } else {
+                        box.classList.remove('completed');
+                        box.textContent = shortDayNames[i].charAt(0);
+                    }
                 }
             }
+            
             document.getElementById('totalWorkouts').textContent = totalWorkouts;
             document.getElementById('currentStreak').textContent = streak;
-            document.getElementById('totalExercises').textContent = totalExercises;
+            document.getElementById('totalExercises').textContent = totalExercisesCount;
             document.getElementById('weeklyProgress').textContent = Math.round((weeklyCompleted / 6) * 100) + '%';
         }
+
         function resetAllData() {
-            if (confirm('Are you sure you want to reset all workout data? This cannot be undone.')) {
+            if (confirm('⚠️ WARNING: This will permanently delete all your workout data and XP. Continue?')) {
                 localStorage.removeItem('completedExercises');
                 localStorage.removeItem('completedDays');
+                localStorage.removeItem('totalXP');
                 completedExercises = {};
                 completedDays = {};
+                totalXP = 0;
                 renderExercises();
                 updateProgress();
                 updateStats();
                 renderCalendar();
+                updateXPBar();
             }
         }
-        init();
+
+        // PWA Install
         let deferredPrompt;
         const installBanner = document.getElementById('installBanner');
+        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js').then(function(registration) {
@@ -387,6 +1466,7 @@
                 });
             });
         }
+        
         window.addEventListener('beforeinstallprompt', function(e) {
             e.preventDefault();
             deferredPrompt = e;
@@ -395,24 +1475,28 @@
             const daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
             if (daysSinceDismissed > 7) installBanner.classList.remove('hidden');
         });
+        
         function installApp() {
             if (!deferredPrompt) return;
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then(function(choiceResult) {
-                if (choiceResult.outcome === 'accepted') console.log('User accepted install');
                 deferredPrompt = null;
                 installBanner.classList.add('hidden');
             });
         }
+        
         function dismissInstall() {
             installBanner.classList.add('hidden');
             localStorage.setItem('installDismissed', Date.now().toString());
         }
+        
         window.addEventListener('appinstalled', function() {
-            console.log('App installed successfully');
             installBanner.classList.add('hidden');
             deferredPrompt = null;
         });
+
+        // Initialize app
+        init();
     </script>
 </body>
 </html>
