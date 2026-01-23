@@ -1,7 +1,7 @@
 {
-  "name": "Kritik's Gurkha Gains - Cyberpunk PPL Tracker",
+  "name": "Kritik's Gurkha Gains - Ultimate PPL Tracker",
   "short_name": "Gurkha Gains",
-  "description": "Cyberpunk-themed Push/Pull/Legs workout tracker with Nepali calendar support",
+  "description": "Cyberpunk PPL Workout Tracker with Nepali Calendar, Holiday Integration & Creatine Tracking",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0a0f",
