@@ -39,7 +39,6 @@
             overflow-x: hidden;
         }
         
-        /* Cyberpunk Grid Background */
         body::before {
             content: '';
             position: fixed;
@@ -55,7 +54,6 @@
             z-index: 0;
         }
         
-        /* Scanline Effect */
         body::after {
             content: '';
             position: fixed;
@@ -83,7 +81,6 @@
             z-index: 1;
         }
         
-        /* Glowing Text */
         .glow-cyan { 
             text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan); 
             color: var(--neon-cyan);
@@ -96,16 +93,12 @@
             text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); 
             color: var(--neon-green);
         }
-        .glow-yellow { 
-            text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow); 
-            color: var(--neon-yellow);
-        }
         
         /* Header */
         .cyber-header {
             background: linear-gradient(180deg, rgba(0,240,255,0.1) 0%, transparent 100%);
             border-bottom: 2px solid var(--neon-cyan);
-            padding: 16px;
+            padding: 12px 16px;
             position: sticky;
             top: 0;
             z-index: 50;
@@ -131,28 +124,18 @@
         .logo-text {
             font-family: 'Orbitron', monospace;
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             letter-spacing: 2px;
             background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-transform: uppercase;
-            animation: logoFlicker 4s ease-in-out infinite;
-        }
-        
-        @keyframes logoFlicker {
-            0%, 100% { opacity: 1; }
-            92% { opacity: 1; }
-            93% { opacity: 0.8; }
-            94% { opacity: 1; }
-            96% { opacity: 0.9; }
-            97% { opacity: 1; }
         }
         
         .nepali-date {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--neon-yellow);
             opacity: 0.9;
         }
@@ -161,58 +144,44 @@
         .cyber-nav {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 16px;
-            background: rgba(10,10,15,0.9);
+            gap: 6px;
+            padding: 10px 12px;
+            background: rgba(10,10,15,0.95);
             border-bottom: 1px solid var(--dark-border);
             position: sticky;
-            top: 76px;
+            top: 68px;
             z-index: 40;
             backdrop-filter: blur(10px);
         }
         
         .nav-btn {
             font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 8px 12px;
             background: transparent;
             border: 1px solid var(--dark-border);
             color: #666;
             cursor: pointer;
             transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
             position: relative;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-        
         .nav-btn.active {
             border-color: var(--neon-cyan);
             color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0,240,255,0.3), inset 0 0 20px rgba(0,240,255,0.1);
-        }
-        
-        .nav-btn.active::before {
-            opacity: 0.1;
+            box-shadow: 0 0 15px rgba(0,240,255,0.3), inset 0 0 15px rgba(0,240,255,0.1);
         }
         
         /* Day Selector */
         .day-selector {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             overflow-x: auto;
-            padding: 16px;
+            padding: 12px;
             scrollbar-width: none;
         }
         
@@ -220,86 +189,164 @@
         
         .day-chip {
             flex-shrink: 0;
-            padding: 12px 16px;
+            padding: 10px 12px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-        }
-        
-        .day-chip::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
-            opacity: 0;
-            transition: opacity 0.3s;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            text-align: center;
         }
         
         .day-chip.active {
             border-color: var(--neon-cyan);
             background: linear-gradient(180deg, rgba(0,240,255,0.15) 0%, transparent 100%);
-            box-shadow: 0 0 30px rgba(0,240,255,0.2);
+            box-shadow: 0 0 20px rgba(0,240,255,0.2);
         }
-        
-        .day-chip.active::before { opacity: 1; }
         
         .day-chip.today {
             border-color: var(--neon-green);
-            box-shadow: 0 0 20px rgba(57,255,20,0.3);
+            box-shadow: 0 0 15px rgba(57,255,20,0.3);
         }
         
         .day-chip.today::after {
-            content: 'TODAY';
+            content: 'आज';
             position: absolute;
-            bottom: -8px;
+            bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.45rem;
             color: var(--dark-bg);
             background: var(--neon-green);
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 2px;
             font-weight: 700;
         }
         
         .day-number {
             font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--neon-cyan);
         }
         
         .day-name {
-            font-size: 0.65rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.55rem;
+            color: #888;
             margin-top: 2px;
         }
         
+        .day-name-nepali {
+            font-size: 0.5rem;
+            color: var(--neon-yellow);
+            margin-top: 1px;
+        }
+        
         .day-type {
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: var(--neon-magenta);
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 600;
+        }
+        
+        /* Creatine Tracker */
+        .creatine-tracker {
+            margin: 0 12px 12px;
+            padding: 12px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+        
+        .creatine-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .creatine-icon {
+            font-size: 1.3rem;
+        }
+        
+        .creatine-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-cyan);
+        }
+        
+        .creatine-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--neon-magenta);
+            background: transparent;
+            color: var(--neon-magenta);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+        }
+        
+        .creatine-btn.taken {
+            background: linear-gradient(135deg, var(--neon-green), #00ff88);
+            border-color: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+        
+        /* Weight Unit Selector */
+        .weight-unit-selector {
+            margin: 0 12px 12px;
+            padding: 10px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+        
+        .unit-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            color: #888;
+        }
+        
+        .unit-toggle {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .unit-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--dark-border);
+            background: transparent;
+            color: #666;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .unit-btn.active {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0,240,255,0.1);
         }
         
         /* Workout Header Card */
         .workout-header {
-            margin: 0 16px 16px;
-            padding: 20px;
+            margin: 0 12px 12px;
+            padding: 16px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
             position: relative;
             overflow: hidden;
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
         }
         
         .workout-header::before {
@@ -312,46 +359,33 @@
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta), var(--neon-yellow));
         }
         
-        .workout-header::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        
         .workout-title {
             font-family: 'Orbitron', monospace;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 4px;
         }
         
         .workout-focus {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--neon-magenta);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         
-        /* Cyberpunk Progress Ring */
+        /* Progress Ring */
         .progress-container {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
         }
         
         .progress-ring {
             transform: rotate(-90deg);
-            filter: drop-shadow(0 0 10px var(--neon-cyan));
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
         }
         
-        .progress-ring-bg {
-            stroke: var(--dark-border);
-        }
+        .progress-ring-bg { stroke: var(--dark-border); }
         
         .progress-ring-fill {
             stroke: url(#cyberGradient);
@@ -370,46 +404,34 @@
         
         .progress-percent {
             font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan);
         }
         
         .progress-label {
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: #666;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         
         /* Exercise Cards */
         .exercise-list {
-            padding: 0 16px 100px;
+            padding: 0 12px 100px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         
         .exercise-card {
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 16px;
+            padding: 14px;
             position: relative;
             transition: all 0.3s ease;
-            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-            animation: cardSlideIn 0.4s ease-out backwards;
-        }
-        
-        @keyframes cardSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
         
         .exercise-card::before {
@@ -424,15 +446,6 @@
             transition: opacity 0.3s;
         }
         
-        .exercise-card:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0,240,255,0.1);
-        }
-        
-        .exercise-card:hover::before {
-            opacity: 1;
-        }
-        
         .exercise-card.completed {
             background: linear-gradient(135deg, rgba(57,255,20,0.1) 0%, transparent 50%);
             border-color: var(--neon-green);
@@ -444,30 +457,130 @@
             box-shadow: 0 0 10px var(--neon-green);
         }
         
-        /* Custom Checkbox */
-        .cyber-checkbox {
-            appearance: none;
+        .exercise-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-info { flex: 1; }
+        
+        .muscle-tag {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.5rem;
+            color: var(--neon-magenta);
+            background: rgba(255,0,255,0.1);
+            padding: 2px 6px;
+            border: 1px solid rgba(255,0,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        
+        .exercise-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .exercise-note {
+            font-size: 0.65rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        /* Weight Input */
+        .weight-input-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        .weight-label {
+            font-size: 0.6rem;
+            color: #666;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .weight-controls {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-left: auto;
+        }
+        
+        .weight-btn {
             width: 28px;
             height: 28px;
+            border: 1px solid var(--neon-cyan);
+            background: transparent;
+            color: var(--neon-cyan);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .weight-btn:hover {
+            background: rgba(0,240,255,0.2);
+        }
+        
+        .weight-display {
+            width: 60px;
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-yellow);
+            background: transparent;
+            border: 1px solid var(--dark-border);
+            padding: 4px;
+        }
+        
+        /* Set Checkboxes */
+        .sets-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        
+        .set-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--dark-border);
+            border-radius: 4px;
+        }
+        
+        .set-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--neon-cyan);
             background: transparent;
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
         }
         
-        .cyber-checkbox:hover {
-            box-shadow: 0 0 15px var(--neon-cyan);
-        }
-        
-        .cyber-checkbox:checked {
+        .set-checkbox:checked {
             background: linear-gradient(135deg, var(--neon-green), #00ff88);
             border-color: var(--neon-green);
-            box-shadow: 0 0 20px var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
         }
         
-        .cyber-checkbox:checked::after {
+        .set-checkbox:checked::after {
             content: '✓';
             position: absolute;
             inset: 0;
@@ -476,138 +589,96 @@
             justify-content: center;
             color: var(--dark-bg);
             font-weight: bold;
-            font-size: 16px;
+            font-size: 12px;
         }
         
-        .exercise-name {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            transition: all 0.3s;
-        }
-        
-        .exercise-card.completed .exercise-name {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        
-        .exercise-meta {
-            display: flex;
-            gap: 12px;
-            margin-top: 6px;
-            flex-wrap: wrap;
-        }
-        
-        .exercise-sets {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.75rem;
-            color: var(--neon-cyan);
-            background: rgba(0,240,255,0.1);
-            padding: 4px 10px;
-            border: 1px solid rgba(0,240,255,0.3);
-        }
-        
-        .exercise-note {
-            font-size: 0.7rem;
-            color: #666;
-            font-style: italic;
-        }
-        
-        /* Muscle Group Tag */
-        .muscle-tag {
+        .set-label {
             font-family: 'Orbitron', monospace;
             font-size: 0.55rem;
-            color: var(--neon-magenta);
-            background: rgba(255,0,255,0.1);
-            padding: 3px 8px;
-            border: 1px solid rgba(255,0,255,0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #888;
+        }
+        
+        .set-reps {
+            font-size: 0.5rem;
+            color: var(--neon-cyan);
         }
         
         /* Calendar View */
         .calendar-container {
-            margin: 16px;
+            margin: 12px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 20px;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            padding: 16px;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
         }
         
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .calendar-nav-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: transparent;
             border: 1px solid var(--neon-cyan);
             color: var(--neon-cyan);
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
         }
         
-        .calendar-nav-btn:hover {
-            background: rgba(0,240,255,0.1);
-            box-shadow: 0 0 15px rgba(0,240,255,0.3);
-        }
-        
-        .calendar-title {
-            text-align: center;
-        }
+        .calendar-title { text-align: center; }
         
         .calendar-month {
             font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--neon-cyan);
         }
         
         .calendar-nepali {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--neon-magenta);
-            margin-top: 4px;
+            margin-top: 2px;
         }
         
         .calendar-weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 8px;
+            gap: 2px;
+            margin-bottom: 6px;
         }
         
         .calendar-weekday {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
-            color: #666;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.55rem;
+            color: var(--neon-yellow);
             text-align: center;
-            padding: 8px 0;
+            padding: 6px 0;
         }
         
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+            gap: 2px;
         }
         
         .calendar-day {
             aspect-ratio: 1;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             background: rgba(255,255,255,0.02);
             border: 1px solid transparent;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
         
         .calendar-day:hover {
@@ -619,7 +690,7 @@
             background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
             color: var(--dark-bg);
             font-weight: 700;
-            box-shadow: 0 0 20px rgba(0,240,255,0.5);
+            box-shadow: 0 0 15px rgba(0,240,255,0.5);
         }
         
         .calendar-day.has-workout {
@@ -631,22 +702,71 @@
             border-color: var(--neon-green);
         }
         
+        .calendar-day.holiday {
+            background: rgba(255,0,255,0.15);
+            border-color: var(--neon-magenta);
+        }
+        
+        .holiday-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--neon-yellow);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 3px;
+        }
+        
+        /* Holiday Info */
+        .holiday-info {
+            margin: 12px;
+            padding: 12px;
+            background: var(--dark-card);
+            border: 1px solid var(--neon-magenta);
+            display: none;
+        }
+        
+        .holiday-info.show { display: block; }
+        
+        .holiday-info h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-magenta);
+            margin-bottom: 8px;
+        }
+        
+        .holiday-list {
+            font-size: 0.75rem;
+            color: #ccc;
+        }
+        
+        .holiday-item {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .holiday-item:last-child { border-bottom: none; }
+        
+        .holiday-name { color: var(--neon-yellow); }
+        .holiday-type { color: #666; font-size: 0.6rem; }
+        
         /* Stats View */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 16px;
+            gap: 10px;
+            padding: 12px;
         }
         
         .stat-card {
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
         
         .stat-card::before {
@@ -665,18 +785,18 @@
         
         .stat-value {
             font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 4px;
         }
         
-        .stat-card.cyan .stat-value { color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan); }
-        .stat-card.magenta .stat-value { color: var(--neon-magenta); text-shadow: 0 0 20px var(--neon-magenta); }
-        .stat-card.green .stat-value { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); }
-        .stat-card.yellow .stat-value { color: var(--neon-yellow); text-shadow: 0 0 20px var(--neon-yellow); }
+        .stat-card.cyan .stat-value { color: var(--neon-cyan); text-shadow: 0 0 15px var(--neon-cyan); }
+        .stat-card.magenta .stat-value { color: var(--neon-magenta); text-shadow: 0 0 15px var(--neon-magenta); }
+        .stat-card.green .stat-value { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
+        .stat-card.yellow .stat-value { color: var(--neon-yellow); text-shadow: 0 0 15px var(--neon-yellow); }
         
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -684,18 +804,18 @@
         
         /* Weekly Overview */
         .weekly-overview {
-            margin: 0 16px 16px;
+            margin: 0 12px 12px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 20px;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            padding: 16px;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
         
         .weekly-title {
             font-family: 'Orbitron', monospace;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--neon-cyan);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             letter-spacing: 2px;
         }
         
@@ -708,44 +828,71 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
         
         .weekly-day-box {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: var(--dark-border);
             border: 1px solid #333;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             transition: all 0.3s;
         }
         
         .weekly-day-box.completed {
             background: linear-gradient(135deg, var(--neon-green), #00ff88);
             border-color: var(--neon-green);
-            box-shadow: 0 0 15px var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
             color: var(--dark-bg);
         }
         
         .weekly-day-label {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: #666;
+        }
+        
+        .weekly-day-nepali {
+            font-size: 0.45rem;
+            color: var(--neon-yellow);
+        }
+        
+        /* Export Button */
+        .export-btn {
+            margin: 0 12px 12px;
+            width: calc(100% - 24px);
+            padding: 14px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            border: none;
+            color: var(--dark-bg);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .export-btn:hover {
+            box-shadow: 0 0 25px rgba(0,240,255,0.5);
+            transform: translateY(-2px);
         }
         
         /* Reset Button */
         .reset-btn {
-            margin: 0 16px 100px;
-            width: calc(100% - 32px);
-            padding: 16px;
+            margin: 0 12px 100px;
+            width: calc(100% - 24px);
+            padding: 14px;
             background: transparent;
             border: 1px solid var(--neon-red);
             color: var(--neon-red);
             font-family: 'Orbitron', monospace;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
@@ -755,7 +902,49 @@
         
         .reset-btn:hover {
             background: rgba(255,7,58,0.1);
-            box-shadow: 0 0 20px rgba(255,7,58,0.3);
+            box-shadow: 0 0 15px rgba(255,7,58,0.3);
+        }
+        
+        /* XP Bar */
+        .xp-bar-container {
+            margin: 0 12px 12px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 10px 14px;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+        
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        
+        .xp-level {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            color: var(--neon-yellow);
+        }
+        
+        .xp-amount {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.6rem;
+            color: #666;
+        }
+        
+        .xp-bar {
+            height: 5px;
+            background: var(--dark-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
+            box-shadow: 0 0 8px var(--neon-yellow);
+            transition: width 0.5s ease;
         }
         
         /* Install Banner */
@@ -766,32 +955,24 @@
             right: 0;
             z-index: 100;
             background: linear-gradient(135deg, var(--neon-green), #00ff88);
-            padding: 12px 16px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            animation: slideDown 0.3s ease-out;
         }
         
         .install-banner.hidden { display: none; }
         
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-        
-        .install-text {
-            color: var(--dark-bg);
-        }
+        .install-text { color: var(--dark-bg); }
         
         .install-title {
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
         
         .install-subtitle {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             opacity: 0.8;
         }
         
@@ -799,9 +980,9 @@
             background: var(--dark-bg);
             color: var(--neon-green);
             border: none;
-            padding: 8px 16px;
+            padding: 6px 12px;
             font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
             font-weight: 700;
         }
@@ -810,111 +991,29 @@
             background: none;
             border: none;
             color: var(--dark-bg);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             cursor: pointer;
-            padding: 8px;
+            padding: 6px;
             opacity: 0.8;
         }
         
-        /* XP Bar */
-        .xp-bar-container {
-            margin: 0 16px 16px;
-            background: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            padding: 12px 16px;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-        }
-        
-        .xp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .xp-level {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.75rem;
-            color: var(--neon-yellow);
-        }
-        
-        .xp-amount {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
-            color: #666;
-        }
-        
-        .xp-bar {
-            height: 6px;
-            background: var(--dark-border);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .xp-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
-            box-shadow: 0 0 10px var(--neon-yellow);
-            transition: width 0.5s ease;
-        }
-        
-        /* Legend */
-        .legend {
-            display: flex;
-            gap: 16px;
-            padding: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.7rem;
-            color: #666;
-        }
-        
-        .legend-box {
-            width: 16px;
-            height: 16px;
-        }
-        
-        .legend-box.today {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-        }
-        
-        .legend-box.workout {
-            border: 1px solid var(--neon-cyan);
-        }
-        
-        .legend-box.completed {
-            background: rgba(57,255,20,0.3);
-            border: 1px solid var(--neon-green);
-        }
-        
-        /* Hidden */
         .hidden { display: none !important; }
-        
-        /* Utility */
         .flex { display: flex; }
         .items-center { align-items: center; }
-        .items-start { align-items: flex-start; }
         .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 8px; }
         .gap-3 { gap: 12px; }
-        .gap-4 { gap: 16px; }
         .flex-1 { flex: 1; }
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 8px; }
     </style>
 </head>
 <body>
     <!-- Install Banner -->
     <div id="installBanner" class="install-banner hidden">
-        <div class="flex items-center gap-3">
-            <span style="font-size: 1.5rem;">⚡</span>
+        <div class="flex items-center gap-2">
+            <span style="font-size: 1.3rem;">⚡</span>
             <div class="install-text">
                 <div class="install-title">INSTALL GURKHA GAINS</div>
-                <div class="install-subtitle">Add to home screen for full experience</div>
+                <div class="install-subtitle">Add to home screen</div>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -929,26 +1028,20 @@
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="logo-text">⚡ Kritik's Gurkha Gains</h1>
-                    <p class="nepali-date" id="nepaliDate">LOADING SYSTEM...</p>
+                    <p class="nepali-date" id="nepaliDate">लोड हुँदैछ...</p>
                 </div>
                 <div style="text-align: right;">
-                    <p style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--neon-cyan);" id="englishDate"></p>
-                    <p style="font-size: 0.7rem; color: #666;" id="dayName"></p>
+                    <p style="font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--neon-cyan);" id="englishDate"></p>
+                    <p style="font-size: 0.6rem; color: #666;" id="dayName"></p>
                 </div>
             </div>
         </header>
 
         <!-- Navigation -->
         <nav class="cyber-nav">
-            <button onclick="showView('workout')" class="nav-btn active" id="nav-workout">
-                <span style="margin-right: 6px;">💪</span>WORKOUT
-            </button>
-            <button onclick="showView('calendar')" class="nav-btn" id="nav-calendar">
-                <span style="margin-right: 6px;">📅</span>CALENDAR
-            </button>
-            <button onclick="showView('stats')" class="nav-btn" id="nav-stats">
-                <span style="margin-right: 6px;">📊</span>STATS
-            </button>
+            <button onclick="showView('workout')" class="nav-btn active" id="nav-workout">💪 WORKOUT</button>
+            <button onclick="showView('calendar')" class="nav-btn" id="nav-calendar">📅 पात्रो</button>
+            <button onclick="showView('stats')" class="nav-btn" id="nav-stats">📊 STATS</button>
         </nav>
 
         <!-- Workout View -->
@@ -956,10 +1049,31 @@
             <!-- Day Selector -->
             <div class="day-selector" id="dayTabs"></div>
 
+            <!-- Creatine Tracker -->
+            <div class="creatine-tracker">
+                <div class="creatine-label">
+                    <span class="creatine-icon">💊</span>
+                    <div>
+                        <div class="creatine-text">CREATINE आज?</div>
+                        <div style="font-size: 0.55rem; color: #666;">Daily 5g dose</div>
+                    </div>
+                </div>
+                <button id="creatineBtn" class="creatine-btn" onclick="toggleCreatine()">NOT TAKEN</button>
+            </div>
+
+            <!-- Weight Unit Selector -->
+            <div class="weight-unit-selector">
+                <span class="unit-label">⚖️ WEIGHT UNIT</span>
+                <div class="unit-toggle">
+                    <button class="unit-btn active" id="unitLbs" onclick="setWeightUnit('lbs')">LBS</button>
+                    <button class="unit-btn" id="unitKg" onclick="setWeightUnit('kg')">KG</button>
+                </div>
+            </div>
+
             <!-- XP Bar -->
             <div class="xp-bar-container">
                 <div class="xp-header">
-                    <span class="xp-level">⚡ LEVEL <span id="userLevel">1</span> WARRIOR</span>
+                    <span class="xp-level">⚡ LEVEL <span id="userLevel">1</span> योद्धा</span>
                     <span class="xp-amount"><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</span>
                 </div>
                 <div class="xp-bar">
@@ -972,10 +1086,10 @@
                 <div class="flex justify-between items-center">
                     <div>
                         <h2 class="workout-title" id="currentDayTitle">DAY 1: PUSH A</h2>
-                        <p class="workout-focus" id="currentDayFocus">// INCLINE & TRICEP FOCUS</p>
+                        <p class="workout-focus" id="currentDayFocus">// HEAVY PRESS & TRICEPS</p>
                     </div>
                     <div class="progress-container">
-                        <svg class="progress-ring" width="100" height="100">
+                        <svg class="progress-ring" width="80" height="80">
                             <defs>
                                 <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" stop-color="#00f0ff"/>
@@ -983,12 +1097,12 @@
                                     <stop offset="100%" stop-color="#00f0ff"/>
                                 </linearGradient>
                             </defs>
-                            <circle class="progress-ring-bg" cx="50" cy="50" r="42" stroke-width="6" fill="none"/>
-                            <circle class="progress-ring-fill" id="progressCircle" cx="50" cy="50" r="42" stroke-width="6" fill="none" stroke-dasharray="264" stroke-dashoffset="264"/>
+                            <circle class="progress-ring-bg" cx="40" cy="40" r="34" stroke-width="5" fill="none"/>
+                            <circle class="progress-ring-fill" id="progressCircle" cx="40" cy="40" r="34" stroke-width="5" fill="none" stroke-dasharray="214" stroke-dashoffset="214"/>
                         </svg>
                         <div class="progress-text">
                             <span class="progress-percent" id="progressText">0%</span>
-                            <span class="progress-label">COMPLETE</span>
+                            <span class="progress-label">DONE</span>
                         </div>
                     </div>
                 </div>
@@ -1010,20 +1124,26 @@
                     <button onclick="changeMonth(1)" class="calendar-nav-btn">▶</button>
                 </div>
                 <div class="calendar-weekdays">
-                    <div class="calendar-weekday">SUN</div>
-                    <div class="calendar-weekday">MON</div>
-                    <div class="calendar-weekday">TUE</div>
-                    <div class="calendar-weekday">WED</div>
-                    <div class="calendar-weekday">THU</div>
-                    <div class="calendar-weekday">FRI</div>
-                    <div class="calendar-weekday">SAT</div>
+                    <div class="calendar-weekday">आइत</div>
+                    <div class="calendar-weekday">सोम</div>
+                    <div class="calendar-weekday">मंगल</div>
+                    <div class="calendar-weekday">बुध</div>
+                    <div class="calendar-weekday">बिही</div>
+                    <div class="calendar-weekday">शुक्र</div>
+                    <div class="calendar-weekday">शनि</div>
                 </div>
                 <div class="calendar-grid" id="calendarGrid"></div>
             </div>
-            <div class="legend">
-                <div class="legend-item"><div class="legend-box today"></div> Today</div>
-                <div class="legend-item"><div class="legend-box workout"></div> Workout Day</div>
-                <div class="legend-item"><div class="legend-box completed"></div> Completed</div>
+            
+            <div class="holiday-info" id="holidayInfo">
+                <h4>🎉 बिदाहरू / HOLIDAYS</h4>
+                <div class="holiday-list" id="holidayList"></div>
+            </div>
+            
+            <div style="padding: 12px; font-size: 0.6rem; color: #666; display: flex; gap: 12px; flex-wrap: wrap;">
+                <span>🟦 आज</span>
+                <span>🟩 Completed</span>
+                <span>🟪 बिदा/Holiday</span>
             </div>
         </div>
 
@@ -1036,136 +1156,154 @@
                 </div>
                 <div class="stat-card cyan">
                     <div class="stat-value" id="currentStreak">0</div>
-                    <div class="stat-label">Day Streak 🔥</div>
+                    <div class="stat-label">Streak 🔥</div>
                 </div>
                 <div class="stat-card magenta">
-                    <div class="stat-value" id="totalExercises">0</div>
-                    <div class="stat-label">Exercises</div>
+                    <div class="stat-value" id="totalSets">0</div>
+                    <div class="stat-label">Sets Done</div>
                 </div>
                 <div class="stat-card yellow">
-                    <div class="stat-value" id="weeklyProgress">0%</div>
-                    <div class="stat-label">This Week</div>
+                    <div class="stat-value" id="creatineDays">0</div>
+                    <div class="stat-label">Creatine 💊</div>
                 </div>
             </div>
 
             <div class="weekly-overview">
-                <div class="weekly-title">// WEEKLY MISSION STATUS</div>
-                <div class="weekly-days">
-                    <div class="weekly-day" id="weekDay0"><div class="weekly-day-box">S</div><div class="weekly-day-label">SUN</div></div>
-                    <div class="weekly-day" id="weekDay1"><div class="weekly-day-box">M</div><div class="weekly-day-label">MON</div></div>
-                    <div class="weekly-day" id="weekDay2"><div class="weekly-day-box">T</div><div class="weekly-day-label">TUE</div></div>
-                    <div class="weekly-day" id="weekDay3"><div class="weekly-day-box">W</div><div class="weekly-day-label">WED</div></div>
-                    <div class="weekly-day" id="weekDay4"><div class="weekly-day-box">T</div><div class="weekly-day-label">THU</div></div>
-                    <div class="weekly-day" id="weekDay5"><div class="weekly-day-box">F</div><div class="weekly-day-label">FRI</div></div>
-                    <div class="weekly-day" id="weekDay6"><div class="weekly-day-box">S</div><div class="weekly-day-label">SAT</div></div>
-                </div>
+                <div class="weekly-title">// साप्ताहिक MISSION STATUS</div>
+                <div class="weekly-days" id="weeklyDays"></div>
             </div>
 
+            <button onclick="exportStats()" class="export-btn">📤 EXPORT STATISTICS</button>
             <button onclick="resetAllData()" class="reset-btn">⚠ RESET ALL DATA</button>
         </div>
     </div>
 
     <script>
-        // Workout Data with Muscle Tags
+        // Updated Workout Data with Forearms
         const workoutData = {
             1: { 
                 title: "DAY 1: PUSH A", 
-                subtitle: "Sunday", 
-                focus: "// INCLINE & TRICEP FOCUS", 
+                nepaliDay: "आइतबार",
+                focus: "// HEAVY PRESS & TRICEPS", 
                 exercises: [
-                    { name: "Inclined Smith Machine Chest Press", sets: "3", reps: "8-10", note: "Heavy compound", muscle: "CHEST" },
-                    { name: "Dips", sets: "3", reps: "10-12", note: "Lower chest/triceps", muscle: "CHEST" },
-                    { name: "Chest Fly Machine", sets: "3", reps: "12-15", note: "Peak contraction", muscle: "CHEST" },
-                    { name: "Cable Lateral Raises", sets: "4", reps: "12-15", note: "Constant tension", muscle: "DELTS" },
-                    { name: "Cable Tricep Push Downs", sets: "3", reps: "10-12", note: "Rope or straight bar", muscle: "TRICEPS" },
-                    { name: "EZ Bar Skull Crushers", sets: "3", reps: "8-10", note: "Long head mass builder", muscle: "TRICEPS" }
+                    { name: "Inclined Smith Machine Chest Press", sets: 3, reps: "8-10", note: "Heavy compound", muscle: "CHEST" },
+                    { name: "Dips", sets: 3, reps: "10-12", note: "Lower chest/triceps", muscle: "CHEST" },
+                    { name: "Chest Fly Machine", sets: 3, reps: "12-15", note: "Peak contraction", muscle: "CHEST" },
+                    { name: "Cable Lateral Raises", sets: 4, reps: "12-15", note: "Constant tension", muscle: "DELTS" },
+                    { name: "Cable Tricep Push Downs", sets: 3, reps: "10-12", note: "Rope or straight bar", muscle: "TRICEPS" },
+                    { name: "EZ Bar Skull Crushers", sets: 3, reps: "8-10", note: "Long head mass builder", muscle: "TRICEPS" }
                 ]
             },
             2: { 
                 title: "DAY 2: PULL A", 
-                subtitle: "Monday", 
-                focus: "// VERTICAL PULLING & CURL FOCUS", 
+                nepaliDay: "सोमबार",
+                focus: "// VERTICAL PULL & FOREARM WIDTH", 
                 exercises: [
-                    { name: "Pull Ups", sets: "3", reps: "AMRAP", note: "Add weight if needed", muscle: "BACK" },
-                    { name: "Lat Pulldowns", sets: "3", reps: "10-12", note: "", muscle: "LATS" },
-                    { name: "Lat Prayers", sets: "3", reps: "12-15", note: "Straight arm pulldowns", muscle: "LATS" },
-                    { name: "Seated Chest Supported Rows", sets: "3", reps: "10-12", note: "Upper back thickness", muscle: "BACK" },
-                    { name: "Bayesian Bicep Curls", sets: "3", reps: "12-15", note: "Full stretch position", muscle: "BICEPS" },
-                    { name: "Preacher Bicep Curls", sets: "3", reps: "10-12", note: "Short head isolation", muscle: "BICEPS" }
+                    { name: "Pull Ups", sets: 3, reps: "AMRAP", note: "Add weight if needed", muscle: "BACK" },
+                    { name: "Lat Pulldowns", sets: 3, reps: "10-12", note: "Wide grip", muscle: "LATS" },
+                    { name: "Lat Prayers", sets: 3, reps: "12-15", note: "Straight arm pulldowns", muscle: "LATS" },
+                    { name: "Seated Chest Supported Rows", sets: 3, reps: "10-12", note: "Upper back thickness", muscle: "BACK" },
+                    { name: "Bayesian Bicep Curls", sets: 3, reps: "12-15", note: "Full stretch position", muscle: "BICEPS" },
+                    { name: "Preacher Bicep Curls", sets: 3, reps: "10-12", note: "Short head isolation", muscle: "BICEPS" },
+                    { name: "Reverse Cable Curls", sets: 3, reps: "12-15", note: "Extensors & Brachioradialis", muscle: "FOREARMS" }
                 ]
             },
             3: { 
                 title: "DAY 3: LEGS A", 
-                subtitle: "Tuesday", 
+                nepaliDay: "मंगलबार",
                 focus: "// SQUAT FOCUS + LOWER ABS", 
                 exercises: [
-                    { name: "Squats", sets: "3", reps: "6-8", note: "Primary heavy compound", muscle: "QUADS" },
-                    { name: "Hip Thrust Machine", sets: "3", reps: "10-12", note: "Glute focus", muscle: "GLUTES" },
-                    { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "", muscle: "QUADS" },
-                    { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "", muscle: "CALVES" },
-                    { name: "Leg Raises (Core)", sets: "3", reps: "15", note: "Lower abs", muscle: "ABS" },
-                    { name: "Inclined Treadmill Walk", sets: "1", reps: "20-30 mins", note: "Steady state cardio", muscle: "CARDIO" }
+                    { name: "Squats", sets: 3, reps: "6-8", note: "Primary heavy compound", muscle: "QUADS" },
+                    { name: "Hip Thrust Machine", sets: 3, reps: "10-12", note: "Glute focus", muscle: "GLUTES" },
+                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Quad isolation", muscle: "QUADS" },
+                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES" },
+                    { name: "Leg Raises", sets: 3, reps: "15", note: "Lower abs", muscle: "ABS" },
+                    { name: "Inclined Treadmill Walk", sets: 1, reps: "20-30 min", note: "Steady state cardio", muscle: "CARDIO" }
                 ]
             },
             4: { 
                 title: "DAY 4: PUSH B", 
-                subtitle: "Wednesday", 
-                focus: "// MACHINE PRESS & DELT FOCUS", 
+                nepaliDay: "बुधबार",
+                focus: "// VOLUME & SHOULDER DETAIL", 
                 exercises: [
-                    { name: "Hammer Chest Press", sets: "3", reps: "8-10", note: "Heavy flat press", muscle: "CHEST" },
-                    { name: "Inclined Machine Press", sets: "3", reps: "10-12", note: "Upper pec shelf", muscle: "CHEST" },
-                    { name: "Multiflight Lateral Raise Machine", sets: "4", reps: "12-15", note: "Drop sets work well", muscle: "DELTS" },
-                    { name: "Inclined Y Raises", sets: "3", reps: "12-15", note: "Lower traps/rear delts", muscle: "DELTS" },
-                    { name: "Cable Tricep Extension", sets: "3", reps: "12-15", note: "Overhead - long head", muscle: "TRICEPS" }
+                    { name: "Hammer Chest Press", sets: 3, reps: "8-10", note: "Heavy flat press", muscle: "CHEST" },
+                    { name: "Inclined Machine Press", sets: 3, reps: "10-12", note: "Upper pec shelf", muscle: "CHEST" },
+                    { name: "Multiflight Lateral Raise Machine", sets: 4, reps: "12-15", note: "Drop sets work well", muscle: "DELTS" },
+                    { name: "Inclined Y Raises", sets: 3, reps: "12-15", note: "Lower traps/rear delts", muscle: "DELTS" },
+                    { name: "Cable Tricep Extension (Overhead)", sets: 3, reps: "12-15", note: "Long head stretch", muscle: "TRICEPS" }
                 ]
             },
             5: { 
                 title: "DAY 5: PULL B", 
-                subtitle: "Thursday", 
-                focus: "// HORIZONTAL ROWING & BRACHIALIS", 
+                nepaliDay: "बिहीबार",
+                focus: "// ROW FOCUS & GRIP STRENGTH", 
                 exercises: [
-                    { name: "Seated Cable Rows", sets: "3", reps: "10-12", note: "", muscle: "BACK" },
-                    { name: "Inclined DB Chest Supported Rows", sets: "3", reps: "10-12", note: "No lower back strain", muscle: "BACK" },
-                    { name: "Lat Pulldowns (Variation)", sets: "3", reps: "10-12", note: "Different grip", muscle: "LATS" },
-                    { name: "Preacher Hammer Curls", sets: "3", reps: "10-12", note: "Brachialis focus", muscle: "BICEPS" },
-                    { name: "Bayesian Bicep Curls", sets: "2", reps: "15", note: "Light pump finish", muscle: "BICEPS" }
+                    { name: "Seated Cable Rows", sets: 3, reps: "10-12", note: "Squeeze at contraction", muscle: "BACK" },
+                    { name: "Inclined DB Chest Supported Rows", sets: 3, reps: "10-12", note: "No lower back strain", muscle: "BACK" },
+                    { name: "Lat Pulldowns (Neutral Grip)", sets: 3, reps: "10-12", note: "Close grip variation", muscle: "LATS" },
+                    { name: "Preacher Hammer Curls", sets: 3, reps: "10-12", note: "Brachialis focus", muscle: "BICEPS" },
+                    { name: "Bayesian Bicep Curls", sets: 2, reps: "15", note: "Light pump finisher", muscle: "BICEPS" },
+                    { name: "Behind-the-Back Barbell Wrist Curls", sets: 3, reps: "15-20", note: "Flexors - inner forearm", muscle: "FOREARMS" }
                 ]
             },
             6: { 
                 title: "DAY 6: LEGS B", 
-                subtitle: "Friday", 
-                focus: "// HINGE/POSTERIOR CHAIN + UPPER ABS", 
+                nepaliDay: "शुक्रबार",
+                focus: "// DEADLIFT FOCUS + UPPER ABS", 
                 exercises: [
-                    { name: "Deadlifts", sets: "3", reps: "5-8", note: "Heavy - strict form", muscle: "POSTERIOR" },
-                    { name: "Lying Hamstring Curls", sets: "3", reps: "10-12", note: "", muscle: "HAMSTRINGS" },
-                    { name: "Quad Leg Extensions", sets: "3", reps: "12-15", note: "Maintain quad volume", muscle: "QUADS" },
-                    { name: "Seated Calf Raises", sets: "4", reps: "15-20", note: "", muscle: "CALVES" },
-                    { name: "Cable Crunches (Core)", sets: "3", reps: "15", note: "Upper abs", muscle: "ABS" },
-                    { name: "Elliptical Machine", sets: "1", reps: "20-30 mins", note: "Moderate cardio", muscle: "CARDIO" }
+                    { name: "Deadlifts", sets: 3, reps: "5-8", note: "Heavy - strict form", muscle: "POSTERIOR" },
+                    { name: "Lying Hamstring Curls", sets: 3, reps: "10-12", note: "Hamstring isolation", muscle: "HAMSTRINGS" },
+                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Maintain quad volume", muscle: "QUADS" },
+                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES" },
+                    { name: "Cable Crunches", sets: 3, reps: "15", note: "Upper abs", muscle: "ABS" },
+                    { name: "Elliptical Machine", sets: 1, reps: "20-30 min", note: "Moderate cardio", muscle: "CARDIO" }
                 ]
             },
             7: { 
-                title: "DAY 7: REST & RECOVERY", 
-                subtitle: "Saturday", 
-                focus: "// ACTIVE RECOVERY PROTOCOL", 
+                title: "DAY 7: REST", 
+                nepaliDay: "शनिबार",
+                focus: "// ACTIVE RECOVERY - आराम", 
                 exercises: [
-                    { name: "Inclined Treadmill Walk", sets: "1", reps: "45 mins", note: "Low intensity", muscle: "CARDIO" },
-                    { name: "Foam Rolling", sets: "1", reps: "15-20 mins", note: "Full body", muscle: "RECOVERY" },
-                    { name: "Stretching", sets: "1", reps: "15-20 mins", note: "Focus on tight areas", muscle: "MOBILITY" }
+                    { name: "Light Walking", sets: 1, reps: "30-45 min", note: "Active recovery", muscle: "RECOVERY" },
+                    { name: "Foam Rolling", sets: 1, reps: "15-20 min", note: "Full body", muscle: "MOBILITY" },
+                    { name: "Stretching", sets: 1, reps: "15-20 min", note: "Focus on tight areas", muscle: "MOBILITY" }
                 ]
             }
         };
 
-        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const shortDayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        const nepaliDayNames = ["आइत", "सोम", "मंगल", "बुध", "बिही", "शुक्र", "शनि"];
+        const nepaliDayNamesFull = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
         const workoutTypes = ["PUSH A", "PULL A", "LEGS A", "PUSH B", "PULL B", "LEGS B", "REST"];
 
         // Nepali Calendar Data
         const nepaliMonths = ["बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "असोज", "कार्तिक", "मंसिर", "पुष", "माघ", "फाल्गुन", "चैत्र"];
         const nepaliMonthsEng = ["Baisakh", "Jestha", "Ashar", "Shrawan", "Bhadra", "Ashwin", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
-        const nepaliDays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
         const nepaliNums = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
         const bsMonthDays = [[2000,30,32,31,32,31,30,30,30,29,30,29,31],[2001,31,31,32,31,31,31,30,29,30,29,30,30],[2002,31,31,32,32,31,30,30,29,30,29,30,30],[2003,31,32,31,32,31,30,30,30,29,29,30,31],[2004,30,32,31,32,31,30,30,30,29,30,29,31],[2005,31,31,32,31,31,31,30,29,30,29,30,30],[2006,31,31,32,32,31,30,30,29,30,29,30,30],[2007,31,32,31,32,31,30,30,30,29,29,30,31],[2008,31,31,31,32,31,31,29,30,30,29,29,31],[2009,31,31,32,31,31,31,30,29,30,29,30,30],[2010,31,31,32,32,31,30,30,29,30,29,30,30],[2011,31,32,31,32,31,30,30,30,29,29,30,31],[2012,31,31,31,32,31,31,29,30,30,29,30,30],[2013,31,31,32,31,31,31,30,29,30,29,30,30],[2014,31,31,32,32,31,30,30,29,30,29,30,30],[2015,31,32,31,32,31,30,30,30,29,29,30,31],[2016,31,31,31,32,31,31,29,30,30,29,30,30],[2017,31,31,32,31,31,31,30,29,30,29,30,30],[2018,31,32,31,32,31,30,30,29,30,29,30,30],[2019,31,32,31,32,31,30,30,30,29,30,29,31],[2020,31,31,31,32,31,31,30,29,30,29,30,30],[2021,31,31,32,31,31,31,30,29,30,29,30,30],[2022,31,32,31,32,31,30,30,30,29,29,30,30],[2023,31,32,31,32,31,30,30,30,29,30,29,31],[2024,31,31,31,32,31,31,30,29,30,29,30,30],[2025,31,31,32,31,31,31,30,29,30,29,30,30],[2026,31,32,31,32,31,30,30,30,29,29,30,31],[2027,30,32,31,32,31,30,30,30,29,30,29,31],[2028,31,31,32,31,31,31,30,29,30,29,30,30],[2029,31,31,32,31,32,30,30,29,30,29,30,30],[2030,31,32,31,32,31,30,30,30,29,29,30,31],[2031,30,32,31,32,31,30,30,30,29,30,29,31],[2032,31,31,32,31,31,31,30,29,30,29,30,30],[2033,31,31,32,32,31,30,30,29,30,29,30,30],[2034,31,32,31,32,31,30,30,30,29,29,30,31],[2035,30,32,31,32,31,31,29,30,30,29,29,31],[2036,31,31,32,31,31,31,30,29,30,29,30,30],[2037,31,31,32,32,31,30,30,29,30,29,30,30],[2038,31,32,31,32,31,30,30,30,29,29,30,31],[2039,31,31,31,32,31,31,29,30,30,29,30,30],[2040,31,31,32,31,31,31,30,29,30,29,30,30],[2041,31,31,32,32,31,30,30,29,30,29,30,30],[2042,31,32,31,32,31,30,30,30,29,29,30,31],[2043,31,31,31,32,31,31,29,30,30,29,30,30],[2044,31,31,32,31,31,31,30,29,30,29,30,30],[2045,31,32,31,32,31,30,30,29,30,29,30,30],[2046,31,32,31,32,31,30,30,30,29,29,30,31],[2047,31,31,31,32,31,31,30,29,30,29,30,30],[2048,31,31,32,31,31,31,30,29,30,29,30,30],[2049,31,32,31,32,31,30,30,30,29,29,30,30],[2050,31,32,31,32,31,30,30,30,29,30,29,31],[2051,31,31,31,32,31,31,30,29,30,29,30,30],[2052,31,31,32,31,31,31,30,29,30,29,30,30],[2053,31,32,31,32,31,30,30,30,29,29,30,30],[2054,31,32,31,32,31,30,30,30,29,30,29,31],[2055,31,31,32,31,31,31,30,29,30,29,30,30],[2056,31,31,32,31,32,30,30,29,30,29,30,30],[2057,31,32,31,32,31,30,30,30,29,29,30,31],[2058,30,32,31,32,31,30,30,30,29,30,29,31],[2059,31,31,32,31,31,31,30,29,30,29,30,30],[2060,31,31,32,32,31,30,30,29,30,29,30,30],[2061,31,32,31,32,31,30,30,30,29,29,30,31],[2062,30,32,31,32,31,31,29,30,29,30,29,31],[2063,31,31,32,31,31,31,30,29,30,29,30,30],[2064,31,31,32,32,31,30,30,29,30,29,30,30],[2065,31,32,31,32,31,30,30,30,29,29,30,31],[2066,31,31,31,32,31,31,29,30,30,29,29,31],[2067,31,31,32,31,31,31,30,29,30,29,30,30],[2068,31,31,32,32,31,30,30,29,30,29,30,30],[2069,31,32,31,32,31,30,30,30,29,29,30,31],[2070,31,31,31,32,31,31,29,30,30,29,30,30],[2071,31,31,32,31,31,31,30,29,30,29,30,30],[2072,31,32,31,32,31,30,30,29,30,29,30,30],[2073,31,32,31,32,31,30,30,30,29,29,30,31],[2074,31,31,31,32,31,31,30,29,30,29,30,30],[2075,31,31,32,31,31,31,30,29,30,29,30,30],[2076,31,32,31,32,31,30,30,30,29,29,30,30],[2077,31,32,31,32,31,30,30,30,29,30,29,31],[2078,31,31,31,32,31,31,30,29,30,29,30,30],[2079,31,31,32,31,31,31,30,29,30,29,30,30],[2080,31,32,31,32,31,30,30,30,29,29,30,30],[2081,31,32,31,32,31,30,30,30,29,30,29,31],[2082,31,31,32,31,31,31,30,29,30,29,30,30],[2083,31,31,32,31,32,30,30,29,30,29,30,30],[2084,31,32,31,32,31,30,30,30,29,29,30,31],[2085,30,32,31,32,31,30,30,30,29,30,29,31],[2086,31,31,32,31,31,31,30,29,30,29,30,30],[2087,31,31,32,32,31,30,30,29,30,29,30,30],[2088,31,32,31,32,31,30,30,30,29,29,30,31],[2089,30,32,31,32,31,31,29,30,30,29,29,31],[2090,31,31,32,31,31,31,30,29,30,29,30,30],[2091,31,31,32,32,31,30,30,29,30,29,30,30],[2092,31,32,31,32,31,30,30,30,29,29,30,31],[2093,31,31,31,32,31,31,29,30,30,29,30,30],[2094,31,31,32,31,31,31,30,29,30,29,30,30],[2095,31,32,31,32,31,30,30,29,30,29,30,30],[2096,31,32,31,32,31,30,30,30,29,29,30,31],[2097,31,31,31,32,31,31,30,29,30,29,30,30],[2098,31,31,32,31,31,31,30,29,30,29,30,30],[2099,31,32,31,32,31,30,30,30,29,29,30,30],[2100,31,32,31,32,31,30,30,30,29,30,29,31]];
+
+        // Holidays Data (Month-Day format)
+        const holidays = {
+            // International Holidays
+            "1-1": { name: "New Year's Day", nepali: "नयाँ वर्ष", type: "International" },
+            "2-14": { name: "Valentine's Day", nepali: "भ्यालेन्टाइन डे", type: "International" },
+            "3-8": { name: "Women's Day", nepali: "महिला दिवस", type: "International" },
+            "5-1": { name: "Labour Day", nepali: "श्रमिक दिवस", type: "International" },
+            "12-25": { name: "Christmas", nepali: "क्रिसमस", type: "International" },
+            // Nepali Holidays (approximate dates - these vary yearly)
+            "1-14": { name: "Makar Sankranti", nepali: "मकर संक्रान्ति", type: "Nepal" },
+            "2-19": { name: "Democracy Day", nepali: "प्रजातन्त्र दिवस", type: "Nepal" },
+            "3-8": { name: "Maha Shivaratri", nepali: "महाशिवरात्रि", type: "Nepal" },
+            "3-28": { name: "Holi", nepali: "होली", type: "Nepal" },
+            "4-14": { name: "Nepali New Year", nepali: "नेपाली नयाँ वर्ष", type: "Nepal" },
+            "5-29": { name: "Republic Day", nepali: "गणतन्त्र दिवस", type: "Nepal" },
+            "5-23": { name: "Buddha Jayanti", nepali: "बुद्ध जयन्ती", type: "Nepal" },
+            "9-19": { name: "Constitution Day", nepali: "संविधान दिवस", type: "Nepal" },
+            "10-15": { name: "Dashain (Approx)", nepali: "दशैं", type: "Nepal" },
+            "11-1": { name: "Tihar (Approx)", nepali: "तिहार", type: "Nepal" },
+            "11-3": { name: "Bhai Tika (Approx)", nepali: "भाइ टीका", type: "Nepal" },
+            "12-30": { name: "Udhauli", nepali: "उधौली", type: "Nepal" }
+        };
 
         function toNepaliNum(num) { return String(num).split('').map(d => nepaliNums[parseInt(d)] || d).join(''); }
         
@@ -1185,16 +1323,16 @@
         }
 
         // State
-        function getTodayWorkoutDay() {
-            const today = new Date();
-            return today.getDay() + 1;
-        }
+        function getTodayWorkoutDay() { return new Date().getDay() + 1; }
 
         let currentDay = getTodayWorkoutDay();
         let currentCalendarDate = new Date();
-        let completedExercises = JSON.parse(localStorage.getItem('completedExercises') || '{}');
+        let completedSets = JSON.parse(localStorage.getItem('completedSets') || '{}');
         let completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
+        let exerciseWeights = JSON.parse(localStorage.getItem('exerciseWeights') || '{}');
+        let creatineTracker = JSON.parse(localStorage.getItem('creatineTracker') || '{}');
         let totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+        let weightUnit = localStorage.getItem('weightUnit') || 'lbs';
 
         // Initialize
         function init() {
@@ -1204,6 +1342,8 @@
             renderCalendar();
             updateStats();
             updateXPBar();
+            updateCreatineButton();
+            updateWeightUnitButtons();
         }
 
         function updateDateDisplay() {
@@ -1211,7 +1351,7 @@
             const dayName = now.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
             const englishDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
             const bs = adToBs(now.getFullYear(), now.getMonth() + 1, now.getDate());
-            const nepaliDate = toNepaliNum(bs.year) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.day) + ' • ' + nepaliDays[now.getDay()];
+            const nepaliDate = toNepaliNum(bs.year) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.day) + ' • ' + nepaliDayNamesFull[now.getDay()];
             document.getElementById('englishDate').textContent = englishDate;
             document.getElementById('dayName').textContent = dayName;
             document.getElementById('nepaliDate').textContent = nepaliDate;
@@ -1230,6 +1370,7 @@
                 html += '<div onclick="selectDay(' + day + ')" class="' + classes + '" data-day="' + day + '">';
                 html += '<div class="day-number">' + String(day).padStart(2, '0') + '</div>';
                 html += '<div class="day-name">' + shortDayNames[day - 1] + '</div>';
+                html += '<div class="day-name-nepali">' + nepaliDayNames[day - 1] + '</div>';
                 html += '<div class="day-type">' + workoutTypes[day - 1] + '</div>';
                 html += '</div>';
             }
@@ -1267,23 +1408,49 @@
             const data = workoutData[currentDay];
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
-            if (!completedExercises[dayKey]) completedExercises[dayKey] = {};
+            if (!completedSets[dayKey]) completedSets[dayKey] = {};
+            if (!exerciseWeights[dayKey]) exerciseWeights[dayKey] = {};
             
-            list.innerHTML = data.exercises.map((ex, index) => {
-                const isCompleted = completedExercises[dayKey][index] || false;
+            list.innerHTML = data.exercises.map((ex, exIndex) => {
+                const exKey = 'ex' + exIndex;
+                if (!completedSets[dayKey][exKey]) completedSets[dayKey][exKey] = {};
+                
+                const completedCount = Object.values(completedSets[dayKey][exKey]).filter(Boolean).length;
+                const isCompleted = completedCount === ex.sets;
+                const currentWeight = exerciseWeights[dayKey][exKey] || 0;
+                
+                let setsHtml = '';
+                for (let s = 0; s < ex.sets; s++) {
+                    const setKey = 'set' + s;
+                    const isSetDone = completedSets[dayKey][exKey][setKey] || false;
+                    setsHtml += `
+                        <div class="set-item">
+                            <input type="checkbox" class="set-checkbox" ${isSetDone ? 'checked' : ''} 
+                                onchange="toggleSet(${exIndex}, ${s}, this.checked)">
+                            <div>
+                                <div class="set-label">SET ${s + 1}</div>
+                                <div class="set-reps">${ex.reps}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
                 return `
-                    <div class="exercise-card ${isCompleted ? 'completed' : ''}" style="animation-delay: ${index * 0.08}s">
-                        <div class="flex items-start gap-3">
-                            <input type="checkbox" class="cyber-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleExercise(${index}, this.checked)">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2" style="flex-wrap: wrap;">
-                                    <span class="muscle-tag">${ex.muscle}</span>
-                                </div>
-                                <h4 class="exercise-name" style="margin-top: 6px;">${ex.name}</h4>
-                                <div class="exercise-meta">
-                                    <span class="exercise-sets">${ex.sets} × ${ex.reps}</span>
-                                    ${ex.note ? `<span class="exercise-note">${ex.note}</span>` : ''}
-                                </div>
+                    <div class="exercise-card ${isCompleted ? 'completed' : ''}">
+                        <div class="exercise-header">
+                            <div class="exercise-info">
+                                <span class="muscle-tag">${ex.muscle}</span>
+                                <h4 class="exercise-name">${ex.name}</h4>
+                                ${ex.note ? `<p class="exercise-note">${ex.note}</p>` : ''}
+                            </div>
+                        </div>
+                        <div class="sets-container">${setsHtml}</div>
+                        <div class="weight-input-container">
+                            <span class="weight-label">WEIGHT:</span>
+                            <div class="weight-controls">
+                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, -2.5)">−</button>
+                                <div class="weight-display">${currentWeight} ${weightUnit}</div>
+                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, 2.5)">+</button>
                             </div>
                         </div>
                     </div>
@@ -1291,22 +1458,26 @@
             }).join('');
         }
 
-        function toggleExercise(index, completed) {
+        function toggleSet(exIndex, setIndex, completed) {
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
-            if (!completedExercises[dayKey]) completedExercises[dayKey] = {};
+            const exKey = 'ex' + exIndex;
+            const setKey = 'set' + setIndex;
             
-            const wasCompleted = completedExercises[dayKey][index];
-            completedExercises[dayKey][index] = completed;
-            localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+            if (!completedSets[dayKey]) completedSets[dayKey] = {};
+            if (!completedSets[dayKey][exKey]) completedSets[dayKey][exKey] = {};
+            
+            const wasCompleted = completedSets[dayKey][exKey][setKey];
+            completedSets[dayKey][exKey][setKey] = completed;
+            localStorage.setItem('completedSets', JSON.stringify(completedSets));
             
             // XP System
             if (completed && !wasCompleted) {
-                totalXP += 15;
+                totalXP += 5;
                 localStorage.setItem('totalXP', totalXP);
                 updateXPBar();
             } else if (!completed && wasCompleted) {
-                totalXP = Math.max(0, totalXP - 15);
+                totalXP = Math.max(0, totalXP - 5);
                 localStorage.setItem('totalXP', totalXP);
                 updateXPBar();
             }
@@ -1316,15 +1487,66 @@
             checkDayCompletion();
         }
 
+        function adjustWeight(exIndex, delta) {
+            const dateKey = getDateKey();
+            const dayKey = dateKey + '-day' + currentDay;
+            const exKey = 'ex' + exIndex;
+            
+            if (!exerciseWeights[dayKey]) exerciseWeights[dayKey] = {};
+            const current = exerciseWeights[dayKey][exKey] || 0;
+            exerciseWeights[dayKey][exKey] = Math.max(0, current + delta);
+            localStorage.setItem('exerciseWeights', JSON.stringify(exerciseWeights));
+            renderExercises();
+        }
+
+        function setWeightUnit(unit) {
+            weightUnit = unit;
+            localStorage.setItem('weightUnit', unit);
+            updateWeightUnitButtons();
+            renderExercises();
+        }
+
+        function updateWeightUnitButtons() {
+            document.getElementById('unitLbs').classList.toggle('active', weightUnit === 'lbs');
+            document.getElementById('unitKg').classList.toggle('active', weightUnit === 'kg');
+        }
+
+        function toggleCreatine() {
+            const dateKey = getDateKey();
+            const wasTaken = creatineTracker[dateKey] || false;
+            creatineTracker[dateKey] = !creatineTracker[dateKey];
+            localStorage.setItem('creatineTracker', JSON.stringify(creatineTracker));
+            updateCreatineButton();
+            
+            // XP System - Add when taken, subtract when untaken
+            if (creatineTracker[dateKey] && !wasTaken) {
+                // Just took creatine - add XP
+                totalXP += 10;
+                localStorage.setItem('totalXP', totalXP);
+                updateXPBar();
+            } else if (!creatineTracker[dateKey] && wasTaken) {
+                // Untook creatine - remove XP
+                totalXP = Math.max(0, totalXP - 10);
+                localStorage.setItem('totalXP', totalXP);
+                updateXPBar();
+            }
+        }
+
+        function updateCreatineButton() {
+            const dateKey = getDateKey();
+            const btn = document.getElementById('creatineBtn');
+            const taken = creatineTracker[dateKey];
+            btn.textContent = taken ? '✓ TAKEN' : 'NOT TAKEN';
+            btn.classList.toggle('taken', taken);
+        }
+
         function updateXPBar() {
             const level = Math.floor(totalXP / 100) + 1;
             const currentLevelXP = totalXP % 100;
-            const nextLevelXP = 100;
-            const percentage = (currentLevelXP / nextLevelXP) * 100;
-            
+            const percentage = (currentLevelXP / 100) * 100;
             document.getElementById('userLevel').textContent = level;
             document.getElementById('currentXP').textContent = currentLevelXP;
-            document.getElementById('nextLevelXP').textContent = nextLevelXP;
+            document.getElementById('nextLevelXP').textContent = 100;
             document.getElementById('xpFill').style.width = percentage + '%';
         }
 
@@ -1332,9 +1554,20 @@
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             const exercises = workoutData[currentDay].exercises;
-            const completed = Object.values(completedExercises[dayKey] || {}).filter(Boolean).length;
-            const percentage = Math.round((completed / exercises.length) * 100);
-            const circumference = 2 * Math.PI * 42;
+            
+            let totalSetsCount = 0;
+            let completedCount = 0;
+            
+            exercises.forEach((ex, exIndex) => {
+                totalSetsCount += ex.sets;
+                const exKey = 'ex' + exIndex;
+                if (completedSets[dayKey] && completedSets[dayKey][exKey]) {
+                    completedCount += Object.values(completedSets[dayKey][exKey]).filter(Boolean).length;
+                }
+            });
+            
+            const percentage = Math.round((completedCount / totalSetsCount) * 100);
+            const circumference = 2 * Math.PI * 34;
             const offset = circumference - (percentage / 100) * circumference;
             document.getElementById('progressCircle').style.strokeDashoffset = offset;
             document.getElementById('progressText').textContent = percentage + '%';
@@ -1344,12 +1577,22 @@
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             const exercises = workoutData[currentDay].exercises;
-            const completed = Object.values(completedExercises[dayKey] || {}).filter(Boolean).length;
-            if (completed === exercises.length) {
+            
+            let totalSetsCount = 0;
+            let completedCount = 0;
+            
+            exercises.forEach((ex, exIndex) => {
+                totalSetsCount += ex.sets;
+                const exKey = 'ex' + exIndex;
+                if (completedSets[dayKey] && completedSets[dayKey][exKey]) {
+                    completedCount += Object.values(completedSets[dayKey][exKey]).filter(Boolean).length;
+                }
+            });
+            
+            if (completedCount === totalSetsCount) {
                 if (!completedDays[dateKey]) {
                     completedDays[dateKey] = currentDay;
                     localStorage.setItem('completedDays', JSON.stringify(completedDays));
-                    // Bonus XP for completing a full day
                     totalXP += 50;
                     localStorage.setItem('totalXP', totalXP);
                     updateXPBar();
@@ -1367,26 +1610,49 @@
             const bs = adToBs(year, month + 1, 15);
             
             document.getElementById('calendarMonth').textContent = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
-            document.getElementById('calendarNepaliMonth').textContent = nepaliMonthsEng[bs.month - 1] + ' ' + bs.year + ' BS';
+            document.getElementById('calendarNepaliMonth').textContent = nepaliMonthsEng[bs.month - 1] + ' ' + bs.year + ' BS • ' + nepaliMonths[bs.month - 1];
             
             let html = '';
+            let monthHolidays = [];
+            
             for (let i = 0; i < firstDay; i++) html += '<div class="calendar-day" style="opacity: 0;"></div>';
+            
             for (let day = 1; day <= daysInMonth; day++) {
                 const date = new Date(year, month, day);
                 const dateKey = year + '-' + (month + 1) + '-' + day;
+                const holidayKey = (month + 1) + '-' + day;
                 const isToday = date.toDateString() === today.toDateString();
                 const isCompleted = completedDays[dateKey];
+                const holiday = holidays[holidayKey];
                 const dayOfWeek = date.getDay() + 1;
                 const isRestDay = dayOfWeek === 7;
+                
+                if (holiday) monthHolidays.push({ day, ...holiday });
                 
                 let classes = 'calendar-day';
                 if (isToday) classes += ' today';
                 else if (isCompleted) classes += ' completed-day';
-                if (!isToday && !isRestDay) classes += ' has-workout';
+                else if (holiday) classes += ' holiday';
+                if (!isToday && !isRestDay && !holiday) classes += ' has-workout';
                 
-                html += '<div class="' + classes + '">' + day + '</div>';
+                html += `<div class="${classes}" onclick="showDayDetails('${dateKey}')">${day}${holiday ? '<span class="holiday-dot"></span>' : ''}</div>`;
             }
             grid.innerHTML = html;
+            
+            // Show holidays for this month
+            const holidayInfo = document.getElementById('holidayInfo');
+            const holidayList = document.getElementById('holidayList');
+            if (monthHolidays.length > 0) {
+                holidayInfo.classList.add('show');
+                holidayList.innerHTML = monthHolidays.map(h => `
+                    <div class="holiday-item">
+                        <span><span class="holiday-name">${h.day}: ${h.nepali}</span> (${h.name})</span>
+                        <span class="holiday-type">${h.type}</span>
+                    </div>
+                `).join('');
+            } else {
+                holidayInfo.classList.remove('show');
+            }
         }
 
         function changeMonth(delta) {
@@ -1394,9 +1660,21 @@
             renderCalendar();
         }
 
+        function showDayDetails(dateKey) {
+            console.log('Selected:', dateKey);
+        }
+
         function updateStats() {
             const totalWorkouts = Object.keys(completedDays).length;
-            const totalExercisesCount = Object.values(completedExercises).reduce((sum, day) => sum + Object.values(day).filter(Boolean).length, 0);
+            
+            let totalSetsCompleted = 0;
+            Object.values(completedSets).forEach(day => {
+                Object.values(day).forEach(ex => {
+                    totalSetsCompleted += Object.values(ex).filter(Boolean).length;
+                });
+            });
+            
+            const creatineDays = Object.values(creatineTracker).filter(Boolean).length;
             
             let streak = 0;
             const today = new Date();
@@ -1410,46 +1688,68 @@
             
             const weekStart = new Date(today);
             weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-            let weeklyCompleted = 0;
             
+            let weeklyHtml = '';
             for (let i = 0; i < 7; i++) {
                 const checkDate = new Date(weekStart);
                 checkDate.setDate(checkDate.getDate() + i);
                 const dateKey = getDateKey(checkDate);
-                if (completedDays[dateKey]) weeklyCompleted++;
+                const isCompleted = completedDays[dateKey];
                 
-                const dayEl = document.getElementById('weekDay' + i);
-                if (dayEl) {
-                    const box = dayEl.querySelector('.weekly-day-box');
-                    if (completedDays[dateKey]) {
-                        box.classList.add('completed');
-                        box.textContent = '✓';
-                    } else {
-                        box.classList.remove('completed');
-                        box.textContent = shortDayNames[i].charAt(0);
-                    }
-                }
+                weeklyHtml += `
+                    <div class="weekly-day">
+                        <div class="weekly-day-box ${isCompleted ? 'completed' : ''}">${isCompleted ? '✓' : shortDayNames[i][0]}</div>
+                        <div class="weekly-day-label">${shortDayNames[i]}</div>
+                        <div class="weekly-day-nepali">${nepaliDayNames[i]}</div>
+                    </div>
+                `;
             }
+            document.getElementById('weeklyDays').innerHTML = weeklyHtml;
             
             document.getElementById('totalWorkouts').textContent = totalWorkouts;
             document.getElementById('currentStreak').textContent = streak;
-            document.getElementById('totalExercises').textContent = totalExercisesCount;
-            document.getElementById('weeklyProgress').textContent = Math.round((weeklyCompleted / 6) * 100) + '%';
+            document.getElementById('totalSets').textContent = totalSetsCompleted;
+            document.getElementById('creatineDays').textContent = creatineDays;
+        }
+
+        function exportStats() {
+            const stats = {
+                appName: "Kritik's Gurkha Gains",
+                exportDate: new Date().toISOString(),
+                totalWorkouts: Object.keys(completedDays).length,
+                totalSetsCompleted: 0,
+                creatineDaysTaken: Object.values(creatineTracker).filter(Boolean).length,
+                totalXP: totalXP,
+                level: Math.floor(totalXP / 100) + 1,
+                completedDays: completedDays,
+                exerciseWeights: exerciseWeights
+            };
+            
+            Object.values(completedSets).forEach(day => {
+                Object.values(day).forEach(ex => {
+                    stats.totalSetsCompleted += Object.values(ex).filter(Boolean).length;
+                });
+            });
+            
+            const dataStr = JSON.stringify(stats, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'gurkha-gains-stats-' + new Date().toISOString().split('T')[0] + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
         function resetAllData() {
-            if (confirm('⚠️ WARNING: This will permanently delete all your workout data and XP. Continue?')) {
-                localStorage.removeItem('completedExercises');
-                localStorage.removeItem('completedDays');
-                localStorage.removeItem('totalXP');
-                completedExercises = {};
+            if (confirm('⚠️ यो कार्यले तपाईंको सबै डाटा मेटाउनेछ। Continue?')) {
+                localStorage.clear();
+                completedSets = {};
                 completedDays = {};
+                exerciseWeights = {};
+                creatineTracker = {};
                 totalXP = 0;
-                renderExercises();
-                updateProgress();
-                updateStats();
-                renderCalendar();
-                updateXPBar();
+                init();
             }
         }
 
@@ -1459,9 +1759,7 @@
         
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js').then(function(registration) {
-                    console.log('ServiceWorker registered:', registration.scope);
-                }).catch(function(error) {
+                navigator.serviceWorker.register('sw.js').catch(function(error) {
                     console.log('ServiceWorker registration failed:', error);
                 });
             });
@@ -1479,7 +1777,7 @@
         function installApp() {
             if (!deferredPrompt) return;
             deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(function(choiceResult) {
+            deferredPrompt.userChoice.then(function() {
                 deferredPrompt = null;
                 installBanner.classList.add('hidden');
             });
@@ -1489,13 +1787,7 @@
             installBanner.classList.add('hidden');
             localStorage.setItem('installDismissed', Date.now().toString());
         }
-        
-        window.addEventListener('appinstalled', function() {
-            installBanner.classList.add('hidden');
-            deferredPrompt = null;
-        });
 
-        // Initialize app
         init();
     </script>
 </body>
