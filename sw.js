@@ -1,4 +1,4 @@
-var CACHE_NAME = 'gurkha-gains-v3';
+var CACHE_NAME = 'gurkha-gains-v5';
 var urlsToCache = [
   './',
   './index.html',
@@ -8,7 +8,7 @@ var urlsToCache = [
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      console.log('Gurkha Gains cache opened');
+      console.log('Gurkha Gains Premium cache opened');
       return cache.addAll(urlsToCache);
     })
   );
