@@ -4,24 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Kritik's Gurkha Gains</title>
-    <meta name="description" content="Cyberpunk PPL Workout Tracker with Nepali Calendar">
-    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Premium PPL Workout Tracker with Progressive Overload & PR Tracking">
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Gurkha Gains">
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-cyan: #00f0ff;
-            --neon-magenta: #ff00ff;
-            --neon-yellow: #ffd700;
-            --neon-green: #39ff14;
-            --neon-red: #ff073a;
-            --neon-orange: #ff6b35;
-            --dark-bg: #0a0a0f;
-            --dark-card: #12121a;
-            --dark-border: #1a1a2e;
+            --gold: #D4AF37;
+            --gold-light: #F4CF67;
+            --gold-dark: #AA8C2C;
+            --black: #000000;
+            --dark: #0A0A0A;
+            --dark-card: #141414;
+            --dark-border: #222222;
+            --gray-900: #1a1a1a;
+            --gray-800: #262626;
+            --gray-700: #333333;
+            --gray-600: #444444;
+            --gray-500: #666666;
+            --gray-400: #888888;
+            --gray-300: #aaaaaa;
+            --white: #ffffff;
+            --green: #22C55E;
+            --green-dark: #16A34A;
+            --red: #EF4444;
+            --blue: #3B82F6;
         }
         
         * { 
@@ -32,45 +42,11 @@
         }
         
         body { 
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
             min-height: 100vh;
-            color: #fff;
+            color: var(--white);
             overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px),
-                linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0,0,0,0.1) 0px,
-                rgba(0,0,0,0.1) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.3;
         }
         
         .app-container { 
@@ -78,275 +54,273 @@
             margin: 0 auto; 
             min-height: 100vh; 
             position: relative;
-            z-index: 1;
-        }
-        
-        .glow-cyan { 
-            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan); 
-            color: var(--neon-cyan);
-        }
-        .glow-magenta { 
-            text-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta); 
-            color: var(--neon-magenta);
-        }
-        .glow-green { 
-            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); 
-            color: var(--neon-green);
+            background: var(--dark);
         }
         
         /* Header */
-        .cyber-header {
-            background: linear-gradient(180deg, rgba(0,240,255,0.1) 0%, transparent 100%);
-            border-bottom: 2px solid var(--neon-cyan);
-            padding: 12px 16px;
+        .header {
+            background: var(--black);
+            padding: 16px 20px;
             position: sticky;
             top: 0;
             z-index: 50;
-            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
         }
         
-        .cyber-header::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), var(--neon-cyan), transparent);
-            animation: headerGlow 3s ease-in-out infinite;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
-        @keyframes headerGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
         
-        .logo-text {
-            font-family: 'Orbitron', monospace;
-            font-weight: 800;
-            font-size: 1.1rem;
+        .brand {
+            flex: 1;
+        }
+        
+        .brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
+            color: var(--white);
+        }
+        
+        .brand-name span {
+            color: var(--gold);
+        }
+        
+        .date-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-top: 2px;
         }
         
         .nepali-date {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--neon-yellow);
-            opacity: 0.9;
+            color: var(--gold);
         }
         
         /* Navigation */
-        .cyber-nav {
+        .nav {
             display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 10px 12px;
-            background: rgba(10,10,15,0.95);
+            background: var(--black);
             border-bottom: 1px solid var(--dark-border);
             position: sticky;
-            top: 68px;
+            top: 77px;
             z-index: 40;
-            backdrop-filter: blur(10px);
         }
         
         .nav-btn {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
-            font-weight: 600;
-            padding: 8px 12px;
+            flex: 1;
+            padding: 14px 8px;
             background: transparent;
-            border: 1px solid var(--dark-border);
-            color: #666;
+            border: none;
+            color: var(--gray-500);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
             position: relative;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         .nav-btn.active {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0,240,255,0.3), inset 0 0 15px rgba(0,240,255,0.1);
+            color: var(--gold);
+        }
+        
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: var(--gold);
         }
         
         /* Day Selector */
         .day-selector {
             display: flex;
-            gap: 6px;
+            gap: 8px;
+            padding: 16px;
             overflow-x: auto;
-            padding: 12px;
             scrollbar-width: none;
+            background: var(--dark);
         }
         
         .day-selector::-webkit-scrollbar { display: none; }
         
         .day-chip {
             flex-shrink: 0;
-            padding: 10px 12px;
+            width: 52px;
+            padding: 12px 8px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
             text-align: center;
         }
         
+        .day-chip:hover {
+            border-color: var(--gray-600);
+        }
+        
         .day-chip.active {
-            border-color: var(--neon-cyan);
-            background: linear-gradient(180deg, rgba(0,240,255,0.15) 0%, transparent 100%);
-            box-shadow: 0 0 20px rgba(0,240,255,0.2);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-color: var(--gold);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
         
-        .day-chip.today {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 15px rgba(57,255,20,0.3);
+        .day-chip.active .day-number,
+        .day-chip.active .day-name,
+        .day-chip.active .day-nepali {
+            color: var(--black);
         }
         
-        .day-chip.today::after {
-            content: 'आज';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.45rem;
-            color: var(--dark-bg);
-            background: var(--neon-green);
-            padding: 1px 5px;
-            border-radius: 2px;
-            font-weight: 700;
+        .day-chip.today:not(.active) {
+            border-color: var(--green);
+            box-shadow: 0 0 0 1px var(--green);
         }
         
         .day-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--neon-cyan);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--white);
+            line-height: 1;
         }
         
         .day-name {
             font-size: 0.55rem;
-            color: #888;
+            color: var(--gray-500);
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .day-nepali {
+            font-size: 0.55rem;
+            color: var(--gold);
             margin-top: 2px;
         }
         
-        .day-name-nepali {
-            font-size: 0.5rem;
-            color: var(--neon-yellow);
-            margin-top: 1px;
+        /* Quick Stats Bar */
+        .quick-stats {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 12px;
+            background: var(--dark);
         }
         
-        .day-type {
-            font-size: 0.5rem;
-            color: var(--neon-magenta);
-            margin-top: 3px;
-            font-weight: 600;
-        }
-        
-        /* Creatine Tracker */
-        .creatine-tracker {
-            margin: 0 12px 12px;
-            padding: 12px 16px;
+        .quick-stat {
+            flex: 1;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .quick-stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+        
+        .quick-stat-label {
+            font-size: 0.55rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .quick-stat.gold .quick-stat-value { color: var(--gold); }
+        .quick-stat.green .quick-stat-value { color: var(--green); }
+        
+        /* Creatine Card */
+        .creatine-card {
+            margin: 0 16px 12px;
+            padding: 14px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
         
-        .creatine-label {
+        .creatine-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .creatine-icon {
-            font-size: 1.3rem;
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
         
-        .creatine-text {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
-            color: var(--neon-cyan);
+        .creatine-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .creatine-text p {
+            font-size: 0.65rem;
+            color: var(--gray-500);
         }
         
         .creatine-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--neon-magenta);
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-600);
             background: transparent;
-            color: var(--neon-magenta);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
+            color: var(--gray-400);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+            text-transform: uppercase;
         }
         
         .creatine-btn.taken {
-            background: linear-gradient(135deg, var(--neon-green), #00ff88);
-            border-color: var(--neon-green);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px var(--neon-green);
+            background: var(--green);
+            border-color: var(--green);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
         }
         
-        /* Weight Unit Selector */
-        .weight-unit-selector {
-            margin: 0 12px 12px;
-            padding: 10px 16px;
-            background: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-        }
-        
-        .unit-label {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.65rem;
-            color: #888;
-        }
-        
-        .unit-toggle {
-            display: flex;
-            gap: 4px;
-        }
-        
-        .unit-btn {
-            padding: 6px 14px;
-            border: 1px solid var(--dark-border);
-            background: transparent;
-            color: #666;
-            font-family: 'Orbitron', monospace;
-            font-size: 0.65rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .unit-btn.active {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            background: rgba(0,240,255,0.1);
-        }
-        
-        /* Workout Header Card */
+        /* Workout Header */
         .workout-header {
-            margin: 0 12px 12px;
-            padding: 16px;
-            background: var(--dark-card);
+            margin: 0 16px 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--dark-card) 100%);
             border: 1px solid var(--dark-border);
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
-            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
         }
         
         .workout-header::before {
@@ -356,41 +330,56 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta), var(--neon-yellow));
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+        
+        .workout-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .workout-day-label {
+            font-size: 0.65rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
         }
         
         .workout-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--white);
+            letter-spacing: 1px;
         }
         
         .workout-focus {
             font-size: 0.75rem;
-            color: var(--neon-magenta);
-            margin-bottom: 12px;
+            color: var(--gray-400);
+            margin-top: 4px;
         }
         
         /* Progress Ring */
         .progress-container {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
         }
         
         .progress-ring {
             transform: rotate(-90deg);
-            filter: drop-shadow(0 0 8px var(--neon-cyan));
         }
         
-        .progress-ring-bg { stroke: var(--dark-border); }
+        .progress-ring-bg { 
+            stroke: var(--gray-800); 
+        }
         
         .progress-ring-fill {
-            stroke: url(#cyberGradient);
+            stroke: var(--gold);
             stroke-linecap: round;
             transition: stroke-dashoffset 0.5s ease;
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
         }
         
         .progress-text {
@@ -403,181 +392,163 @@
         }
         
         .progress-percent {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px var(--neon-cyan);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--white);
         }
         
-        .progress-label {
-            font-size: 0.5rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        /* Weight Unit Toggle */
+        .unit-toggle {
+            margin: 0 16px 12px;
+            padding: 12px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
-        /* Exercise Cards */
+        .unit-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+        
+        .unit-buttons {
+            display: flex;
+            background: var(--gray-800);
+            border-radius: 8px;
+            padding: 3px;
+        }
+        
+        .unit-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--gray-500);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .unit-btn.active {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* Exercise List */
         .exercise-list {
-            padding: 0 12px 100px;
+            padding: 0 16px 120px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .exercise-card {
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 14px;
-            position: relative;
+            border-radius: 14px;
+            padding: 16px;
             transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-        
-        .exercise-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-magenta));
-            opacity: 0.5;
-            transition: opacity 0.3s;
         }
         
         .exercise-card.completed {
-            background: linear-gradient(135deg, rgba(57,255,20,0.1) 0%, transparent 50%);
-            border-color: var(--neon-green);
-        }
-        
-        .exercise-card.completed::before {
-            background: var(--neon-green);
-            opacity: 1;
-            box-shadow: 0 0 10px var(--neon-green);
+            border-color: var(--green);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, var(--dark-card) 100%);
         }
         
         .exercise-header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
-        .exercise-info { flex: 1; }
+        .exercise-info {
+            flex: 1;
+        }
         
         .muscle-tag {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.5rem;
-            color: var(--neon-magenta);
-            background: rgba(255,0,255,0.1);
-            padding: 2px 6px;
-            border: 1px solid rgba(255,0,255,0.3);
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--gray-800);
+            border-radius: 4px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
         .exercise-name {
-            font-family: 'Rajdhani', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            color: #fff;
+            color: var(--white);
+            line-height: 1.3;
         }
         
         .exercise-note {
             font-size: 0.65rem;
-            color: #666;
-            font-style: italic;
-            margin-top: 2px;
+            color: var(--gray-500);
+            margin-top: 3px;
         }
         
-        /* Weight Input */
-        .weight-input-container {
+        /* PR Badge */
+        .pr-badge {
             display: flex;
             align-items: center;
             gap: 4px;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--dark-border);
-        }
-        
-        .weight-label {
+            padding: 4px 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 6px;
             font-size: 0.6rem;
-            color: #666;
-            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: var(--black);
         }
         
-        .weight-controls {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            margin-left: auto;
+        .pr-badge.no-pr {
+            background: var(--gray-800);
+            color: var(--gray-500);
         }
         
-        .weight-btn {
-            width: 28px;
-            height: 28px;
-            border: 1px solid var(--neon-cyan);
-            background: transparent;
-            color: var(--neon-cyan);
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        
-        .weight-btn:hover {
-            background: rgba(0,240,255,0.2);
-        }
-        
-        .weight-display {
-            width: 60px;
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 0.8rem;
-            color: var(--neon-yellow);
-            background: transparent;
-            border: 1px solid var(--dark-border);
-            padding: 4px;
-        }
-        
-        /* Set Checkboxes */
-        .sets-container {
+        /* Sets Grid */
+        .sets-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .set-item {
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 4px 8px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--dark-border);
-            border-radius: 4px;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--gray-800);
+            border-radius: 8px;
+            border: 1px solid var(--gray-700);
         }
         
         .set-checkbox {
             appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--neon-cyan);
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray-600);
+            border-radius: 6px;
             background: transparent;
             cursor: pointer;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         
         .set-checkbox:checked {
-            background: linear-gradient(135deg, var(--neon-green), #00ff88);
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px var(--neon-green);
+            background: var(--green);
+            border-color: var(--green);
         }
         
         .set-checkbox:checked::after {
@@ -587,83 +558,177 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark-bg);
+            color: var(--white);
             font-weight: bold;
             font-size: 12px;
         }
         
+        .set-info {
+            text-align: left;
+        }
+        
         .set-label {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.55rem;
-            color: #888;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--white);
         }
         
         .set-reps {
-            font-size: 0.5rem;
-            color: var(--neon-cyan);
+            font-size: 0.55rem;
+            color: var(--gray-500);
+        }
+        
+        /* Weight Controls */
+        .weight-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--gray-800);
+        }
+        
+        .weight-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+        
+        .weight-controls {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .weight-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-700);
+            background: var(--gray-800);
+            color: var(--white);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .weight-btn:hover {
+            background: var(--gray-700);
+            border-color: var(--gold);
+        }
+        
+        .weight-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .weight-display {
+            min-width: 70px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+            padding: 6px 12px;
+            background: var(--gray-900);
+            border-radius: 6px;
+        }
+        
+        /* Progressive Overload Indicator */
+        .overload-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: var(--gray-900);
+            border-radius: 8px;
+            font-size: 0.65rem;
+        }
+        
+        .overload-indicator.up {
+            color: var(--green);
+        }
+        
+        .overload-indicator.same {
+            color: var(--gray-500);
+        }
+        
+        .overload-indicator.down {
+            color: var(--red);
         }
         
         /* Calendar View */
         .calendar-container {
-            margin: 12px;
+            margin: 16px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 16px;
-            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            border-radius: 16px;
+            padding: 20px;
         }
         
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
         .calendar-nav-btn {
-            width: 36px;
-            height: 36px;
-            background: transparent;
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 10px;
+            color: var(--white);
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         
-        .calendar-title { text-align: center; }
+        .calendar-nav-btn:hover {
+            background: var(--gray-700);
+            border-color: var(--gold);
+        }
+        
+        .calendar-title {
+            text-align: center;
+        }
         
         .calendar-month {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--neon-cyan);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            letter-spacing: 1px;
         }
         
-        .calendar-nepali {
-            font-size: 0.7rem;
-            color: var(--neon-magenta);
+        .calendar-nepali-month {
+            font-size: 0.75rem;
+            color: var(--gold);
             margin-top: 2px;
         }
         
         .calendar-weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-            margin-bottom: 6px;
+            gap: 4px;
+            margin-bottom: 8px;
         }
         
         .calendar-weekday {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.55rem;
-            color: var(--neon-yellow);
+            font-size: 0.6rem;
+            color: var(--gray-500);
             text-align: center;
-            padding: 6px 0;
+            padding: 8px 0;
+            font-weight: 600;
         }
         
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
+            gap: 4px;
         }
         
         .calendar-day {
@@ -672,101 +737,119 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid transparent;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: var(--gray-900);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             position: relative;
         }
         
         .calendar-day:hover {
-            border-color: var(--neon-cyan);
-            background: rgba(0,240,255,0.1);
+            background: var(--gray-800);
         }
         
         .calendar-day.today {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-            color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
             font-weight: 700;
-            box-shadow: 0 0 15px rgba(0,240,255,0.5);
-        }
-        
-        .calendar-day.has-workout {
-            border-color: rgba(0,240,255,0.3);
         }
         
         .calendar-day.completed-day {
-            background: rgba(57,255,20,0.2);
-            border-color: var(--neon-green);
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid var(--green);
         }
         
         .calendar-day.holiday {
-            background: rgba(255,0,255,0.15);
-            border-color: var(--neon-magenta);
+            color: var(--red);
         }
         
-        .holiday-dot {
+        .calendar-day.holiday::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
             width: 4px;
             height: 4px;
-            background: var(--neon-yellow);
+            background: var(--red);
             border-radius: 50%;
-            position: absolute;
-            bottom: 3px;
         }
         
-        /* Holiday Info */
-        .holiday-info {
-            margin: 12px;
-            padding: 12px;
+        /* Holiday List */
+        .holiday-card {
+            margin: 0 16px 16px;
             background: var(--dark-card);
-            border: 1px solid var(--neon-magenta);
-            display: none;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            overflow: hidden;
         }
         
-        .holiday-info.show { display: block; }
-        
-        .holiday-info h4 {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
-            color: var(--neon-magenta);
-            margin-bottom: 8px;
+        .holiday-card-header {
+            padding: 12px 16px;
+            background: var(--gray-900);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .holiday-list {
-            font-size: 0.75rem;
-            color: #ccc;
+            padding: 8px 0;
         }
         
         .holiday-item {
-            padding: 6px 0;
-            border-bottom: 1px solid var(--dark-border);
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--dark-border);
         }
         
-        .holiday-item:last-child { border-bottom: none; }
+        .holiday-item:last-child {
+            border-bottom: none;
+        }
         
-        .holiday-name { color: var(--neon-yellow); }
-        .holiday-type { color: #666; font-size: 0.6rem; }
+        .holiday-name {
+            font-size: 0.8rem;
+            color: var(--white);
+        }
+        
+        .holiday-name span {
+            color: var(--gray-500);
+            font-size: 0.7rem;
+        }
+        
+        .holiday-type {
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: var(--gray-800);
+            color: var(--gray-400);
+        }
+        
+        .holiday-type.nepal {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+        }
         
         /* Stats View */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            padding: 12px;
+            gap: 12px;
+            padding: 16px;
         }
         
         .stat-card {
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 16px;
+            border-radius: 14px;
+            padding: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
         
         .stat-card::before {
@@ -775,48 +858,59 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
         }
         
-        .stat-card.cyan::before { background: var(--neon-cyan); }
-        .stat-card.magenta::before { background: var(--neon-magenta); }
-        .stat-card.green::before { background: var(--neon-green); }
-        .stat-card.yellow::before { background: var(--neon-yellow); }
+        .stat-card.gold::before { background: var(--gold); }
+        .stat-card.green::before { background: var(--green); }
+        .stat-card.blue::before { background: var(--blue); }
+        .stat-card.red::before { background: var(--red); }
+        
+        .stat-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
         
         .stat-value {
-            font-family: 'Orbitron', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            line-height: 1;
         }
         
-        .stat-card.cyan .stat-value { color: var(--neon-cyan); text-shadow: 0 0 15px var(--neon-cyan); }
-        .stat-card.magenta .stat-value { color: var(--neon-magenta); text-shadow: 0 0 15px var(--neon-magenta); }
-        .stat-card.green .stat-value { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
-        .stat-card.yellow .stat-value { color: var(--neon-yellow); text-shadow: 0 0 15px var(--neon-yellow); }
+        .stat-card.gold .stat-value { color: var(--gold); }
+        .stat-card.green .stat-value { color: var(--green); }
+        .stat-card.blue .stat-value { color: var(--blue); }
+        .stat-card.red .stat-value { color: var(--red); }
         
         .stat-label {
             font-size: 0.65rem;
-            color: #666;
+            color: var(--gray-500);
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 4px;
         }
         
         /* Weekly Overview */
-        .weekly-overview {
-            margin: 0 12px 12px;
+        .weekly-card {
+            margin: 0 16px 16px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 16px;
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            border-radius: 14px;
+            padding: 20px;
+        }
+        
+        .weekly-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
         
         .weekly-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.75rem;
-            color: var(--neon-cyan);
-            margin-bottom: 12px;
-            letter-spacing: 2px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            color: var(--white);
+            letter-spacing: 1px;
         }
         
         .weekly-days {
@@ -828,195 +922,323 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         
         .weekly-day-box {
-            width: 32px;
-            height: 32px;
-            background: var(--dark-border);
-            border: 1px solid #333;
+            width: 36px;
+            height: 36px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
+            color: var(--gray-500);
             transition: all 0.3s;
         }
         
         .weekly-day-box.completed {
-            background: linear-gradient(135deg, var(--neon-green), #00ff88);
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px var(--neon-green);
-            color: var(--dark-bg);
+            background: var(--green);
+            border-color: var(--green);
+            color: var(--white);
         }
         
         .weekly-day-label {
-            font-size: 0.5rem;
-            color: #666;
+            font-size: 0.55rem;
+            color: var(--gray-500);
         }
         
-        .weekly-day-nepali {
-            font-size: 0.45rem;
-            color: var(--neon-yellow);
-        }
-        
-        /* Export Button */
-        .export-btn {
-            margin: 0 12px 12px;
-            width: calc(100% - 24px);
-            padding: 14px;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-            border: none;
-            color: var(--dark-bg);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-        
-        .export-btn:hover {
-            box-shadow: 0 0 25px rgba(0,240,255,0.5);
-            transform: translateY(-2px);
-        }
-        
-        /* Reset Button */
-        .reset-btn {
-            margin: 0 12px 100px;
-            width: calc(100% - 24px);
-            padding: 14px;
-            background: transparent;
-            border: 1px solid var(--neon-red);
-            color: var(--neon-red);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-        
-        .reset-btn:hover {
-            background: rgba(255,7,58,0.1);
-            box-shadow: 0 0 15px rgba(255,7,58,0.3);
-        }
-        
-        /* XP Bar */
-        .xp-bar-container {
-            margin: 0 12px 12px;
+        /* PR Records Section */
+        .pr-section {
+            margin: 0 16px 16px;
             background: var(--dark-card);
             border: 1px solid var(--dark-border);
-            padding: 10px 14px;
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            border-radius: 14px;
+            overflow: hidden;
         }
         
-        .xp-header {
+        .pr-header {
+            padding: 16px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pr-list {
+            padding: 8px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .pr-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--dark-border);
         }
         
-        .xp-level {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.65rem;
-            color: var(--neon-yellow);
+        .pr-item:last-child {
+            border-bottom: none;
         }
         
-        .xp-amount {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
-            color: #666;
+        .pr-exercise {
+            font-size: 0.8rem;
+            color: var(--white);
         }
         
-        .xp-bar {
-            height: 5px;
-            background: var(--dark-border);
+        .pr-weight {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        /* Data Management Buttons */
+        .data-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+        
+        .data-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .data-btn.export {
+            background: var(--gold);
+            border: none;
+            color: var(--black);
+        }
+        
+        .data-btn.export:hover {
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .data-btn.import {
+            background: transparent;
+            border: 1px solid var(--gray-600);
+            color: var(--gray-400);
+        }
+        
+        .data-btn.import:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .reset-btn {
+            margin: 0 16px 100px;
+            width: calc(100% - 32px);
+            padding: 14px;
+            background: transparent;
+            border: 1px solid var(--red);
+            border-radius: 12px;
+            color: var(--red);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .reset-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        /* Level Bar */
+        .level-card {
+            margin: 0 16px 12px;
+            padding: 14px 16px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+        }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .level-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .level-badge {
+            padding: 4px 10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 6px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            color: var(--black);
+        }
+        
+        .level-title {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+        
+        .level-xp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+        }
+        
+        .level-bar {
+            height: 6px;
+            background: var(--gray-800);
             border-radius: 3px;
             overflow: hidden;
         }
         
-        .xp-fill {
+        .level-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
-            box-shadow: 0 0 8px var(--neon-yellow);
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 3px;
             transition: width 0.5s ease;
         }
         
         /* Install Banner */
         .install-banner {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            background: linear-gradient(135deg, var(--neon-green), #00ff88);
-            padding: 10px 14px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
         
-        .install-banner.hidden { display: none; }
+        .install-banner.show {
+            transform: translateY(0);
+        }
         
-        .install-text { color: var(--dark-bg); }
+        .install-banner.hidden { 
+            display: none; 
+        }
+        
+        .install-text {
+            color: var(--black);
+        }
         
         .install-title {
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            font-size: 0.75rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
         }
         
         .install-subtitle {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             opacity: 0.8;
+        }
+        
+        .install-buttons {
+            display: flex;
+            gap: 8px;
         }
         
         .install-btn {
-            background: var(--dark-bg);
-            color: var(--neon-green);
+            padding: 8px 16px;
+            background: var(--black);
+            color: var(--gold);
             border: none;
-            padding: 6px 12px;
-            font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: 700;
         }
         
         .install-dismiss {
+            padding: 8px;
             background: none;
             border: none;
-            color: var(--dark-bg);
-            font-size: 0.7rem;
+            color: var(--black);
+            font-size: 1rem;
             cursor: pointer;
-            padding: 6px;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         
+        /* Hidden file input */
+        .hidden-input {
+            display: none;
+        }
+        
+        /* Utility */
         .hidden { display: none !important; }
-        .flex { display: flex; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .gap-2 { gap: 8px; }
-        .gap-3 { gap: 12px; }
-        .flex-1 { flex: 1; }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--gray-800);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 200;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-700);
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .toast.success {
+            border-color: var(--green);
+        }
+        
+        .toast.error {
+            border-color: var(--red);
+        }
     </style>
 </head>
 <body>
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+    
     <!-- Install Banner -->
     <div id="installBanner" class="install-banner hidden">
-        <div class="flex items-center gap-2">
-            <span style="font-size: 1.3rem;">⚡</span>
-            <div class="install-text">
-                <div class="install-title">INSTALL GURKHA GAINS</div>
-                <div class="install-subtitle">Add to home screen</div>
-            </div>
+        <div class="install-text">
+            <div class="install-title">INSTALL GURKHA GAINS</div>
+            <div class="install-subtitle">Add to home screen for best experience</div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="install-buttons">
             <button onclick="dismissInstall()" class="install-dismiss">✕</button>
             <button onclick="installApp()" class="install-btn">INSTALL</button>
         </div>
@@ -1024,24 +1246,23 @@
 
     <div class="app-container">
         <!-- Header -->
-        <header class="cyber-header">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 class="logo-text">⚡ Kritik's Gurkha Gains</h1>
-                    <p class="nepali-date" id="nepaliDate">लोड हुँदैछ...</p>
-                </div>
-                <div style="text-align: right;">
-                    <p style="font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--neon-cyan);" id="englishDate"></p>
-                    <p style="font-size: 0.6rem; color: #666;" id="dayName"></p>
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">🏋️</div>
+                <div class="brand">
+                    <h1 class="brand-name">KRITIK'S <span>GURKHA GAINS</span></h1>
+                    <p class="date-display">
+                        <span id="englishDate"></span> • <span class="nepali-date" id="nepaliDate">Loading...</span>
+                    </p>
                 </div>
             </div>
         </header>
 
         <!-- Navigation -->
-        <nav class="cyber-nav">
-            <button onclick="showView('workout')" class="nav-btn active" id="nav-workout">💪 WORKOUT</button>
+        <nav class="nav">
+            <button onclick="showView('workout')" class="nav-btn active" id="nav-workout">💪 Workout</button>
             <button onclick="showView('calendar')" class="nav-btn" id="nav-calendar">📅 पात्रो</button>
-            <button onclick="showView('stats')" class="nav-btn" id="nav-stats">📊 STATS</button>
+            <button onclick="showView('stats')" class="nav-btn" id="nav-stats">📊 Stats</button>
         </nav>
 
         <!-- Workout View -->
@@ -1049,60 +1270,72 @@
             <!-- Day Selector -->
             <div class="day-selector" id="dayTabs"></div>
 
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="quick-stat gold">
+                    <div class="quick-stat-value" id="todaySets">0/0</div>
+                    <div class="quick-stat-label">Sets Done</div>
+                </div>
+                <div class="quick-stat">
+                    <div class="quick-stat-value" id="todayExercises">0/0</div>
+                    <div class="quick-stat-label">Exercises</div>
+                </div>
+                <div class="quick-stat green">
+                    <div class="quick-stat-value" id="streakCount">0🔥</div>
+                    <div class="quick-stat-label">Streak</div>
+                </div>
+            </div>
+
             <!-- Creatine Tracker -->
-            <div class="creatine-tracker">
-                <div class="creatine-label">
-                    <span class="creatine-icon">💊</span>
-                    <div>
-                        <div class="creatine-text">CREATINE आज?</div>
-                        <div style="font-size: 0.55rem; color: #666;">Daily 5g dose</div>
+            <div class="creatine-card">
+                <div class="creatine-info">
+                    <div class="creatine-icon">💊</div>
+                    <div class="creatine-text">
+                        <h4>Daily Creatine</h4>
+                        <p>5g Monohydrate • आज लियो?</p>
                     </div>
                 </div>
                 <button id="creatineBtn" class="creatine-btn" onclick="toggleCreatine()">NOT TAKEN</button>
             </div>
 
-            <!-- Weight Unit Selector -->
-            <div class="weight-unit-selector">
-                <span class="unit-label">⚖️ WEIGHT UNIT</span>
-                <div class="unit-toggle">
+            <!-- Level/XP Bar -->
+            <div class="level-card">
+                <div class="level-header">
+                    <div class="level-info">
+                        <div class="level-badge">LVL <span id="userLevel">1</span></div>
+                        <span class="level-title">Warrior योद्धा</span>
+                    </div>
+                    <span class="level-xp"><span id="currentXP">0</span>/<span id="nextLevelXP">100</span> XP</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" id="xpFill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Weight Unit Toggle -->
+            <div class="unit-toggle">
+                <span class="unit-label">Weight Unit</span>
+                <div class="unit-buttons">
                     <button class="unit-btn active" id="unitLbs" onclick="setWeightUnit('lbs')">LBS</button>
                     <button class="unit-btn" id="unitKg" onclick="setWeightUnit('kg')">KG</button>
                 </div>
             </div>
 
-            <!-- XP Bar -->
-            <div class="xp-bar-container">
-                <div class="xp-header">
-                    <span class="xp-level">⚡ LEVEL <span id="userLevel">1</span> योद्धा</span>
-                    <span class="xp-amount"><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</span>
-                </div>
-                <div class="xp-bar">
-                    <div class="xp-fill" id="xpFill" style="width: 0%;"></div>
-                </div>
-            </div>
-
             <!-- Workout Header -->
             <div class="workout-header">
-                <div class="flex justify-between items-center">
+                <div class="workout-meta">
                     <div>
-                        <h2 class="workout-title" id="currentDayTitle">DAY 1: PUSH A</h2>
-                        <p class="workout-focus" id="currentDayFocus">// HEAVY PRESS & TRICEPS</p>
+                        <p class="workout-day-label" id="workoutDayLabel">Day 1 • आइतबार</p>
+                        <h2 class="workout-title" id="currentDayTitle">PUSH A</h2>
+                        <p class="workout-focus" id="currentDayFocus">Heavy Press & Triceps</p>
                     </div>
                     <div class="progress-container">
-                        <svg class="progress-ring" width="80" height="80">
-                            <defs>
-                                <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#00f0ff"/>
-                                    <stop offset="50%" stop-color="#ff00ff"/>
-                                    <stop offset="100%" stop-color="#00f0ff"/>
-                                </linearGradient>
-                            </defs>
-                            <circle class="progress-ring-bg" cx="40" cy="40" r="34" stroke-width="5" fill="none"/>
-                            <circle class="progress-ring-fill" id="progressCircle" cx="40" cy="40" r="34" stroke-width="5" fill="none" stroke-dasharray="214" stroke-dashoffset="214"/>
+                        <svg class="progress-ring" width="70" height="70">
+                            <circle class="progress-ring-bg" cx="35" cy="35" r="30" stroke-width="5" fill="none"/>
+                            <circle class="progress-ring-fill" id="progressCircle" cx="35" cy="35" r="30" stroke-width="5" fill="none" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
                         </svg>
                         <div class="progress-text">
                             <span class="progress-percent" id="progressText">0%</span>
-                            <span class="progress-label">DONE</span>
                         </div>
                     </div>
                 </div>
@@ -1119,7 +1352,7 @@
                     <button onclick="changeMonth(-1)" class="calendar-nav-btn">◀</button>
                     <div class="calendar-title">
                         <div class="calendar-month" id="calendarMonth"></div>
-                        <div class="calendar-nepali" id="calendarNepaliMonth"></div>
+                        <div class="calendar-nepali-month" id="calendarNepaliMonth"></div>
                     </div>
                     <button onclick="changeMonth(1)" class="calendar-nav-btn">▶</button>
                 </div>
@@ -1135,201 +1368,234 @@
                 <div class="calendar-grid" id="calendarGrid"></div>
             </div>
             
-            <div class="holiday-info" id="holidayInfo">
-                <h4>🎉 बिदाहरू / HOLIDAYS</h4>
+            <div class="holiday-card" id="holidayCard">
+                <div class="holiday-card-header">🎉 Holidays This Month</div>
                 <div class="holiday-list" id="holidayList"></div>
-            </div>
-            
-            <div style="padding: 12px; font-size: 0.6rem; color: #666; display: flex; gap: 12px; flex-wrap: wrap;">
-                <span>🟦 आज</span>
-                <span>🟩 Completed</span>
-                <span>🟪 बिदा/Holiday</span>
             </div>
         </div>
 
         <!-- Stats View -->
         <div id="stats-view" class="hidden">
             <div class="stats-grid">
-                <div class="stat-card green">
+                <div class="stat-card gold">
+                    <div class="stat-icon">🏆</div>
                     <div class="stat-value" id="totalWorkouts">0</div>
                     <div class="stat-label">Workouts</div>
                 </div>
-                <div class="stat-card cyan">
+                <div class="stat-card green">
+                    <div class="stat-icon">🔥</div>
                     <div class="stat-value" id="currentStreak">0</div>
-                    <div class="stat-label">Streak 🔥</div>
+                    <div class="stat-label">Day Streak</div>
                 </div>
-                <div class="stat-card magenta">
+                <div class="stat-card blue">
+                    <div class="stat-icon">💪</div>
                     <div class="stat-value" id="totalSets">0</div>
-                    <div class="stat-label">Sets Done</div>
+                    <div class="stat-label">Total Sets</div>
                 </div>
-                <div class="stat-card yellow">
+                <div class="stat-card red">
+                    <div class="stat-icon">💊</div>
                     <div class="stat-value" id="creatineDays">0</div>
-                    <div class="stat-label">Creatine 💊</div>
+                    <div class="stat-label">Creatine Days</div>
                 </div>
             </div>
 
-            <div class="weekly-overview">
-                <div class="weekly-title">// साप्ताहिक MISSION STATUS</div>
+            <!-- Weekly Overview -->
+            <div class="weekly-card">
+                <div class="weekly-header">
+                    <span class="weekly-title">THIS WEEK'S PROGRESS</span>
+                </div>
                 <div class="weekly-days" id="weeklyDays"></div>
             </div>
 
-            <button onclick="exportStats()" class="export-btn">📤 EXPORT STATISTICS</button>
-            <button onclick="resetAllData()" class="reset-btn">⚠ RESET ALL DATA</button>
+            <!-- PR Records -->
+            <div class="pr-section">
+                <div class="pr-header">🏅 PERSONAL RECORDS (PRs)</div>
+                <div class="pr-list" id="prList">
+                    <div class="pr-item">
+                        <span class="pr-exercise">No PRs yet. Start lifting!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Management -->
+            <div class="data-buttons">
+                <button onclick="exportData()" class="data-btn export">📤 Export</button>
+                <button onclick="document.getElementById('importInput').click()" class="data-btn import">📥 Import</button>
+                <input type="file" id="importInput" class="hidden-input" accept=".json" onchange="importData(event)">
+            </div>
+
+            <button onclick="resetAllData()" class="reset-btn">⚠️ Reset All Data</button>
         </div>
     </div>
 
     <script>
-        // Updated Workout Data with Forearms
+        // Workout Data with Forearms
         const workoutData = {
             1: { 
-                title: "DAY 1: PUSH A", 
+                title: "PUSH A", 
                 nepaliDay: "आइतबार",
-                focus: "// HEAVY PRESS & TRICEPS", 
+                focus: "Heavy Press & Triceps", 
                 exercises: [
-                    { name: "Inclined Smith Machine Chest Press", sets: 3, reps: "8-10", note: "Heavy compound", muscle: "CHEST" },
-                    { name: "Dips", sets: 3, reps: "10-12", note: "Lower chest/triceps", muscle: "CHEST" },
-                    { name: "Chest Fly Machine", sets: 3, reps: "12-15", note: "Peak contraction", muscle: "CHEST" },
-                    { name: "Cable Lateral Raises", sets: 4, reps: "12-15", note: "Constant tension", muscle: "DELTS" },
-                    { name: "Cable Tricep Push Downs", sets: 3, reps: "10-12", note: "Rope or straight bar", muscle: "TRICEPS" },
-                    { name: "EZ Bar Skull Crushers", sets: 3, reps: "8-10", note: "Long head mass builder", muscle: "TRICEPS" }
+                    { name: "Inclined Smith Machine Chest Press", sets: 3, reps: "8-10", note: "Heavy compound", muscle: "CHEST", trackWeight: true },
+                    { name: "Dips", sets: 3, reps: "10-12", note: "Lower chest/triceps", muscle: "CHEST", trackWeight: true },
+                    { name: "Chest Fly Machine", sets: 3, reps: "12-15", note: "Peak contraction", muscle: "CHEST", trackWeight: true },
+                    { name: "Cable Lateral Raises", sets: 4, reps: "12-15", note: "Constant tension", muscle: "DELTS", trackWeight: true },
+                    { name: "Cable Tricep Push Downs", sets: 3, reps: "10-12", note: "Rope or straight bar", muscle: "TRICEPS", trackWeight: true },
+                    { name: "EZ Bar Skull Crushers", sets: 3, reps: "8-10", note: "Long head focus", muscle: "TRICEPS", trackWeight: true }
                 ]
             },
             2: { 
-                title: "DAY 2: PULL A", 
+                title: "PULL A", 
                 nepaliDay: "सोमबार",
-                focus: "// VERTICAL PULL & FOREARM WIDTH", 
+                focus: "Vertical Pull & Forearm Width", 
                 exercises: [
-                    { name: "Pull Ups", sets: 3, reps: "AMRAP", note: "Add weight if needed", muscle: "BACK" },
-                    { name: "Lat Pulldowns", sets: 3, reps: "10-12", note: "Wide grip", muscle: "LATS" },
-                    { name: "Lat Prayers", sets: 3, reps: "12-15", note: "Straight arm pulldowns", muscle: "LATS" },
-                    { name: "Seated Chest Supported Rows", sets: 3, reps: "10-12", note: "Upper back thickness", muscle: "BACK" },
-                    { name: "Bayesian Bicep Curls", sets: 3, reps: "12-15", note: "Full stretch position", muscle: "BICEPS" },
-                    { name: "Preacher Bicep Curls", sets: 3, reps: "10-12", note: "Short head isolation", muscle: "BICEPS" },
-                    { name: "Reverse Cable Curls", sets: 3, reps: "12-15", note: "Extensors & Brachioradialis", muscle: "FOREARMS" }
+                    { name: "Pull Ups", sets: 3, reps: "AMRAP", note: "Add weight if needed", muscle: "BACK", trackWeight: true },
+                    { name: "Lat Pulldowns", sets: 3, reps: "10-12", note: "Wide grip", muscle: "LATS", trackWeight: true },
+                    { name: "Lat Prayers", sets: 3, reps: "12-15", note: "Straight arm pulldowns", muscle: "LATS", trackWeight: true },
+                    { name: "Seated Chest Supported Rows", sets: 3, reps: "10-12", note: "Upper back thickness", muscle: "BACK", trackWeight: true },
+                    { name: "Bayesian Bicep Curls", sets: 3, reps: "12-15", note: "Full stretch", muscle: "BICEPS", trackWeight: true },
+                    { name: "Preacher Bicep Curls", sets: 3, reps: "10-12", note: "Short head isolation", muscle: "BICEPS", trackWeight: true },
+                    { name: "Reverse Cable Curls", sets: 3, reps: "12-15", note: "Extensors & Brachioradialis", muscle: "FOREARMS", trackWeight: true }
                 ]
             },
             3: { 
-                title: "DAY 3: LEGS A", 
+                title: "LEGS A", 
                 nepaliDay: "मंगलबार",
-                focus: "// SQUAT FOCUS + LOWER ABS", 
+                focus: "Squat Focus + Lower Abs", 
                 exercises: [
-                    { name: "Squats", sets: 3, reps: "6-8", note: "Primary heavy compound", muscle: "QUADS" },
-                    { name: "Hip Thrust Machine", sets: 3, reps: "10-12", note: "Glute focus", muscle: "GLUTES" },
-                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Quad isolation", muscle: "QUADS" },
-                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES" },
-                    { name: "Leg Raises", sets: 3, reps: "15", note: "Lower abs", muscle: "ABS" },
-                    { name: "Inclined Treadmill Walk", sets: 1, reps: "20-30 min", note: "Steady state cardio", muscle: "CARDIO" }
+                    { name: "Squats", sets: 3, reps: "6-8", note: "Primary compound", muscle: "QUADS", trackWeight: true },
+                    { name: "Hip Thrust Machine", sets: 3, reps: "10-12", note: "Glute focus", muscle: "GLUTES", trackWeight: true },
+                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Isolation", muscle: "QUADS", trackWeight: true },
+                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES", trackWeight: true },
+                    { name: "Leg Raises", sets: 3, reps: "15", note: "Lower abs", muscle: "ABS", trackWeight: false },
+                    { name: "Inclined Treadmill Walk", sets: 1, reps: "20-30 min", note: "Cardio", muscle: "CARDIO", trackWeight: false }
                 ]
             },
             4: { 
-                title: "DAY 4: PUSH B", 
+                title: "PUSH B", 
                 nepaliDay: "बुधबार",
-                focus: "// VOLUME & SHOULDER DETAIL", 
+                focus: "Volume & Shoulder Detail", 
                 exercises: [
-                    { name: "Hammer Chest Press", sets: 3, reps: "8-10", note: "Heavy flat press", muscle: "CHEST" },
-                    { name: "Inclined Machine Press", sets: 3, reps: "10-12", note: "Upper pec shelf", muscle: "CHEST" },
-                    { name: "Multiflight Lateral Raise Machine", sets: 4, reps: "12-15", note: "Drop sets work well", muscle: "DELTS" },
-                    { name: "Inclined Y Raises", sets: 3, reps: "12-15", note: "Lower traps/rear delts", muscle: "DELTS" },
-                    { name: "Cable Tricep Extension (Overhead)", sets: 3, reps: "12-15", note: "Long head stretch", muscle: "TRICEPS" }
+                    { name: "Hammer Chest Press", sets: 3, reps: "8-10", note: "Flat press", muscle: "CHEST", trackWeight: true },
+                    { name: "Inclined Machine Press", sets: 3, reps: "10-12", note: "Upper pec", muscle: "CHEST", trackWeight: true },
+                    { name: "Multiflight Lateral Raise Machine", sets: 4, reps: "12-15", note: "Drop sets work well", muscle: "DELTS", trackWeight: true },
+                    { name: "Inclined Y Raises", sets: 3, reps: "12-15", note: "Lower traps/rear delts", muscle: "DELTS", trackWeight: true },
+                    { name: "Cable Tricep Extension (Overhead)", sets: 3, reps: "12-15", note: "Long head stretch", muscle: "TRICEPS", trackWeight: true }
                 ]
             },
             5: { 
-                title: "DAY 5: PULL B", 
+                title: "PULL B", 
                 nepaliDay: "बिहीबार",
-                focus: "// ROW FOCUS & GRIP STRENGTH", 
+                focus: "Row Focus & Grip Strength", 
                 exercises: [
-                    { name: "Seated Cable Rows", sets: 3, reps: "10-12", note: "Squeeze at contraction", muscle: "BACK" },
-                    { name: "Inclined DB Chest Supported Rows", sets: 3, reps: "10-12", note: "No lower back strain", muscle: "BACK" },
-                    { name: "Lat Pulldowns (Neutral Grip)", sets: 3, reps: "10-12", note: "Close grip variation", muscle: "LATS" },
-                    { name: "Preacher Hammer Curls", sets: 3, reps: "10-12", note: "Brachialis focus", muscle: "BICEPS" },
-                    { name: "Bayesian Bicep Curls", sets: 2, reps: "15", note: "Light pump finisher", muscle: "BICEPS" },
-                    { name: "Behind-the-Back Barbell Wrist Curls", sets: 3, reps: "15-20", note: "Flexors - inner forearm", muscle: "FOREARMS" }
+                    { name: "Seated Cable Rows", sets: 3, reps: "10-12", note: "Squeeze contraction", muscle: "BACK", trackWeight: true },
+                    { name: "Inclined DB Chest Supported Rows", sets: 3, reps: "10-12", note: "No lower back strain", muscle: "BACK", trackWeight: true },
+                    { name: "Lat Pulldowns (Neutral Grip)", sets: 3, reps: "10-12", note: "Close grip", muscle: "LATS", trackWeight: true },
+                    { name: "Preacher Hammer Curls", sets: 3, reps: "10-12", note: "Brachialis focus", muscle: "BICEPS", trackWeight: true },
+                    { name: "Bayesian Bicep Curls", sets: 2, reps: "15", note: "Pump finisher", muscle: "BICEPS", trackWeight: true },
+                    { name: "Behind-the-Back Barbell Wrist Curls", sets: 3, reps: "15-20", note: "Inner forearm flexors", muscle: "FOREARMS", trackWeight: true }
                 ]
             },
             6: { 
-                title: "DAY 6: LEGS B", 
+                title: "LEGS B", 
                 nepaliDay: "शुक्रबार",
-                focus: "// DEADLIFT FOCUS + UPPER ABS", 
+                focus: "Deadlift Focus + Upper Abs", 
                 exercises: [
-                    { name: "Deadlifts", sets: 3, reps: "5-8", note: "Heavy - strict form", muscle: "POSTERIOR" },
-                    { name: "Lying Hamstring Curls", sets: 3, reps: "10-12", note: "Hamstring isolation", muscle: "HAMSTRINGS" },
-                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Maintain quad volume", muscle: "QUADS" },
-                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES" },
-                    { name: "Cable Crunches", sets: 3, reps: "15", note: "Upper abs", muscle: "ABS" },
-                    { name: "Elliptical Machine", sets: 1, reps: "20-30 min", note: "Moderate cardio", muscle: "CARDIO" }
+                    { name: "Deadlifts", sets: 3, reps: "5-8", note: "Heavy - strict form", muscle: "POSTERIOR", trackWeight: true },
+                    { name: "Lying Hamstring Curls", sets: 3, reps: "10-12", note: "Isolation", muscle: "HAMSTRINGS", trackWeight: true },
+                    { name: "Quad Leg Extensions", sets: 3, reps: "12-15", note: "Maintain quad volume", muscle: "QUADS", trackWeight: true },
+                    { name: "Seated Calf Raises", sets: 4, reps: "15-20", note: "Full ROM", muscle: "CALVES", trackWeight: true },
+                    { name: "Cable Crunches", sets: 3, reps: "15", note: "Upper abs", muscle: "ABS", trackWeight: true },
+                    { name: "Elliptical Machine", sets: 1, reps: "20-30 min", note: "Cardio", muscle: "CARDIO", trackWeight: false }
                 ]
             },
             7: { 
-                title: "DAY 7: REST", 
+                title: "REST DAY", 
                 nepaliDay: "शनिबार",
-                focus: "// ACTIVE RECOVERY - आराम", 
+                focus: "Active Recovery", 
                 exercises: [
-                    { name: "Light Walking", sets: 1, reps: "30-45 min", note: "Active recovery", muscle: "RECOVERY" },
-                    { name: "Foam Rolling", sets: 1, reps: "15-20 min", note: "Full body", muscle: "MOBILITY" },
-                    { name: "Stretching", sets: 1, reps: "15-20 min", note: "Focus on tight areas", muscle: "MOBILITY" }
+                    { name: "Light Walking", sets: 1, reps: "30-45 min", note: "Active recovery", muscle: "RECOVERY", trackWeight: false },
+                    { name: "Foam Rolling", sets: 1, reps: "15-20 min", note: "Full body", muscle: "MOBILITY", trackWeight: false },
+                    { name: "Stretching", sets: 1, reps: "15-20 min", note: "Focus on tight areas", muscle: "MOBILITY", trackWeight: false }
                 ]
             }
         };
-
-        const shortDayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-        const nepaliDayNames = ["आइत", "सोम", "मंगल", "बुध", "बिही", "शुक्र", "शनि"];
-        const nepaliDayNamesFull = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
-        const workoutTypes = ["PUSH A", "PULL A", "LEGS A", "PUSH B", "PULL B", "LEGS B", "REST"];
 
         // Nepali Calendar Data
         const nepaliMonths = ["बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "असोज", "कार्तिक", "मंसिर", "पुष", "माघ", "फाल्गुन", "चैत्र"];
         const nepaliMonthsEng = ["Baisakh", "Jestha", "Ashar", "Shrawan", "Bhadra", "Ashwin", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
         const nepaliNums = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+        const shortDayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        const nepaliDayNames = ["आइत", "सोम", "मंगल", "बुध", "बिही", "शुक्र", "शनि"];
+        const nepaliDayNamesFull = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
+        
         const bsMonthDays = [[2000,30,32,31,32,31,30,30,30,29,30,29,31],[2001,31,31,32,31,31,31,30,29,30,29,30,30],[2002,31,31,32,32,31,30,30,29,30,29,30,30],[2003,31,32,31,32,31,30,30,30,29,29,30,31],[2004,30,32,31,32,31,30,30,30,29,30,29,31],[2005,31,31,32,31,31,31,30,29,30,29,30,30],[2006,31,31,32,32,31,30,30,29,30,29,30,30],[2007,31,32,31,32,31,30,30,30,29,29,30,31],[2008,31,31,31,32,31,31,29,30,30,29,29,31],[2009,31,31,32,31,31,31,30,29,30,29,30,30],[2010,31,31,32,32,31,30,30,29,30,29,30,30],[2011,31,32,31,32,31,30,30,30,29,29,30,31],[2012,31,31,31,32,31,31,29,30,30,29,30,30],[2013,31,31,32,31,31,31,30,29,30,29,30,30],[2014,31,31,32,32,31,30,30,29,30,29,30,30],[2015,31,32,31,32,31,30,30,30,29,29,30,31],[2016,31,31,31,32,31,31,29,30,30,29,30,30],[2017,31,31,32,31,31,31,30,29,30,29,30,30],[2018,31,32,31,32,31,30,30,29,30,29,30,30],[2019,31,32,31,32,31,30,30,30,29,30,29,31],[2020,31,31,31,32,31,31,30,29,30,29,30,30],[2021,31,31,32,31,31,31,30,29,30,29,30,30],[2022,31,32,31,32,31,30,30,30,29,29,30,30],[2023,31,32,31,32,31,30,30,30,29,30,29,31],[2024,31,31,31,32,31,31,30,29,30,29,30,30],[2025,31,31,32,31,31,31,30,29,30,29,30,30],[2026,31,32,31,32,31,30,30,30,29,29,30,31],[2027,30,32,31,32,31,30,30,30,29,30,29,31],[2028,31,31,32,31,31,31,30,29,30,29,30,30],[2029,31,31,32,31,32,30,30,29,30,29,30,30],[2030,31,32,31,32,31,30,30,30,29,29,30,31],[2031,30,32,31,32,31,30,30,30,29,30,29,31],[2032,31,31,32,31,31,31,30,29,30,29,30,30],[2033,31,31,32,32,31,30,30,29,30,29,30,30],[2034,31,32,31,32,31,30,30,30,29,29,30,31],[2035,30,32,31,32,31,31,29,30,30,29,29,31],[2036,31,31,32,31,31,31,30,29,30,29,30,30],[2037,31,31,32,32,31,30,30,29,30,29,30,30],[2038,31,32,31,32,31,30,30,30,29,29,30,31],[2039,31,31,31,32,31,31,29,30,30,29,30,30],[2040,31,31,32,31,31,31,30,29,30,29,30,30],[2041,31,31,32,32,31,30,30,29,30,29,30,30],[2042,31,32,31,32,31,30,30,30,29,29,30,31],[2043,31,31,31,32,31,31,29,30,30,29,30,30],[2044,31,31,32,31,31,31,30,29,30,29,30,30],[2045,31,32,31,32,31,30,30,29,30,29,30,30],[2046,31,32,31,32,31,30,30,30,29,29,30,31],[2047,31,31,31,32,31,31,30,29,30,29,30,30],[2048,31,31,32,31,31,31,30,29,30,29,30,30],[2049,31,32,31,32,31,30,30,30,29,29,30,30],[2050,31,32,31,32,31,30,30,30,29,30,29,31],[2051,31,31,31,32,31,31,30,29,30,29,30,30],[2052,31,31,32,31,31,31,30,29,30,29,30,30],[2053,31,32,31,32,31,30,30,30,29,29,30,30],[2054,31,32,31,32,31,30,30,30,29,30,29,31],[2055,31,31,32,31,31,31,30,29,30,29,30,30],[2056,31,31,32,31,32,30,30,29,30,29,30,30],[2057,31,32,31,32,31,30,30,30,29,29,30,31],[2058,30,32,31,32,31,30,30,30,29,30,29,31],[2059,31,31,32,31,31,31,30,29,30,29,30,30],[2060,31,31,32,32,31,30,30,29,30,29,30,30],[2061,31,32,31,32,31,30,30,30,29,29,30,31],[2062,30,32,31,32,31,31,29,30,29,30,29,31],[2063,31,31,32,31,31,31,30,29,30,29,30,30],[2064,31,31,32,32,31,30,30,29,30,29,30,30],[2065,31,32,31,32,31,30,30,30,29,29,30,31],[2066,31,31,31,32,31,31,29,30,30,29,29,31],[2067,31,31,32,31,31,31,30,29,30,29,30,30],[2068,31,31,32,32,31,30,30,29,30,29,30,30],[2069,31,32,31,32,31,30,30,30,29,29,30,31],[2070,31,31,31,32,31,31,29,30,30,29,30,30],[2071,31,31,32,31,31,31,30,29,30,29,30,30],[2072,31,32,31,32,31,30,30,29,30,29,30,30],[2073,31,32,31,32,31,30,30,30,29,29,30,31],[2074,31,31,31,32,31,31,30,29,30,29,30,30],[2075,31,31,32,31,31,31,30,29,30,29,30,30],[2076,31,32,31,32,31,30,30,30,29,29,30,30],[2077,31,32,31,32,31,30,30,30,29,30,29,31],[2078,31,31,31,32,31,31,30,29,30,29,30,30],[2079,31,31,32,31,31,31,30,29,30,29,30,30],[2080,31,32,31,32,31,30,30,30,29,29,30,30],[2081,31,32,31,32,31,30,30,30,29,30,29,31],[2082,31,31,32,31,31,31,30,29,30,29,30,30],[2083,31,31,32,31,32,30,30,29,30,29,30,30],[2084,31,32,31,32,31,30,30,30,29,29,30,31],[2085,30,32,31,32,31,30,30,30,29,30,29,31],[2086,31,31,32,31,31,31,30,29,30,29,30,30],[2087,31,31,32,32,31,30,30,29,30,29,30,30],[2088,31,32,31,32,31,30,30,30,29,29,30,31],[2089,30,32,31,32,31,31,29,30,30,29,29,31],[2090,31,31,32,31,31,31,30,29,30,29,30,30],[2091,31,31,32,32,31,30,30,29,30,29,30,30],[2092,31,32,31,32,31,30,30,30,29,29,30,31],[2093,31,31,31,32,31,31,29,30,30,29,30,30],[2094,31,31,32,31,31,31,30,29,30,29,30,30],[2095,31,32,31,32,31,30,30,29,30,29,30,30],[2096,31,32,31,32,31,30,30,30,29,29,30,31],[2097,31,31,31,32,31,31,30,29,30,29,30,30],[2098,31,31,32,31,31,31,30,29,30,29,30,30],[2099,31,32,31,32,31,30,30,30,29,29,30,30],[2100,31,32,31,32,31,30,30,30,29,30,29,31]];
 
-        // Holidays Data (Month-Day format)
+        // Holidays
         const holidays = {
-            // International Holidays
             "1-1": { name: "New Year's Day", nepali: "नयाँ वर्ष", type: "International" },
-            "2-14": { name: "Valentine's Day", nepali: "भ्यालेन्टाइन डे", type: "International" },
-            "3-8": { name: "Women's Day", nepali: "महिला दिवस", type: "International" },
-            "5-1": { name: "Labour Day", nepali: "श्रमिक दिवस", type: "International" },
-            "12-25": { name: "Christmas", nepali: "क्रिसमस", type: "International" },
-            // Nepali Holidays (approximate dates - these vary yearly)
             "1-14": { name: "Makar Sankranti", nepali: "मकर संक्रान्ति", type: "Nepal" },
+            "2-14": { name: "Valentine's Day", nepali: "भ्यालेन्टाइन डे", type: "International" },
             "2-19": { name: "Democracy Day", nepali: "प्रजातन्त्र दिवस", type: "Nepal" },
-            "3-8": { name: "Maha Shivaratri", nepali: "महाशिवरात्रि", type: "Nepal" },
-            "3-28": { name: "Holi", nepali: "होली", type: "Nepal" },
+            "3-8": { name: "Women's Day", nepali: "महिला दिवस", type: "International" },
             "4-14": { name: "Nepali New Year", nepali: "नेपाली नयाँ वर्ष", type: "Nepal" },
+            "5-1": { name: "Labour Day", nepali: "श्रमिक दिवस", type: "International" },
             "5-29": { name: "Republic Day", nepali: "गणतन्त्र दिवस", type: "Nepal" },
-            "5-23": { name: "Buddha Jayanti", nepali: "बुद्ध जयन्ती", type: "Nepal" },
             "9-19": { name: "Constitution Day", nepali: "संविधान दिवस", type: "Nepal" },
-            "10-15": { name: "Dashain (Approx)", nepali: "दशैं", type: "Nepal" },
-            "11-1": { name: "Tihar (Approx)", nepali: "तिहार", type: "Nepal" },
-            "11-3": { name: "Bhai Tika (Approx)", nepali: "भाइ टीका", type: "Nepal" },
-            "12-30": { name: "Udhauli", nepali: "उधौली", type: "Nepal" }
+            "12-25": { name: "Christmas", nepali: "क्रिसमस", type: "International" }
         };
 
-        function toNepaliNum(num) { return String(num).split('').map(d => nepaliNums[parseInt(d)] || d).join(''); }
+        // Helper Functions
+        function toNepaliNum(num) { 
+            return String(num).split('').map(d => nepaliNums[parseInt(d)] || d).join(''); 
+        }
         
         function adToBs(year, month, day) {
             const startAdDate = new Date(1943, 3, 14);
             const inputDate = new Date(year, month - 1, day);
-            let totalDays = Math.floor((inputDate - startAdDate) / (1000 * 60 * 60 * 24));
+            let totalDays = Math.floor((inputDate - startAdDate) / (1000 * 60 * 60 * 24)) + 1; // Fixed: Added +1
             let bsYear = 2000, bsMonth = 1, bsDay = 1;
             while (totalDays > 0) {
                 const yearData = bsMonthDays.find(y => y[0] === bsYear);
                 if (!yearData) break;
                 const daysInMonth = yearData[bsMonth];
-                if (totalDays >= daysInMonth) { totalDays -= daysInMonth; bsMonth++; if (bsMonth > 12) { bsMonth = 1; bsYear++; } }
-                else { bsDay = totalDays + 1; totalDays = 0; }
+                if (totalDays > daysInMonth) { 
+                    totalDays -= daysInMonth; 
+                    bsMonth++; 
+                    if (bsMonth > 12) { bsMonth = 1; bsYear++; } 
+                } else { 
+                    bsDay = totalDays; 
+                    totalDays = 0; 
+                }
             }
             return { year: bsYear, month: bsMonth, day: bsDay };
         }
 
-        // State
-        function getTodayWorkoutDay() { return new Date().getDay() + 1; }
+        function getTodayWorkoutDay() { 
+            return new Date().getDay() + 1; 
+        }
+        
+        function getDateKey(date) { 
+            date = date || new Date(); 
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(); 
+        }
 
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // State
         let currentDay = getTodayWorkoutDay();
         let currentCalendarDate = new Date();
         let completedSets = JSON.parse(localStorage.getItem('completedSets') || '{}');
         let completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
         let exerciseWeights = JSON.parse(localStorage.getItem('exerciseWeights') || '{}');
+        let weightHistory = JSON.parse(localStorage.getItem('weightHistory') || '{}');
+        let personalRecords = JSON.parse(localStorage.getItem('personalRecords') || '{}');
         let creatineTracker = JSON.parse(localStorage.getItem('creatineTracker') || '{}');
         let totalXP = parseInt(localStorage.getItem('totalXP') || '0');
         let weightUnit = localStorage.getItem('weightUnit') || 'lbs';
@@ -1339,21 +1605,18 @@
             updateDateDisplay();
             renderDayTabs();
             selectDay(getTodayWorkoutDay());
-            renderCalendar();
-            updateStats();
-            updateXPBar();
             updateCreatineButton();
             updateWeightUnitButtons();
+            updateXPBar();
+            updateQuickStats();
         }
 
         function updateDateDisplay() {
             const now = new Date();
-            const dayName = now.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
-            const englishDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+            const englishDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const bs = adToBs(now.getFullYear(), now.getMonth() + 1, now.getDate());
-            const nepaliDate = toNepaliNum(bs.year) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.day) + ' • ' + nepaliDayNamesFull[now.getDay()];
+            const nepaliDate = toNepaliNum(bs.day) + ' ' + nepaliMonths[bs.month - 1] + ' ' + toNepaliNum(bs.year);
             document.getElementById('englishDate').textContent = englishDate;
-            document.getElementById('dayName').textContent = dayName;
             document.getElementById('nepaliDate').textContent = nepaliDate;
         }
 
@@ -1366,13 +1629,12 @@
                 const isActive = day === currentDay;
                 let classes = 'day-chip';
                 if (isActive) classes += ' active';
-                if (isToday) classes += ' today';
-                html += '<div onclick="selectDay(' + day + ')" class="' + classes + '" data-day="' + day + '">';
-                html += '<div class="day-number">' + String(day).padStart(2, '0') + '</div>';
-                html += '<div class="day-name">' + shortDayNames[day - 1] + '</div>';
-                html += '<div class="day-name-nepali">' + nepaliDayNames[day - 1] + '</div>';
-                html += '<div class="day-type">' + workoutTypes[day - 1] + '</div>';
-                html += '</div>';
+                if (isToday && !isActive) classes += ' today';
+                html += `<div onclick="selectDay(${day})" class="${classes}" data-day="${day}">
+                    <div class="day-number">${day}</div>
+                    <div class="day-name">${shortDayNames[day - 1]}</div>
+                    <div class="day-nepali">${nepaliDayNames[day - 1]}</div>
+                </div>`;
             }
             container.innerHTML = html;
         }
@@ -1392,15 +1654,12 @@
             currentDay = day;
             renderDayTabs();
             const data = workoutData[day];
+            document.getElementById('workoutDayLabel').textContent = `Day ${day} • ${data.nepaliDay}`;
             document.getElementById('currentDayTitle').textContent = data.title;
             document.getElementById('currentDayFocus').textContent = data.focus;
             renderExercises();
             updateProgress();
-        }
-
-        function getDateKey(date) { 
-            date = date || new Date(); 
-            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(); 
+            updateQuickStats();
         }
 
         function renderExercises() {
@@ -1413,12 +1672,16 @@
             
             list.innerHTML = data.exercises.map((ex, exIndex) => {
                 const exKey = 'ex' + exIndex;
+                const exId = `day${currentDay}-${exKey}`;
                 if (!completedSets[dayKey][exKey]) completedSets[dayKey][exKey] = {};
                 
                 const completedCount = Object.values(completedSets[dayKey][exKey]).filter(Boolean).length;
                 const isCompleted = completedCount === ex.sets;
                 const currentWeight = exerciseWeights[dayKey][exKey] || 0;
+                const pr = personalRecords[exId] || 0;
+                const lastWeight = getLastWeight(exId);
                 
+                // Generate set checkboxes
                 let setsHtml = '';
                 for (let s = 0; s < ex.sets; s++) {
                     const setKey = 'set' + s;
@@ -1427,12 +1690,32 @@
                         <div class="set-item">
                             <input type="checkbox" class="set-checkbox" ${isSetDone ? 'checked' : ''} 
                                 onchange="toggleSet(${exIndex}, ${s}, this.checked)">
-                            <div>
-                                <div class="set-label">SET ${s + 1}</div>
+                            <div class="set-info">
+                                <div class="set-label">Set ${s + 1}</div>
                                 <div class="set-reps">${ex.reps}</div>
                             </div>
+                        </div>`;
+                }
+                
+                // Weight controls
+                let weightHtml = '';
+                if (ex.trackWeight) {
+                    const overloadClass = currentWeight > lastWeight ? 'up' : (currentWeight < lastWeight ? 'down' : 'same');
+                    const overloadIcon = currentWeight > lastWeight ? '↑' : (currentWeight < lastWeight ? '↓' : '=');
+                    const overloadText = lastWeight > 0 ? `${overloadIcon} Last: ${lastWeight} ${weightUnit}` : 'First time!';
+                    
+                    weightHtml = `
+                        <div class="weight-row">
+                            <span class="weight-label">Weight</span>
+                            <div class="weight-controls">
+                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, -2.5)">−</button>
+                                <div class="weight-display">${currentWeight} ${weightUnit}</div>
+                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, 2.5)">+</button>
+                            </div>
                         </div>
-                    `;
+                        <div class="overload-indicator ${overloadClass}">
+                            📈 ${overloadText}
+                        </div>`;
                 }
                 
                 return `
@@ -1443,19 +1726,20 @@
                                 <h4 class="exercise-name">${ex.name}</h4>
                                 ${ex.note ? `<p class="exercise-note">${ex.note}</p>` : ''}
                             </div>
+                            ${ex.trackWeight ? `<div class="pr-badge ${pr > 0 ? '' : 'no-pr'}">🏅 PR: ${pr > 0 ? pr + ' ' + weightUnit : '--'}</div>` : ''}
                         </div>
-                        <div class="sets-container">${setsHtml}</div>
-                        <div class="weight-input-container">
-                            <span class="weight-label">WEIGHT:</span>
-                            <div class="weight-controls">
-                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, -2.5)">−</button>
-                                <div class="weight-display">${currentWeight} ${weightUnit}</div>
-                                <button class="weight-btn" onclick="adjustWeight(${exIndex}, 2.5)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                        <div class="sets-grid">${setsHtml}</div>
+                        ${weightHtml}
+                    </div>`;
             }).join('');
+        }
+
+        function getLastWeight(exId) {
+            const history = weightHistory[exId] || [];
+            if (history.length > 0) {
+                return history[history.length - 1].weight;
+            }
+            return 0;
         }
 
         function toggleSet(exIndex, setIndex, completed) {
@@ -1474,29 +1758,59 @@
             // XP System
             if (completed && !wasCompleted) {
                 totalXP += 5;
-                localStorage.setItem('totalXP', totalXP);
-                updateXPBar();
             } else if (!completed && wasCompleted) {
                 totalXP = Math.max(0, totalXP - 5);
-                localStorage.setItem('totalXP', totalXP);
-                updateXPBar();
             }
+            localStorage.setItem('totalXP', totalXP);
+            updateXPBar();
             
             renderExercises();
             updateProgress();
+            updateQuickStats();
             checkDayCompletion();
+            checkAndUpdatePR(exIndex);
         }
 
         function adjustWeight(exIndex, delta) {
             const dateKey = getDateKey();
             const dayKey = dateKey + '-day' + currentDay;
             const exKey = 'ex' + exIndex;
+            const exId = `day${currentDay}-${exKey}`;
             
             if (!exerciseWeights[dayKey]) exerciseWeights[dayKey] = {};
             const current = exerciseWeights[dayKey][exKey] || 0;
-            exerciseWeights[dayKey][exKey] = Math.max(0, current + delta);
+            const newWeight = Math.max(0, current + delta);
+            exerciseWeights[dayKey][exKey] = newWeight;
             localStorage.setItem('exerciseWeights', JSON.stringify(exerciseWeights));
+            
             renderExercises();
+        }
+
+        function checkAndUpdatePR(exIndex) {
+            const dateKey = getDateKey();
+            const dayKey = dateKey + '-day' + currentDay;
+            const exKey = 'ex' + exIndex;
+            const exId = `day${currentDay}-${exKey}`;
+            const exercise = workoutData[currentDay].exercises[exIndex];
+            
+            if (!exercise.trackWeight) return;
+            
+            const currentWeight = exerciseWeights[dayKey]?.[exKey] || 0;
+            const allSetsCompleted = Object.values(completedSets[dayKey]?.[exKey] || {}).filter(Boolean).length === exercise.sets;
+            
+            if (allSetsCompleted && currentWeight > 0) {
+                const currentPR = personalRecords[exId] || 0;
+                if (currentWeight > currentPR) {
+                    personalRecords[exId] = currentWeight;
+                    localStorage.setItem('personalRecords', JSON.stringify(personalRecords));
+                    showToast(`🏅 NEW PR! ${exercise.name}: ${currentWeight} ${weightUnit}`, 'success');
+                }
+                
+                // Save to history
+                if (!weightHistory[exId]) weightHistory[exId] = [];
+                weightHistory[exId].push({ date: dateKey, weight: currentWeight });
+                localStorage.setItem('weightHistory', JSON.stringify(weightHistory));
+            }
         }
 
         function setWeightUnit(unit) {
@@ -1518,18 +1832,13 @@
             localStorage.setItem('creatineTracker', JSON.stringify(creatineTracker));
             updateCreatineButton();
             
-            // XP System - Add when taken, subtract when untaken
             if (creatineTracker[dateKey] && !wasTaken) {
-                // Just took creatine - add XP
                 totalXP += 10;
-                localStorage.setItem('totalXP', totalXP);
-                updateXPBar();
             } else if (!creatineTracker[dateKey] && wasTaken) {
-                // Untook creatine - remove XP
                 totalXP = Math.max(0, totalXP - 10);
-                localStorage.setItem('totalXP', totalXP);
-                updateXPBar();
             }
+            localStorage.setItem('totalXP', totalXP);
+            updateXPBar();
         }
 
         function updateCreatineButton() {
@@ -1567,10 +1876,43 @@
             });
             
             const percentage = Math.round((completedCount / totalSetsCount) * 100);
-            const circumference = 2 * Math.PI * 34;
+            const circumference = 2 * Math.PI * 30;
             const offset = circumference - (percentage / 100) * circumference;
             document.getElementById('progressCircle').style.strokeDashoffset = offset;
             document.getElementById('progressText').textContent = percentage + '%';
+        }
+
+        function updateQuickStats() {
+            const dateKey = getDateKey();
+            const dayKey = dateKey + '-day' + currentDay;
+            const exercises = workoutData[currentDay].exercises;
+            
+            let totalSetsCount = 0;
+            let completedSetsCount = 0;
+            let completedExCount = 0;
+            
+            exercises.forEach((ex, exIndex) => {
+                totalSetsCount += ex.sets;
+                const exKey = 'ex' + exIndex;
+                const setsCompleted = Object.values(completedSets[dayKey]?.[exKey] || {}).filter(Boolean).length;
+                completedSetsCount += setsCompleted;
+                if (setsCompleted === ex.sets) completedExCount++;
+            });
+            
+            document.getElementById('todaySets').textContent = `${completedSetsCount}/${totalSetsCount}`;
+            document.getElementById('todayExercises').textContent = `${completedExCount}/${exercises.length}`;
+            
+            // Streak
+            let streak = 0;
+            const today = new Date();
+            for (let i = 0; i < 365; i++) {
+                const checkDate = new Date(today);
+                checkDate.setDate(checkDate.getDate() - i);
+                const checkKey = getDateKey(checkDate);
+                if (completedDays[checkKey]) streak++;
+                else if (i > 0) break;
+            }
+            document.getElementById('streakCount').textContent = streak + '🔥';
         }
 
         function checkDayCompletion() {
@@ -1589,14 +1931,13 @@
                 }
             });
             
-            if (completedCount === totalSetsCount) {
-                if (!completedDays[dateKey]) {
-                    completedDays[dateKey] = currentDay;
-                    localStorage.setItem('completedDays', JSON.stringify(completedDays));
-                    totalXP += 50;
-                    localStorage.setItem('totalXP', totalXP);
-                    updateXPBar();
-                }
+            if (completedCount === totalSetsCount && !completedDays[dateKey]) {
+                completedDays[dateKey] = currentDay;
+                localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                totalXP += 50;
+                localStorage.setItem('totalXP', totalXP);
+                updateXPBar();
+                showToast('🎉 Workout Complete! +50 XP', 'success');
             }
         }
 
@@ -1610,7 +1951,7 @@
             const bs = adToBs(year, month + 1, 15);
             
             document.getElementById('calendarMonth').textContent = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
-            document.getElementById('calendarNepaliMonth').textContent = nepaliMonthsEng[bs.month - 1] + ' ' + bs.year + ' BS • ' + nepaliMonths[bs.month - 1];
+            document.getElementById('calendarNepaliMonth').textContent = nepaliMonthsEng[bs.month - 1] + ' ' + bs.year;
             
             let html = '';
             let monthHolidays = [];
@@ -1624,44 +1965,36 @@
                 const isToday = date.toDateString() === today.toDateString();
                 const isCompleted = completedDays[dateKey];
                 const holiday = holidays[holidayKey];
-                const dayOfWeek = date.getDay() + 1;
-                const isRestDay = dayOfWeek === 7;
                 
                 if (holiday) monthHolidays.push({ day, ...holiday });
                 
                 let classes = 'calendar-day';
                 if (isToday) classes += ' today';
                 else if (isCompleted) classes += ' completed-day';
-                else if (holiday) classes += ' holiday';
-                if (!isToday && !isRestDay && !holiday) classes += ' has-workout';
+                if (holiday) classes += ' holiday';
                 
-                html += `<div class="${classes}" onclick="showDayDetails('${dateKey}')">${day}${holiday ? '<span class="holiday-dot"></span>' : ''}</div>`;
+                html += `<div class="${classes}">${day}</div>`;
             }
             grid.innerHTML = html;
             
-            // Show holidays for this month
-            const holidayInfo = document.getElementById('holidayInfo');
+            // Holidays list
             const holidayList = document.getElementById('holidayList');
+            const holidayCard = document.getElementById('holidayCard');
             if (monthHolidays.length > 0) {
-                holidayInfo.classList.add('show');
+                holidayCard.style.display = 'block';
                 holidayList.innerHTML = monthHolidays.map(h => `
                     <div class="holiday-item">
-                        <span><span class="holiday-name">${h.day}: ${h.nepali}</span> (${h.name})</span>
-                        <span class="holiday-type">${h.type}</span>
-                    </div>
-                `).join('');
+                        <span class="holiday-name">${h.day}: ${h.nepali} <span>(${h.name})</span></span>
+                        <span class="holiday-type ${h.type === 'Nepal' ? 'nepal' : ''}">${h.type}</span>
+                    </div>`).join('');
             } else {
-                holidayInfo.classList.remove('show');
+                holidayCard.style.display = 'none';
             }
         }
 
         function changeMonth(delta) {
             currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
             renderCalendar();
-        }
-
-        function showDayDetails(dateKey) {
-            console.log('Selected:', dateKey);
         }
 
         function updateStats() {
@@ -1674,7 +2007,7 @@
                 });
             });
             
-            const creatineDays = Object.values(creatineTracker).filter(Boolean).length;
+            const creatineDaysCount = Object.values(creatineTracker).filter(Boolean).length;
             
             let streak = 0;
             const today = new Date();
@@ -1686,6 +2019,12 @@
                 else if (i > 0) break;
             }
             
+            document.getElementById('totalWorkouts').textContent = totalWorkouts;
+            document.getElementById('currentStreak').textContent = streak;
+            document.getElementById('totalSets').textContent = totalSetsCompleted;
+            document.getElementById('creatineDays').textContent = creatineDaysCount;
+            
+            // Weekly overview
             const weekStart = new Date(today);
             weekStart.setDate(weekStart.getDate() - weekStart.getDay());
             
@@ -1699,93 +2038,129 @@
                 weeklyHtml += `
                     <div class="weekly-day">
                         <div class="weekly-day-box ${isCompleted ? 'completed' : ''}">${isCompleted ? '✓' : shortDayNames[i][0]}</div>
-                        <div class="weekly-day-label">${shortDayNames[i]}</div>
-                        <div class="weekly-day-nepali">${nepaliDayNames[i]}</div>
-                    </div>
-                `;
+                        <div class="weekly-day-label">${nepaliDayNames[i]}</div>
+                    </div>`;
             }
             document.getElementById('weeklyDays').innerHTML = weeklyHtml;
             
-            document.getElementById('totalWorkouts').textContent = totalWorkouts;
-            document.getElementById('currentStreak').textContent = streak;
-            document.getElementById('totalSets').textContent = totalSetsCompleted;
-            document.getElementById('creatineDays').textContent = creatineDays;
+            // PR List
+            const prList = document.getElementById('prList');
+            const prEntries = Object.entries(personalRecords).filter(([_, weight]) => weight > 0);
+            if (prEntries.length > 0) {
+                prList.innerHTML = prEntries.map(([exId, weight]) => {
+                    const [dayPart, exPart] = exId.split('-');
+                    const dayNum = parseInt(dayPart.replace('day', ''));
+                    const exNum = parseInt(exPart.replace('ex', ''));
+                    const exercise = workoutData[dayNum]?.exercises[exNum];
+                    return `
+                        <div class="pr-item">
+                            <span class="pr-exercise">${exercise?.name || exId}</span>
+                            <span class="pr-weight">${weight} ${weightUnit}</span>
+                        </div>`;
+                }).join('');
+            } else {
+                prList.innerHTML = '<div class="pr-item"><span class="pr-exercise">No PRs yet. Start lifting! 💪</span></div>';
+            }
         }
 
-        function exportStats() {
-            const stats = {
-                appName: "Kritik's Gurkha Gains",
+        function exportData() {
+            const data = {
+                version: '2.0',
                 exportDate: new Date().toISOString(),
-                totalWorkouts: Object.keys(completedDays).length,
-                totalSetsCompleted: 0,
-                creatineDaysTaken: Object.values(creatineTracker).filter(Boolean).length,
-                totalXP: totalXP,
-                level: Math.floor(totalXP / 100) + 1,
-                completedDays: completedDays,
-                exerciseWeights: exerciseWeights
+                appName: "Kritik's Gurkha Gains",
+                completedSets,
+                completedDays,
+                exerciseWeights,
+                weightHistory,
+                personalRecords,
+                creatineTracker,
+                totalXP,
+                weightUnit
             };
             
-            Object.values(completedSets).forEach(day => {
-                Object.values(day).forEach(ex => {
-                    stats.totalSetsCompleted += Object.values(ex).filter(Boolean).length;
-                });
-            });
-            
-            const dataStr = JSON.stringify(stats, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'gurkha-gains-stats-' + new Date().toISOString().split('T')[0] + '.json';
+            a.download = `gurkha-gains-backup-${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             URL.revokeObjectURL(url);
+            showToast('📤 Data exported successfully!', 'success');
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (data.completedSets) { completedSets = data.completedSets; localStorage.setItem('completedSets', JSON.stringify(completedSets)); }
+                    if (data.completedDays) { completedDays = data.completedDays; localStorage.setItem('completedDays', JSON.stringify(completedDays)); }
+                    if (data.exerciseWeights) { exerciseWeights = data.exerciseWeights; localStorage.setItem('exerciseWeights', JSON.stringify(exerciseWeights)); }
+                    if (data.weightHistory) { weightHistory = data.weightHistory; localStorage.setItem('weightHistory', JSON.stringify(weightHistory)); }
+                    if (data.personalRecords) { personalRecords = data.personalRecords; localStorage.setItem('personalRecords', JSON.stringify(personalRecords)); }
+                    if (data.creatineTracker) { creatineTracker = data.creatineTracker; localStorage.setItem('creatineTracker', JSON.stringify(creatineTracker)); }
+                    if (data.totalXP !== undefined) { totalXP = data.totalXP; localStorage.setItem('totalXP', totalXP); }
+                    if (data.weightUnit) { weightUnit = data.weightUnit; localStorage.setItem('weightUnit', weightUnit); }
+                    
+                    init();
+                    showToast('📥 Data imported successfully!', 'success');
+                } catch (err) {
+                    showToast('❌ Invalid backup file!', 'error');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
         }
 
         function resetAllData() {
-            if (confirm('⚠️ यो कार्यले तपाईंको सबै डाटा मेटाउनेछ। Continue?')) {
+            if (confirm('⚠️ यो कार्यले सबै डाटा मेटाउनेछ! Are you sure?')) {
                 localStorage.clear();
                 completedSets = {};
                 completedDays = {};
                 exerciseWeights = {};
+                weightHistory = {};
+                personalRecords = {};
                 creatineTracker = {};
                 totalXP = 0;
                 init();
+                showToast('🗑️ All data reset!', 'success');
             }
         }
 
         // PWA Install
         let deferredPrompt;
-        const installBanner = document.getElementById('installBanner');
-        
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js').catch(function(error) {
-                    console.log('ServiceWorker registration failed:', error);
-                });
-            });
-        }
-        
-        window.addEventListener('beforeinstallprompt', function(e) {
+        window.addEventListener('beforeinstallprompt', e => {
             e.preventDefault();
             deferredPrompt = e;
             const dismissed = localStorage.getItem('installDismissed');
-            const dismissedTime = dismissed ? parseInt(dismissed) : 0;
-            const daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
-            if (daysSinceDismissed > 7) installBanner.classList.remove('hidden');
+            if (!dismissed || Date.now() - parseInt(dismissed) > 7 * 24 * 60 * 60 * 1000) {
+                document.getElementById('installBanner').classList.remove('hidden');
+                setTimeout(() => document.getElementById('installBanner').classList.add('show'), 100);
+            }
         });
-        
+
         function installApp() {
             if (!deferredPrompt) return;
             deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(function() {
+            deferredPrompt.userChoice.then(() => {
                 deferredPrompt = null;
-                installBanner.classList.add('hidden');
+                document.getElementById('installBanner').classList.add('hidden');
             });
         }
-        
+
         function dismissInstall() {
-            installBanner.classList.add('hidden');
+            document.getElementById('installBanner').classList.remove('show');
+            setTimeout(() => document.getElementById('installBanner').classList.add('hidden'), 300);
             localStorage.setItem('installDismissed', Date.now().toString());
+        }
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Error:', err));
         }
 
         init();
