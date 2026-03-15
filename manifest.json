@@ -29,7 +29,17 @@
     {
       "name": "Today's Workout",
       "url": "./index.html",
-      "description": "Start today's workout"
+      "description": "Start today's workout session"
+    },
+    {
+      "name": "View Stats",
+      "url": "./index.html#stats",
+      "description": "Check your progress and PRs"
+    },
+    {
+      "name": "Calendar",
+      "url": "./index.html#calendar",
+      "description": "View workout calendar"
     }
   ]
 }
